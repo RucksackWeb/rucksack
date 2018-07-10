@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ECommerceStore.Data;
+using ECommerceStore.Models;
+using ECommerceStore.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,6 +33,8 @@ namespace ECommerceStore
 
             services.AddDbContext<WarehouseDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IInventory, DevInventory>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
