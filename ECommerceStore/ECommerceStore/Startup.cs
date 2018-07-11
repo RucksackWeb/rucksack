@@ -37,7 +37,7 @@ namespace ECommerceStore
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
 
@@ -61,7 +61,7 @@ namespace ECommerceStore
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                await context.Response.WriteAsync("Nate and Andrew's ECommerce has died");
             });
         }
     }
