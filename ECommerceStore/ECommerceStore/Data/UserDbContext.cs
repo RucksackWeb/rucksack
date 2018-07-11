@@ -1,5 +1,5 @@
 ﻿using ECommerceStore.Models;
-using Microsoft.AspNetCore.Identity.EntityFramerworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
