@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.ViewModels;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,25 +26,15 @@ namespace ECommerceStore.Controllers
         }
 
         [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register()
+        public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel rvm)
+        public async Task<IActionResult> Login(LoginViewModel lvm)
         {
-            ApplicationUser user = new ApplicationUser
-            {
-                Email = rvm.Email,
-                FirstName = rvm.FirstName,
-                LastName = rvm.LastName
-            };
-
-            var result = await _userManager.CreateAsync(user, rvm.Password);
+            var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
 
             if (result.Succeeded)
             {
@@ -53,6 +42,7 @@ namespace ECommerceStore.Controllers
             }
 
             return View();
+
         }
     }
 }
