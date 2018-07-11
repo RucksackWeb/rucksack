@@ -1,1 +1,31 @@
-﻿
+﻿@model RegisterViewModel
+
+<form asp-action="Register">
+
+    <div>
+        <label asp-for="@Model.Email"> E-mail </label>
+        <input type="email" asp-for="@Model.Email" required />
+    </div>
+
+    <div>
+        <label asp-for="@Model.FirstName"> First Name </label>
+        <input type="text" asp-for="@Model.FirstName" required />
+    </div>
+
+    <div>
+        <label asp-for="@Model.LastName"> Last Name </label>
+        <input type="text" asp-for="@Model.LastName" required />
+    </div>
+
+    <div>
+        <label asp-for="@Model.Password"> Password </label>
+        <input type="password" asp-for="@Model.Password" required />
+    </div>
+
+    <div>
+        <label asp-for="@Model.ConfirmPassword"> Confirm Password </label>
+        <input type="password" asp-for="@Model.ConfirmPassword" required />
+    </div>
+
+    <button type="submit">Register</button>
+</form>
