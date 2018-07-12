@@ -34,10 +34,12 @@ namespace ECommerceStore
             services.AddMvc();
 
             services.AddDbContext<WarehouseDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
 
             services.AddDbContext<UserDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
@@ -64,7 +66,7 @@ namespace ECommerceStore
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Nate and Andrew's ECommerce has died");
+                await context.Response.WriteAsync("un-break me");
             });
         }
     }
