@@ -1,5 +1,4 @@
 ﻿<!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -9,12 +8,24 @@
     <header>
         <nav>
 
-            <div>
-                <a asp-controller="Account" asp-action="Login"> Login </a>
-            </div>
-            <div>
-                <a asp-controller="Account" asp-action="Register"> Register </a>
-            </div>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div>
+                    Welcome @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value
+                    @UserManager.GetUserName(User)
+                </div>
+            }
+            else
+            {
+                <div>
+                    <a asp-controller="Account" asp-action="Login"> Login </a>
+                </div>
+
+                <div>
+                    <a asp-controller="Account" asp-action="Register"> Register </a>
+                </div>
+
+            }
         </nav>
     </header>
     <main>
