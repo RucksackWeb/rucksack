@@ -45,7 +45,7 @@ namespace ECommerceStore.Controllers
             if (result.Succeeded)
             {
 
-                if (lvm.Email == "admin@codefellows.com")
+                if (User.IsInRole(ApplicationRoles.Admin))
                 {
                     return RedirectToAction("Index", "Admin ");
                 }
@@ -71,6 +71,7 @@ namespace ECommerceStore.Controllers
         {
             ApplicationUser user = new ApplicationUser
             {
+                UserName = rvm.Email,
                 Email = rvm.Email,
                 FirstName = rvm.FirstName,
                 LastName = rvm.LastName
@@ -80,6 +81,16 @@ namespace ECommerceStore.Controllers
 
             if (result.Succeeded)
             {
+                List<Claim> claimList = new List<Claim>();
+
+                Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+
+                claimList.Add(nameClaim);
+                claimList.Add(emailClaim);
+
+                await _userManager.AddClaimsAsync(user, claimList);
+
                 await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
                 await _signInManager.SignInAsync(user, false);
@@ -99,6 +110,7 @@ namespace ECommerceStore.Controllers
         //Log Out
         public async Task<IActionResult> LogOut()
         {
+            if (_signInManager.IsSignedIn(User))
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
