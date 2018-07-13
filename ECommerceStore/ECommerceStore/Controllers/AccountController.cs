@@ -21,7 +21,7 @@ namespace ECommerceStore.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+         //View
         public IActionResult Index()
         {
             return View();
