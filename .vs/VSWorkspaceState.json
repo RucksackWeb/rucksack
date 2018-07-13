@@ -2,7 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\ECommerceStore",
-    "\\ECommerceStore\\ECommerceStore"
+    "\\ECommerceStore\\ECommerceStore",
+    "\\ECommerceStore\\ECommerceStore\\Data"
   ],
   "SelectedNode": "\\ECommerceStore\\.gitignore",
   "PreviewInSolutionExplorer": false

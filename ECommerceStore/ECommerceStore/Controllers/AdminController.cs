@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using ECommerceStore.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
-    public class HomeController : Controller
+    
+    [Route("[controller]/[action]")]
+    [Authorize]
+    public class AdminController : Controller
     {
-        private IInventory _context;
-
-        public HomeController(IInventory context)
-        {
-            _context = context;
-        }
-
         public IActionResult Index()
         {
             return View();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.ViewModels;
@@ -10,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
+    [AllowAnonymous]
+    [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private UserManager<ApplicationUser> _userManager;
@@ -39,15 +42,27 @@ namespace ECommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return View();
+
+                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: false, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
-
             return View();
+        }
 
+        public async Task<IActionResult> Logout()
+        {
+            if (_signInManager.IsSignedIn(User))
+            {
+                _signInManager.SignOutAsync();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // Register
@@ -65,6 +80,7 @@ namespace ECommerceStore.Controllers
         {
             ApplicationUser user = new ApplicationUser
             {
+                UserName = rvm.Email,
                 Email = rvm.Email,
                 FirstName = rvm.FirstName,
                 LastName = rvm.LastName
@@ -72,9 +88,21 @@ namespace ECommerceStore.Controllers
 
             var result = await _userManager.CreateAsync(user, rvm.Password);
 
+
             if (result.Succeeded)
             {
-                return View();
+                List<Claim> claimList = new List<Claim>();
+ 
+                Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+
+                claimList.Add(nameClaim);
+                claimList.Add(emailClaim);
+                    
+                await _userManager.AddClaimsAsync(user, claimList);
+
+                await _signInManager.SignInAsync(user, false);
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
