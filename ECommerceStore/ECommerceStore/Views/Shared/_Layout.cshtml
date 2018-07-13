@@ -1,26 +1,68 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Styles/Base.css" type="text/css" />
+    <link rel="stylesheet" href="~/Styles/Layout.css" type="text/css" />
+    <link rel="stylesheet" href="~/Styles/Modules.css" type="text/css" />
 </head>
+
 <body>
     <header>
-        <nav>
+        <div id="header-content">
+            <div id="logo-block">
+                <img id="logo" src="http://via.placeholder.com/350x150"/>
+            </div>
+            <div id="greeting">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <p>
+                        @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value
+                    </p>
 
-            <div>
-                <a asp-controller="Account" asp-action="Login"> Login </a>
+                    <div class="button">
+                        <a asp-controller="Account" asp-action="Logout">Logout</a>
+                    </div>
+                }
+                else
+                { 
+                    <div class="button">
+                        <div id="login">
+                            <a asp-controller="Account" asp-action="Login"> Login </a>
+                        </div>
+                        <div id="register">
+                            <a asp-controller="Account" asp-action="Register"> Register </a>
+                        </div>
+                    </div>
+                }
             </div>
-            <div>
-                <a asp-controller="Account" asp-action="Register"> Register </a>
-            </div>
-        </nav>
+        </div>
     </header>
+
+
+
     <main>
+        <div id="banner"></div>
         <div>
             @RenderBody()
         </div>
     </main>
+
+
+
+    <footer>
+        <ul>
+            <li>ECommerce 2018</li>
+            <li>
+                <a href="https://linkedin.com" target="_blank">Andrew Baik</a>
+            </li>
+            <li>
+                <a href="https://linkedin.com" target="_blank">Nathan Aurich</a>
+            </li>
+        </ul>
+    </footer>
 </body>
+
 </html>
