@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerceStore.Migrations.UserDb
+namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180713060437_initial")]
+    [Migration("20180713220429_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -44,10 +44,11 @@ namespace ECommerceStore.Controllers
 
             if (result.Succeeded)
             {
+                var user = await _userManager.FindByEmailAsync(lvm.Email);
 
-                if (User.IsInRole(ApplicationRoles.Admin))
+                if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                 {
-                    return RedirectToAction("Index", "Admin ");
+                    return RedirectToAction("Index", "Admin");
                 }
 
                 return RedirectToAction("Index", "Home");
@@ -85,9 +86,11 @@ namespace ECommerceStore.Controllers
 
                 Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                 Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+                Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
 
                 claimList.Add(nameClaim);
                 claimList.Add(emailClaim);
+                claimList.Add(roleClaim);
 
                 await _userManager.AddClaimsAsync(user, claimList);
 
@@ -95,10 +98,14 @@ namespace ECommerceStore.Controllers
 
                 await _signInManager.SignInAsync(user, false);
 
-                if (user.Email == "admin@codefellows.com")
+                
+                if (user.Email.Contains("@codefellows.com"))
                 {
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
-                    return RedirectToAction("Index", "Admin ");
+                    Claim adminRoleClaim = new Claim(ClaimTypes.Role, ApplicationRoles.Admin);
+                    await _userManager.AddClaimAsync(user, adminRoleClaim);
+
+                    return RedirectToAction("Index", "Admin");
                 }
 
                 return RedirectToAction("Index", "Home");
