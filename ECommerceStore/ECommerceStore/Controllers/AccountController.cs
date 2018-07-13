@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.ViewModels;
@@ -43,11 +44,16 @@ namespace ECommerceStore.Controllers
 
             if (result.Succeeded)
             {
-                return View();
+
+                if (lvm.Email == "admin@codefellows.com")
+                {
+                    return RedirectToAction("Index", "Admin ");
+                }
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
-
         }
 
         // Register
@@ -74,10 +80,27 @@ namespace ECommerceStore.Controllers
 
             if (result.Succeeded)
             {
-                return View();
+                await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                await _signInManager.SignInAsync(user, false);
+
+                if (user.Email == "admin@codefellows.com")
+                {
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                    return RedirectToAction("Index", "Admin ");
+                }
+
+                return RedirectToAction("Index", "Home");
             }
 
             return View();
+        }
+
+        //Log Out
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
