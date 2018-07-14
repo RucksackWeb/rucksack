@@ -56,6 +56,8 @@ namespace ECommerceStore.Migrations
 
                     b.Property<string>("SecurityStamp");
 
+                    b.Property<bool>("Subscribe");
+
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")

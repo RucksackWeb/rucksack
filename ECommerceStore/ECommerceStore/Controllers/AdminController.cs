@@ -9,7 +9,7 @@ namespace ECommerceStore.Controllers
 {
     
     [Route("[controller]/[action]")]
-    [Authorize]
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
         public IActionResult Index()

@@ -4,10 +4,12 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceStore.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private IInventory _context;
@@ -20,6 +22,13 @@ namespace ECommerceStore.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        // For test purpose
+        [Authorize(Policy = "SubscribersOnly")]
+        public IActionResult Admin()
+        {
+            return RedirectToAction("Login", "Account");
         }
     }
 }

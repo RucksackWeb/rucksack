@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180713220429_initial")]
+    [Migration("20180714000130_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,6 +57,8 @@ namespace ECommerceStore.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<bool>("Subscribe");
 
                     b.Property<bool>("TwoFactorEnabled");
 

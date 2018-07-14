@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerceStore.Data;
 using ECommerceStore.Models;
+using ECommerceStore.Models.Handler;
 using ECommerceStore.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -46,6 +48,14 @@ namespace ECommerceStore
                 .AddDefaultTokenProviders();
 
 
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                option.AddPolicy("SubscribersOnly", policy => policy.RequireClaim("Subscription"));
+            });
+
+
+            services.AddSingleton<IAuthorizationHandler, AdminOnlyHandler>();
             services.AddScoped<IInventory, DevInventory>();
         }
 

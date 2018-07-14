@@ -75,7 +75,8 @@ namespace ECommerceStore.Controllers
                 UserName = rvm.Email,
                 Email = rvm.Email,
                 FirstName = rvm.FirstName,
-                LastName = rvm.LastName
+                LastName = rvm.LastName,
+                Subscribe = rvm.Subscribe
             };
 
             var result = await _userManager.CreateAsync(user, rvm.Password);
@@ -87,6 +88,12 @@ namespace ECommerceStore.Controllers
                 Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
                 Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
                 Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
+
+                if (user.Subscribe)
+                {
+                    Claim subscribeClaim = new Claim("Subscription", $"{user.Subscribe}");
+                    claimList.Add(subscribeClaim);
+                }
 
                 claimList.Add(nameClaim);
                 claimList.Add(emailClaim);
