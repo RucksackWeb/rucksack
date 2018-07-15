@@ -1,0 +1,44 @@
+﻿@model Product
+
+@{
+    Layout = "_Layout";
+}
+
+
+
+<h3> Add a New product</h3>
+
+<form method="post" form-action="Create">
+
+    <div>
+        <label asp-for="SKU"></label>
+        <input type="text" asp-for="SKU" />
+    </div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" />
+    </div>
+
+    <div>
+        <label asp-for="Price"></label>
+        <input type="number" asp-for="Price" />
+    </div>
+
+    <div>
+        <label asp-for="Quantity"></label>
+        <input type="number" asp-for="Quantity" />
+    </div>
+
+    <div>
+        <label asp-for="Image"></label>
+        <input type="url" asp-for="Image" />
+    </div>
+
+    <div>
+        <label asp-for="ProductCategory"></label>
+        @(Html.DropDownListFor(p => p.ProductCategory, new SelectList(Enum.GetValues(typeof(Category))), "Select Category"))
+    </div>
+
+    <button type="submit"> Add to Warehouse </button>
+</form>

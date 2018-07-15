@@ -2,15 +2,16 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ECommerceStore.Models.Handler
 {
     public class SubscriberFeatureRequirement : IAuthorizationRequirement
     {
-        public bool Subscription { get; set; }
+        public Claim Subscription { get; set; }
 
-        public SubscriberFeatureRequirement(bool subscribed)
+        public SubscriberFeatureRequirement(Claim subscribed)
         {
             Subscription = subscribed;
         }

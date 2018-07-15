@@ -40,18 +40,25 @@ namespace ECommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(lvm.Email);
+                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
 
-                if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Admin");
-                }
+                    var user = await _userManager.FindByEmailAsync(lvm.Email);
 
-                return RedirectToAction("Index", "Home");
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Your Credential is Incorrect");
+                }
             }
 
             return View();
@@ -70,55 +77,64 @@ namespace ECommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
-            ApplicationUser user = new ApplicationUser
+            if (ModelState.IsValid)
             {
-                UserName = rvm.Email,
-                Email = rvm.Email,
-                FirstName = rvm.FirstName,
-                LastName = rvm.LastName,
-                Subscribe = rvm.Subscribe
-            };
 
-            var result = await _userManager.CreateAsync(user, rvm.Password);
 
-            if (result.Succeeded)
-            {
-                List<Claim> claimList = new List<Claim>();
-
-                Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
-                Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
-                Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
-
-                if (user.Subscribe)
+                ApplicationUser user = new ApplicationUser
                 {
-                    Claim subscribeClaim = new Claim("Subscription", $"{user.Subscribe}");
-                    claimList.Add(subscribeClaim);
-                }
+                    UserName = rvm.Email,
+                    Email = rvm.Email,
+                    FirstName = rvm.FirstName,
+                    LastName = rvm.LastName,
+                    Subscribe = rvm.Subscribe
+                };
 
-                claimList.Add(nameClaim);
-                claimList.Add(emailClaim);
-                claimList.Add(roleClaim);
+                var result = await _userManager.CreateAsync(user, rvm.Password);
 
-                await _userManager.AddClaimsAsync(user, claimList);
-
-                await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
-
-                await _signInManager.SignInAsync(user, false);
-
-                
-                if (user.Email.Contains("@codefellows.com"))
+                if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
-                    Claim adminRoleClaim = new Claim(ClaimTypes.Role, ApplicationRoles.Admin);
-                    await _userManager.AddClaimAsync(user, adminRoleClaim);
+                    List<Claim> claimList = new List<Claim>();
 
-                    return RedirectToAction("Index", "Admin");
+                    Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+                    Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
+
+                    if (user.Subscribe)
+                    {
+                        Claim subscribeClaim = new Claim("Subscription", $"{user.Subscribe}");
+                        claimList.Add(subscribeClaim);
+                    }
+
+                    claimList.Add(nameClaim);
+                    claimList.Add(emailClaim);
+                    claimList.Add(roleClaim);
+
+                    await _userManager.AddClaimsAsync(user, claimList);
+
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    await _signInManager.SignInAsync(user, false);
+
+
+                    if (user.Email.Contains("@codefellows.com"))
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+                        Claim adminRoleClaim = new Claim(ClaimTypes.Role, ApplicationRoles.Admin);
+                        await _userManager.AddClaimAsync(user, adminRoleClaim);
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+
+                    return RedirectToAction("Index", "Home");
                 }
-
-                return RedirectToAction("Index", "Home");
             }
 
-            return View();
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect");
+            }
+                return View();
         }
 
         //Log Out

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ECommerceStore.Data;
 using ECommerceStore.Models;
 using ECommerceStore.Models.Interfaces;
+using ECommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,8 +33,10 @@ namespace ECommerceStore.Controllers
 
         public async Task<IActionResult> GetAll()
         {
-            List<Product> products = await _context.GetAll();
-            return View();
+            List<Product> products= await _context.GetAll();
+            DisplayProducts allProducts = new DisplayProducts();
+            allProducts.Products = products; 
+            return View(allProducts);
         }
 
 
@@ -55,7 +58,7 @@ namespace ECommerceStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
-            var result = _context.Create(product);
+            var result = await _context.Create(product);
             return View();
         }
 

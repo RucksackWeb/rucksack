@@ -56,6 +56,7 @@ namespace ECommerceStore
 
 
             services.AddSingleton<IAuthorizationHandler, AdminOnlyHandler>();
+            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
             services.AddScoped<IInventory, DevInventory>();
         }
 

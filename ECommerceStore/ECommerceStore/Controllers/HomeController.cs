@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
+
+   // [Route("[controller]/[action]")]
     [AllowAnonymous]
     public class HomeController : Controller
     {
@@ -24,11 +26,5 @@ namespace ECommerceStore.Controllers
             return View();
         }
 
-        // For test purpose
-        [Authorize(Policy = "SubscribersOnly")]
-        public IActionResult Admin()
-        {
-            return RedirectToAction("Login", "Account");
-        }
     }
 }

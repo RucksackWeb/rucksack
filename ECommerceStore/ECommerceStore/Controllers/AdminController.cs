@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ECommerceStore.Controllers
 {
     
-    [Route("[controller]/[action]")]
     [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {

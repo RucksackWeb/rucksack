@@ -11,6 +11,11 @@ namespace ECommerceStore.Models.Handler
 
         protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, SubscriberFeatureRequirement requirement)
         {
+            //if(context.User == null)
+            //{
+            //    return Task.CompletedTask;
+            //}
+
             if(context.User.HasClaim(c => c.Type == "Subscription"))
             {
                 context.Succeed(requirement);
