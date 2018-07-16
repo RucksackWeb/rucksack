@@ -64,8 +64,17 @@ namespace ECommerceStore.Models
             var dbproduct = _context.Products.FirstOrDefault(p => p.ID == id);
             if(dbproduct.ID == product.ID)
             {
-                _context.Products.Update(product);
+                dbproduct.SKU = product.SKU;
+                dbproduct.Name = product.Name;
+                dbproduct.Price = product.Price;
+                dbproduct.Description = product.Description;
+                dbproduct.Image = product.Image;
+                dbproduct.Quantity = product.Quantity;
+                dbproduct.ProductCategory = product.ProductCategory;
+
+                _context.Products.Update(dbproduct);
                 await _context.SaveChangesAsync();
+
                 return "Update complete";
             }
             else

@@ -9,6 +9,8 @@ namespace ECommerceStore.Models
     public class Product
     {
         public int ID { get; set; }
+
+        [Display(Name = "Model Number")]
         public string SKU { get; set; }
         public string Name { get; set; }
         public decimal Price { get; set; }
@@ -24,9 +26,8 @@ namespace ECommerceStore.Models
 
     public enum Category
     {
-        Tech,
-        Cloth,
-        Car,
-        Utility
+        Gadget,
+        Speaker,
+        Bags
     }
 }

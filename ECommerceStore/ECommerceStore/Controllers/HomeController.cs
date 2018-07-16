@@ -9,8 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
-
-   // [Route("[controller]/[action]")]
     [AllowAnonymous]
     public class HomeController : Controller
     {

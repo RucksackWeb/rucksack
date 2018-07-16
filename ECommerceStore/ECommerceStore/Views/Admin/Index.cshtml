@@ -17,15 +17,16 @@
 
 <div> Admin Dashboard</div>
 
+@*Currently working on the bootstrap dropdown menu for product management(Andrew)*@
+<div class="dropdown-menu">
+    <h6 class="dropdown-header"> Manage Products </h6>
+    <a class="dropdown-item" asp-action="Create" asp-controller="Product"> Add new Product </a>
+    <a class="dropdown-item" asp-action="GetAll" asp-controller="Product"> Manage Existing Products </a>
+</div>
 
-    <div class="dropdown-menu">
-        <h6 class="dropdown-header"> Manage Products </h6>
-        <a class="dropdown-item" asp-action="Create" asp-controller="Product"> Add new Product </a>
-        <a class="dropdown-item" asp-action="GetAll" asp-controller="Product"> Manage Existing Products </a>
-
-    </div>
-
-
+@*temporary working links for web site redirect*@
+<a class="dropdown-item" asp-action="Create" asp-controller="Product"> Add new Product </a>
+<a class="dropdown-item" asp-action="GetAll" asp-controller="Product"> Manage Existing Products </a>
 
 
 
