@@ -22,13 +22,12 @@ namespace ECommerceStore.Controllers
             _context = context;
         }
 
+
+
         public IActionResult index()
         {
             return View();
         }
-
-
-
 
 
         public async Task<IActionResult> GetAll()
@@ -58,16 +57,28 @@ namespace ECommerceStore.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
-            var result = await _context.Create(product);
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _context.Create(product);
+                return View();
+            }
+
+            else
+            {
+
+                ModelState.AddModelError(string.Empty, "");
+                return View();
+
+            }
         }
 
 
 
 
         [HttpGet]
-        public IActionResult Update(Product product)
+        public async Task<IActionResult> Update(int id)
         {
+            var product = await _context.GetById(id);
             return View(product);
         }
 
@@ -77,19 +88,20 @@ namespace ECommerceStore.Controllers
             string result = await _context.Update(id, product);
             if(result == "Update complete")
             {
-                return View();
+                return RedirectToAction("GetAll");
             }
             else
             {
-                return View();
+                //ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect");
+                return View(product);
             }
         }
 
         
         public async Task<IActionResult> Delete(int id)
         {
-            var result = _context.Delete(id);
-            return View();
+            var result = await _context.Delete(id);
+            return Redirect("GetAll");
         }
     }
 }

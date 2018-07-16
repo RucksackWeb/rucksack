@@ -1,0 +1,55 @@
+﻿@model DisplayProducts
+
+@{
+    Layout = "_Layout";
+}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="../../favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+      rel="stylesheet" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+      crossorigin="anonymous">
+<link rel="stylesheet" href="~/Styles/AllProducts.css" />
+
+
+
+
+
+@foreach (Product product in Model.Products)
+{
+
+    <div class="card">
+
+        <!-- Card image -->
+        <div class="view overlay">
+            <img class="card-img-top" src="@product.Image" alt="@product.Name image">
+            <a>
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body elegant-color white-text rounded-bottom">
+
+            <!-- Social shares button -->
+            <a class="activator waves-effect mr-4"><i class="fa fa-share-alt white-text"></i></a>
+            <!-- Title -->
+            <h4 class="card-title">@product.Name</h4>
+            <hr class="hr-light">
+            <!-- Text -->
+            <p class="card-text white-text mb-4">$@product.Price</p>
+            <!-- Link -->
+            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID" class="white-text d-flex justify-content-end"><h5>View Detail <i class="fa fa-angle-double-right"></i></h5></a>
+
+        </div>
+
+    </div>
+    <!-- Card Dark -->
+
+}
+
