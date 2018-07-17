@@ -55,7 +55,7 @@ namespace ECommerceStore
             });
 
 
-            services.AddSingleton<IAuthorizationHandler, AdminOnlyHandler>();
+           // services.AddSingleton<IAuthorizationHandler, AdminOnlyHandler>();
             services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
             services.AddScoped<IInventory, DevInventory>();
         }
@@ -69,9 +69,8 @@ namespace ECommerceStore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
-
             app.UseAuthentication();
+            app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
 

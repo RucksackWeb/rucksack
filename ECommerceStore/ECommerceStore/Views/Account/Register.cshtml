@@ -1,7 +1,14 @@
 ﻿@model RegisterViewModel
 
+@{ 
+    Layout = "_Layout";
+}
+
+<link rel="stylesheet" href="~/Styles/Account/Login.css" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister" rel="stylesheet">
+
 <form method="post">
-    <div asp-validation-summary="All"></div>
+    <div class="validation" asp-validation-summary="All"></div>
     <div>
         <label asp-for="Email"></label>
         <input type="email" asp-for="Email" required />

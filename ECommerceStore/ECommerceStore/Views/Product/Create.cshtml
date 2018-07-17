@@ -10,43 +10,43 @@
 
 <form method="post" form-action="Create">
 
-    <div>
+    <div class="form-group">
         <label asp-for="SKU"></label>
         <input type="text" asp-for="SKU" />
         <span asp-validation-for="SKU"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="Name"></label>
         <input type="text" asp-for="Name" />
         <span asp-validation-for="Name"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="Price"></label>
         <input type="number" asp-for="Price" />
         <span asp-validation-for="Price"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="Quantity"></label>
         <input type="number" asp-for="Quantity" />
         <span asp-validation-for="Quantity"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="Image"></label>
         <input type="url" asp-for="Image" />
         <span asp-validation-for="Image"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="Description"></label>
         <input type="text" asp-for="Description" />
         <span asp-validation-for="Description"></span>
     </div>
 
-    <div>
+    <div class="form-group">
         <label asp-for="ProductCategory"></label>
         @(Html.DropDownListFor(p => p.ProductCategory, new SelectList(Enum.GetValues(typeof(Category))), "Select Category"))
         <span asp-validation-for="ProductCategory"></span>
