@@ -58,27 +58,40 @@ div.menu {
 }
 
 
-
-/* Login/Register/username/logout buttons */
+/*Login/register buttons*/
 div.nav-account{
-    float: right;   
-    margin-right: 5em;
-    margin-top: .8em;
-    display:inline-block;
+
 }
+div.nav-accoutn a {
 
-
-div.account a {
-    padding-right: 1em;
-    font-size: 1.2em;
-    font-family: 'Special Elite', cursive;
 }
-
-
-
 
 
 
 footer{
     margin-left: 30%;   
+}
+
+
+/*Responsive Styling*/
+@media only screen and (min-width: 780px){
+    
+    /*Menu buttons*/
+    div.menu {
+
+    }
+
+
+    /* Login/Register buttons */
+    div.nav-account {
+        float: right;
+        margin-right: 5em;
+        margin-top: .8em;
+        display: inline-block;
+    }
+    div.account a {
+        padding-right: 1em;
+        font-size: 1.2em;
+        font-family: 'Special Elite', cursive;
+    }
 }
