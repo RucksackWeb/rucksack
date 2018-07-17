@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
-    
-    [Authorize(Policy = "AdminOnly")]
+  //  [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
+        [Authorize(Policy = "AdminOnly")]
         public IActionResult Index()
         {
             return View();

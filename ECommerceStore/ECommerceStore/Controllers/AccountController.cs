@@ -114,14 +114,14 @@ namespace ECommerceStore.Controllers
 
                     await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
 
-                    await _signInManager.SignInAsync(user, false);
-
-
                     if (user.Email.Contains("@codefellows.com"))
                     {
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
-                        Claim adminRoleClaim = new Claim(ClaimTypes.Role, ApplicationRoles.Admin);
-                        await _userManager.AddClaimAsync(user, adminRoleClaim);
+
+                    }
+                    await _signInManager.SignInAsync(user, true);
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
 
                         return RedirectToAction("Index", "Admin");
                     }
@@ -132,7 +132,7 @@ namespace ECommerceStore.Controllers
 
             else
             {
-                ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect");
+                ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect"); 
             }
                 return View();
         }
