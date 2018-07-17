@@ -36,12 +36,12 @@ namespace ECommerceStore
             services.AddMvc();
 
             services.AddDbContext<WarehouseDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
-            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
 
             services.AddDbContext<UserDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
-            //options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
@@ -54,8 +54,6 @@ namespace ECommerceStore
                 option.AddPolicy("SubscribersOnly", policy => policy.RequireClaim("Subscription"));
             });
 
-
-           // services.AddSingleton<IAuthorizationHandler, AdminOnlyHandler>();
             services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
             services.AddScoped<IInventory, DevInventory>();
         }
