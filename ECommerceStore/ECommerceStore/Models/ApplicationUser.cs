@@ -11,5 +11,12 @@ namespace ECommerceStore.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public bool Subscribe { get; set; }
+    }
+
+    public static class ApplicationRoles
+    {
+        public const string Member = "Member";
+        public const string Admin = "Admin";
     }
 }

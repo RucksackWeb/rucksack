@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.ViewModels;
@@ -20,7 +21,7 @@ namespace ECommerceStore.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
+         //View
         public IActionResult Index()
         {
             return View();
@@ -39,15 +40,28 @@ namespace ECommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel lvm)
         {
-            var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
-
-            if (result.Succeeded)
+            if (ModelState.IsValid)
             {
-                return View();
+                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
+
+                if (result.Succeeded)
+                {
+                    var user = await _userManager.FindByEmailAsync(lvm.Email);
+
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Your Credential is Incorrect");
+                }
             }
 
             return View();
-
         }
 
         // Register
@@ -63,21 +77,72 @@ namespace ECommerceStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel rvm)
         {
-            ApplicationUser user = new ApplicationUser
+            if (ModelState.IsValid)
             {
-                Email = rvm.Email,
-                FirstName = rvm.FirstName,
-                LastName = rvm.LastName
-            };
 
-            var result = await _userManager.CreateAsync(user, rvm.Password);
 
-            if (result.Succeeded)
-            {
-                return View();
+                ApplicationUser user = new ApplicationUser
+                {
+                    UserName = rvm.Email,
+                    Email = rvm.Email,
+                    FirstName = rvm.FirstName,
+                    LastName = rvm.LastName,
+                    Subscribe = rvm.Subscribe
+                };
+
+                var result = await _userManager.CreateAsync(user, rvm.Password);
+
+                if (result.Succeeded)
+                {
+                    List<Claim> claimList = new List<Claim>();
+
+                    Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+                    Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
+
+                    if (user.Subscribe)
+                    {
+                        Claim subscribeClaim = new Claim("Subscription", $"{user.Subscribe}");
+                        claimList.Add(subscribeClaim);
+                    }
+
+                    claimList.Add(nameClaim);
+                    claimList.Add(emailClaim);
+                    claimList.Add(roleClaim);
+
+                    await _userManager.AddClaimsAsync(user, claimList);
+
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    if (user.Email.Contains("@codefellows.com"))
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+
+                    }
+                    await _signInManager.SignInAsync(user, true);
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            return View();
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect"); 
+            }
+                return View();
+        }
+
+        //Log Out
+        public async Task<IActionResult> LogOut()
+        {
+            if (_signInManager.IsSignedIn(User))
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

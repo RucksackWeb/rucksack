@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ECommerceStore.Data;
 using ECommerceStore.Models;
+using ECommerceStore.Models.Handler;
 using ECommerceStore.Models.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,16 +36,25 @@ namespace ECommerceStore
             services.AddMvc();
 
             services.AddDbContext<WarehouseDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
 
             services.AddDbContext<UserDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
 
+            services.AddAuthorization(option =>
+            {
+                option.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
+                option.AddPolicy("SubscribersOnly", policy => policy.RequireClaim("Subscription"));
+            });
+
+            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
             services.AddScoped<IInventory, DevInventory>();
         }
 
@@ -56,15 +67,14 @@ namespace ECommerceStore
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
-
             app.UseAuthentication();
+            app.UseStaticFiles();
 
             app.UseMvcWithDefaultRoute();
 
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync("Nate and Andrew's ECommerce has died");
+                await context.Response.WriteAsync("un-break me");
             });
         }
     }

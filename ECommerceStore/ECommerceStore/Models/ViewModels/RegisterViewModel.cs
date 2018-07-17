@@ -20,8 +20,11 @@ namespace ECommerceStore.Models.ViewModels
         [Display( Name = "Last Name")]
         public string LastName { get; set; }
 
+        public bool Subscribe { get; set; }
+
         [Required]
         public string Password { get; set; }
+
 
 
         [Required]
