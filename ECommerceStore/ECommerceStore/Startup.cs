@@ -36,12 +36,12 @@ namespace ECommerceStore
             services.AddMvc();
 
             services.AddDbContext<WarehouseDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
-            options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
 
             services.AddDbContext<UserDbContext>(options =>
-            //options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
-            options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
+            options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
+            //options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
