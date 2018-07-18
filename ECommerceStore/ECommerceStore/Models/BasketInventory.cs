@@ -66,7 +66,40 @@ namespace ECommerceStore.Models
         }
 
 
-        // Update quantity of a product in the cart view
+        // need to move this method to somewhere else
+        // being used for view component
+        public async Task<Basket> GetBasket(string userId)
+        {
+            if (GetBasketById(userId) == null)
+            {
+                Basket newBasket = new Basket();
+                newBasket.UserId = userId;
+                await _context.Baskets.AddAsync(newBasket);
+            }
+
+            Basket basket = _context.Baskets.Where(b => b.UserId == userId).FirstOrDefault(b => b.IsComplete == false);
+            List<BasketItem> items = _context.CartItems.Where(i => i.BasketId == basket.Id).ToList();
+
+            if (items != null)
+            {
+                basket.TotalCost = 0;
+                foreach (BasketItem item in items)
+                {
+                    Product product = _context.Products.FirstOrDefault(p => p.ID == item.ItemId);
+                    item.Product = product;
+
+                    item.Cost = decimal.Multiply(Convert.ToDecimal(item.Quantity), product.Price);
+                    basket.TotalCost += item.Cost;
+                }
+                _context.Baskets.Update(basket);
+                await _context.SaveChangesAsync();
+            }
+
+            basket.CartItem = items;
+            return basket;
+        }
+
+
         public async Task<string> Update(int id, BasketItem item)
         {
             var dbItem = _context.CartItems.FirstOrDefault(i => i.Id == id);
@@ -82,7 +115,6 @@ namespace ECommerceStore.Models
         }
 
 
-        // Removes a product from cart
         public async Task<string> RemoveItem(int id)
         {
             var item = _context.CartItems.FirstOrDefault(i => i.Id == id);

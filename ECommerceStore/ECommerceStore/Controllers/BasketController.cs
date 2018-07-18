@@ -91,7 +91,7 @@ namespace ECommerceStore.Controllers
             Basket basket = _basket.GetBasketById(userId);
             List<BasketItem> items = _basket.GetItems(basket.Id);
 
-            if (items != null)
+            if (items != null)  
             {
                 basket.TotalCost = 0;
                 foreach (BasketItem item in items)

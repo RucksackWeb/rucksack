@@ -1,13 +1,13 @@
-﻿@model  ECommerceStore.Models.Basket
+﻿@model Basket
 
-<ul>
+@*<ul>
     @foreach (var BasketItem in Model.CartItem)
     {
         <li>
             <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
             <a asp-action="" asp-controller="">@BasketItem.Quantity</a>
-            <span>@{BasketItem.Cost}</span>
+            <span>@BasketItem.Cost</span>
             <hr />
         </li>
     }
-</ul>
+</ul>*@

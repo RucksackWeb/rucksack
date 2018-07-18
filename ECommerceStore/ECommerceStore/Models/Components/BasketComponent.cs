@@ -17,8 +17,9 @@ namespace ECommerceStore.Models.Components
             _allItems = allItems;
         }
 
-        public IViewComponentResult Invoke(int userId)
+        public IViewComponentResult Invoke(string userId)
         {
+
             var userCart = _allItems.GetBasket(userId);
 
             return View(userCart);
