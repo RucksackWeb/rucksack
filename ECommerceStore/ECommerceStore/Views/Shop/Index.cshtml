@@ -3,12 +3,17 @@
 @{
     Layout = "_Layout";
 }
+<div style="float:right">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("BasketComponent", UserManager.GetUserId(User));
+    }
+</div>
 
-@foreach (Product product in Model.Products)
-{
-
+<div>
+    @foreach (Product product in Model.Products)
+    {
     <div class="card">
-
         <!-- Card image -->
         <div class="view overlay">
             <img class="card-img-top" src="@product.Image" alt="@product.Name image">
@@ -16,10 +21,8 @@
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
-
         <!-- Card content -->
         <div class="card-body elegant-color white-text rounded-bottom">
-
             <!-- Social shares button -->
             <a class="activator waves-effect mr-4"><i class="fa fa-share-alt white-text"></i></a>
             <!-- Title -->
@@ -30,11 +33,8 @@
             <!-- Link -->
             <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@product.ID"> Add To Shopping Cart </a>
             <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID" class="white-text d-flex justify-content-end"><h5>View Detail <i class="fa fa-angle-double-right"></i></h5></a>
-
         </div>
-
     </div>
     <!-- Card Dark -->
-
-}
-
+    }
+</div>

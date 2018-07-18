@@ -1,13 +1,15 @@
 ﻿@model Basket
 
-@*<ul>
+    <h2>Shopping Cart</h2>
+<ul>
     @foreach (var BasketItem in Model.CartItem)
     {
         <li>
             <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
-            <a asp-action="" asp-controller="">@BasketItem.Quantity</a>
+            <a asp-action="CartPage" asp-controller="Shop">@BasketItem.Quantity</a>
             <span>@BasketItem.Cost</span>
             <hr />
         </li>
     }
-</ul>*@
+</ul>
+    <div>Total: @Model.TotalCost</div>
