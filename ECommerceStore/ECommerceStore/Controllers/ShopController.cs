@@ -2,19 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ECommerceStore.Models;
 using ECommerceStore.Models.Interfaces;
 using ECommerceStore.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
 {
     public class ShopController : Controller
     {
-        private IInventory _context { get; set; }
+        private IInventory _context;
+        private IBasket _basket;
+        private SignInManager<ApplicationUser> _signInManager { get; set; }
+        private UserManager<ApplicationUser> _userManager { get; set; }
 
-        public ShopController(IInventory context)
+        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket)
         {
             _context = context;
+            _basket = basket;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
 
@@ -32,5 +40,39 @@ namespace ECommerceStore.Controllers
 
             return View(product);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> CartPage()
+        {
+            string userId = _userManager.GetUserId(User);
+            if (_basket.GetBasketById(userId) == null)
+            {
+                Basket newBasket = new Basket();
+                newBasket.UserId = userId;
+                await _basket.CreateBasket(newBasket);
+            }
+
+            Basket basket = _basket.GetBasketById(userId);
+            List<BasketItem> items = _basket.GetItems(basket.Id);
+
+            if (items != null)
+            {
+                basket.TotalCost = 0;
+                foreach (BasketItem item in items)
+                {
+                    Product product = await _context.GetById(item.ItemId);
+                    item.Product = product;
+
+                    item.Cost = decimal.Multiply(Convert.ToDecimal(item.Quantity), product.Price);
+                    basket.TotalCost += item.Cost;
+                }
+                await _basket.SaveBasket(basket);
+            }
+
+            basket.CartItem = items;
+
+            return View(basket);
+        }
+
     }
 }
