@@ -1,0 +1,40 @@
+﻿@model Basket
+
+
+@{ 
+    Layout = "_Layout";
+}
+
+<table>
+
+    <tr>
+        <th></th>
+        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Name)</th>
+        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Quantity)</th>
+        <th></th>
+        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Price)</th>
+        <th>@Html.DisplayNameFor(i => i.CartItem[0].Cost)</th>
+   </tr>
+
+
+   @foreach(BasketItem item in Model.CartItem)
+   {
+
+        <tr>
+            <td><img src="@item.Product.Image" width="150px" /></td>
+            <td>@item.Product.Name</td>
+            <td> @item.Quantity</td>
+            <td>x</td>
+            <td>@item.Product.Price</td>
+            <td>$@item.Cost</td>
+            <td><a asp-action="RemoveProduct" asp-controller="Basket"> Delete </a></td>
+        </tr>
+
+    }
+
+
+
+</table>
+<h3> Total Cost: $@Model.TotalCost</h3>
+
+

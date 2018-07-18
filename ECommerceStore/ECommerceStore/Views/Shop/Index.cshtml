@@ -28,6 +28,7 @@
             <!-- Text -->
             <p class="card-text white-text mb-4">$@product.Price</p>
             <!-- Link -->
+            <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@product.ID"> Add To Shopping Cart </a>
             <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID" class="white-text d-flex justify-content-end"><h5>View Detail <i class="fa fa-angle-double-right"></i></h5></a>
 
         </div>
