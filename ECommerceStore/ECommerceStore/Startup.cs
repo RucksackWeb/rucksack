@@ -48,13 +48,23 @@ namespace ECommerceStore
                 .AddDefaultTokenProviders();
 
 
+            // Claims
             services.AddAuthorization(option =>
             {
                 option.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
                 option.AddPolicy("SubscribersOnly", policy => policy.RequireClaim("Subscription"));
             });
 
-            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
+
+            // OAuth
+            services.AddAuthentication().AddGoogle(google =>
+            {
+                google.ClientId = Configuration["OAuth:Authentication:Google:ClientId"];
+                google.ClientSecret = Configuration["OAuth:Authentication:Google:ClientSecret"];
+            });
+
+
+            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();   
             services.AddScoped<IInventory, DevInventory>();
             services.AddTransient<IBasket, BasketInventory>();
         }

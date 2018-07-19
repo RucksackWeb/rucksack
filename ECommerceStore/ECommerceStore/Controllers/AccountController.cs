@@ -119,7 +119,7 @@ namespace ECommerceStore.Controllers
                         await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
 
                     }
-                    await _signInManager.SignInAsync(user, true);
+                    await _signInManager.SignInAsync(user, false);
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {
 
@@ -143,6 +143,125 @@ namespace ECommerceStore.Controllers
             if (_signInManager.IsSignedIn(User))
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+
+
+
+
+
+
+
+        public IActionResult ExternalLogin(string provider)
+        {
+            var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account");
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginCallback(string remoteError = null)
+        {
+            if(remoteError != null)
+            {
+                TempData["ErrorMessage"] = "Error from Proider";
+                return RedirectToAction(nameof(Login));
+            }
+
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            if (info == null)
+            {
+                return RedirectToAction(nameof(Login));
+            }
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, false, true);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+            var fullname = info.Principal.FindFirstValue(ClaimTypes.Name);
+            string[] names = fullname.Split(" ");
+
+            return RedirectToAction("ExternalLoginConfirmation", new ExternalLoginViewModel
+            {
+                Email = email,
+                FirstName = names[0],
+                LastName = names[1]
+            });
+        } 
+
+
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel elvm)
+        {
+            if (ModelState.IsValid)
+            {
+                var info = await _signInManager.GetExternalLoginInfoAsync();
+
+                if(info == null)
+                {
+                    TempData["ErrorMessage"] = "Error Loading Information";
+                }
+
+                var user = new ApplicationUser
+                {   
+                    UserName = elvm.Email,
+                    Email = elvm.Email,
+                    FirstName = elvm.FirstName,
+                    LastName = elvm.LastName
+                };
+
+                var result = await _userManager.CreateAsync(user);
+
+
+                if (result.Succeeded)
+                {
+                    List<Claim> claimList = new List<Claim>();
+
+                    Claim nameClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+                    Claim emailClaim = new Claim(ClaimTypes.Email, user.Email);
+                    Claim roleClaim = new Claim(ClaimTypes.Role, "Member");
+
+                    if (user.Subscribe)
+                    {
+                        Claim subscribeClaim = new Claim("Subscription", $"{user.Subscribe}");
+                        claimList.Add(subscribeClaim);
+                    }
+
+                    claimList.Add(nameClaim);
+                    claimList.Add(emailClaim);
+                    claimList.Add(roleClaim);
+
+                    await _userManager.AddClaimsAsync(user, claimList);
+
+                    await _userManager.AddToRoleAsync(user, ApplicationRoles.Member);
+
+                    if (user.Email.Contains("@codefellows.com"))
+                    {
+                        await _userManager.AddToRoleAsync(user, ApplicationRoles.Admin);
+
+                    }
+
+                   // await _signInManager.SignInAsync(user, true);
+
+                    if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
+                    {
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+
+
+                    // result = await _userManager.AddLoginAsync(user, info);
+
+                        return RedirectToAction("Index", "Home");
+                    
+                }
+            }
+            return RedirectToAction("Login");
         }
     }
 }
