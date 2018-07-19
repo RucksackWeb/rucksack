@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerceStore.Migrations.WarehouseDb
+namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20180718171753_Initial")]
-    partial class Initial
+    [Migration("20180719173342_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
