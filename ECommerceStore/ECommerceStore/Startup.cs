@@ -63,6 +63,12 @@ namespace ECommerceStore
                 google.ClientSecret = Configuration["OAuth:Authentication:Google:ClientSecret"];
             });
 
+            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = Configuration["OAuth:Authentication:Microsoft:ApplicationId"];
+                microsoftOptions.ClientSecret = Configuration["OAuth:Authentication:Microsoft:Password"];
+            });
+
 
             services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();   
             services.AddScoped<IInventory, DevInventory>();
