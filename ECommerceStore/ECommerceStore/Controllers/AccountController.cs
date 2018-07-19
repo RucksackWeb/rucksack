@@ -246,7 +246,7 @@ namespace ECommerceStore.Controllers
 
                     }
 
-                   // await _signInManager.SignInAsync(user, true);
+                    await _signInManager.SignInAsync(user, true);
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {
@@ -255,8 +255,10 @@ namespace ECommerceStore.Controllers
                     }
 
 
-                    // result = await _userManager.AddLoginAsync(user, info);
+                    result = await _userManager.AddLoginAsync(user, info);
 
+
+                    if (result.Succeeded)
                         return RedirectToAction("Index", "Home");
                     
                 }

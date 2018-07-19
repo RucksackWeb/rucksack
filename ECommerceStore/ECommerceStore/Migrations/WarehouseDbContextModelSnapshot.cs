@@ -4,16 +4,14 @@ using ECommerceStore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerceStore.Migrations.WarehouseDb
+namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20180718171753_Initial")]
-    partial class Initial
+    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
