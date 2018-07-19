@@ -27,7 +27,7 @@
             <td>x</td>
             <td>@item.Product.Price</td>
             <td>$@item.Cost</td>
-            <td><a asp-action="RemoveProduct" asp-controller="Basket"> Delete </a></td>
+            <td><a asp-action="RemoveProduct" asp-controller="Basket" asp-route-id="@item.Id"> Delete </a></td>
         </tr>
 
     }

@@ -42,7 +42,7 @@ namespace ECommerceStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: true, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(lvm.Email, lvm.Password, isPersistent: false, lockoutOnFailure: false);
 
                 if (result.Succeeded)
                 {
@@ -79,8 +79,7 @@ namespace ECommerceStore.Controllers
         {
             if (ModelState.IsValid)
             {
-
-
+                
                 ApplicationUser user = new ApplicationUser
                 {
                     UserName = rvm.Email,
@@ -200,6 +199,21 @@ namespace ECommerceStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (await _userManager.FindByEmailAsync(elvm.Email) != null)
+                {
+                    var savedUser = await _userManager.FindByEmailAsync(elvm.Email);
+                    await _signInManager.SignInAsync(savedUser, false);
+                    if (await _userManager.IsInRoleAsync(savedUser, ApplicationRoles.Admin))
+                    {
+
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+
                 var info = await _signInManager.GetExternalLoginInfoAsync();
 
                 if(info == null)
@@ -246,7 +260,7 @@ namespace ECommerceStore.Controllers
 
                     }
 
-                   // await _signInManager.SignInAsync(user, true);
+                   await _signInManager.SignInAsync(user, false);
 
                     if (await _userManager.IsInRoleAsync(user, ApplicationRoles.Admin))
                     {
@@ -255,7 +269,7 @@ namespace ECommerceStore.Controllers
                     }
 
 
-                    // result = await _userManager.AddLoginAsync(user, info);
+                    result = await _userManager.AddLoginAsync(user, info);
 
                         return RedirectToAction("Index", "Home");
                     
