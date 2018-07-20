@@ -16,11 +16,11 @@
         <th>@Html.DisplayNameFor(i => i.CartItem[0].Cost)</th>
    </tr>
 
-
    @foreach(BasketItem item in Model.CartItem)
    {
 
         <tr>
+
             <td><img src="@item.Product.Image" width="150px" /></td>
             <td>@item.Product.Name</td>
             <td> @item.Quantity</td>

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ECommerceStore.Models
 {
-    public class BasketInventory : IBasket
+    public class DevBasket : IBasket
     {
         private WarehouseDbContext _context;
 
-        public BasketInventory(WarehouseDbContext context)
+        public DevBasket(WarehouseDbContext context)
         {
             _context = context;
         }
@@ -68,42 +68,42 @@ namespace ECommerceStore.Models
 
         // need to move this method to somewhere else
         // being used for view component
-        public async Task<Basket> GetBasket(string userId)
-        {
-            if (GetBasketById(userId) == null)
-            {
-                Basket newBasket = new Basket();
-                newBasket.UserId = userId;
-                await _context.Baskets.AddAsync(newBasket);
-            }
+        //public async Task<Basket> GetBasket(string userId)
+        //{
+        //    if (GetBasketById(userId) == null)
+        //    {
+        //        Basket newBasket = new Basket();
+        //        newBasket.UserId = userId;
+        //        await _context.Baskets.AddAsync(newBasket);
+        //    }
 
-            Basket basket = _context.Baskets.Where(b => b.UserId == userId).FirstOrDefault(b => b.IsComplete == false);
-            List<BasketItem> items = _context.CartItems.Where(i => i.BasketId == basket.Id).ToList();
+        //    Basket basket = _context.Baskets.Where(b => b.UserId == userId).FirstOrDefault(b => b.IsComplete == false);
+        //    List<BasketItem> items = _context.CartItems.Where(i => i.BasketId == basket.Id).ToList();
 
-            if (items != null)
-            {
-                basket.TotalCost = 0;
-                foreach (BasketItem item in items)
-                {
-                    Product product = _context.Products.FirstOrDefault(p => p.ID == item.ItemId);
-                    item.Product = product;
+        //    if (items != null)
+        //    {
+        //        basket.TotalCost = 0;
+        //        foreach (BasketItem item in items)
+        //        {
+        //            Product product = _context.Products.FirstOrDefault(p => p.ID == item.ItemId);
+        //            item.Product = product;
 
-                    item.Cost = decimal.Multiply(Convert.ToDecimal(item.Quantity), product.Price);
-                    basket.TotalCost += item.Cost;
-                }
-                _context.Baskets.Update(basket);
-                await _context.SaveChangesAsync();
-            }
+        //            item.Cost = decimal.Multiply(Convert.ToDecimal(item.Quantity), product.Price);
+        //            basket.TotalCost += item.Cost;
+        //        }
+        //        _context.Baskets.Update(basket);
+        //        await _context.SaveChangesAsync();
+        //    }
 
-            basket.CartItem = items;
-            return basket;
-        }
+        //    basket.CartItem = items;
+        //    return basket;
+        //}
 
 
         public async Task<string> Update(int id, BasketItem item)
         {
             var dbItem = _context.CartItems.FirstOrDefault(i => i.Id == id);
-            if(dbItem.Id == item.Id)
+            if (dbItem.Id == item.Id)
             {
                 dbItem.Quantity = item.Quantity;
                 dbItem.Cost = item.Cost;

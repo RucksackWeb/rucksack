@@ -14,13 +14,15 @@ namespace ECommerceStore.Controllers
     {
         private IInventory _context;
         private IBasket _basket;
+        private IOrder _order;
         private SignInManager<ApplicationUser> _signInManager { get; set; }
         private UserManager<ApplicationUser> _userManager { get; set; }
 
-        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket)
+        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order)
         {
             _context = context;
             _basket = basket;
+            _order = order;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -74,5 +76,42 @@ namespace ECommerceStore.Controllers
             return View(basket);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout(int basketId)
+        {
+            string userId = _userManager.GetUserId(User);
+            var basket = await _basket.GetBasket(userId);
+            List<BasketItem> items = _basket.GetItems(basketId);
+            
+            if(items == null)
+            {
+                return RedirectToAction("CartPage");
+            }
+
+
+            foreach(BasketItem item in items)
+            {
+                var product = await _context.GetById(item.ItemId);
+                item.Product = product;
+            }
+
+            if(_order.Get(basketId) == null)
+            {
+                Order newOrder = new Order
+                {
+                    UserId = userId,
+                    BasketId = basketId,
+                    Subtotal = basket.TotalCost,
+                    Items = items
+                };
+                
+                await _order.Add(newOrder);
+            }
+
+            Order order = _order.Get(basketId);
+
+            return View(order);
+        }
     }
 }
