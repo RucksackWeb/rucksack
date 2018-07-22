@@ -11,14 +11,17 @@ namespace ECommerceStore.Models
         public int ID { get; set; }
         public string UserId { get; set; }
         public int BasketId { get; set; }
+        public List<BasketItem> Items { get; set; }
 
-        [Display(Name = "Shipping Address")]
+        [Display(Name = "Street Address")]
         public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int Zipcode { get; set; }
+
 
         [Display(Name = "Time of Transaction")]
         public DateTime Date { get; set; }
-
-        public List<BasketItem> Items { get; set; }
 
         public decimal Subtotal { get; set; }
         public bool IsComplete { get; set; } = false;

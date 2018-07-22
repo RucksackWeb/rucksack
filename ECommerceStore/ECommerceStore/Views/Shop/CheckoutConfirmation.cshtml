@@ -1,0 +1,37 @@
+﻿@model Order
+
+@{ 
+    Layout = "_Layout";
+}
+
+<h2> Thank you for your Order @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value!</h2>
+
+<div>
+    <p>Custromer Number: @Model.UserId</p>
+    <p>Order Number: @Model.ID</p>
+    <p>Order Time: @Model.Date</p>
+</div>
+
+<div>
+    <h3> Shipping Address: </h3>
+    <p> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </p>
+    <p>@Model.Address  @Model.City  @Model.State, @Model.Zipcode</p>
+</div>
+
+<h3> Items </h3>
+
+<div>
+    @foreach(BasketItem item in Model.Items)
+    {
+        <div>
+            <img scr="@item.Product.Image">
+            <p>@item.Product.Name</p>
+            <p>@item.Quantity</p>
+        </div>
+
+    }
+
+</div>
+    <p> Your order is on its way! </p>
+
+<a asp-action="Index" asp-controller="Home"> Back to Home Page</a>

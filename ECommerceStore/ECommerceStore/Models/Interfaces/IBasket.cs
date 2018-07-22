@@ -17,7 +17,7 @@ namespace ECommerceStore.Models.Interfaces
         BasketItem GetItemById(int basketid);
 
         List<BasketItem> GetItems(int basketId);
-        Task<Basket> GetBasket(string userId);
+        //Task<Basket> GetBasket(string userId);
 
         Task<string> Update(int id, BasketItem item);
         Task<string> RemoveItem(int id);

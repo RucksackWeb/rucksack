@@ -9,7 +9,8 @@ namespace ECommerceStore.Models.Interfaces
     {
         Task<string> Add(Order order);
         Task<string> Update(Order order);
-        Order Get(int id);
+        Order Get(int basketId);
+        Order Get(string userId);
         Task<string> Remove(int id);
 
 

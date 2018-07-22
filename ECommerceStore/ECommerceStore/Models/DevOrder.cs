@@ -33,8 +33,14 @@ namespace ECommerceStore.Models
         }
 
         public Order Get(int basketId)
-        { 
+        {
             var order = _context.Orders.FirstOrDefault(o => o.BasketId == basketId);
+            return order;
+        }
+
+        public Order Get(string userId)
+        {
+            var order = _context.Orders.Where(o => o.UserId == userId).FirstOrDefault(o => o.IsComplete == false);
             return order;
         }
 
