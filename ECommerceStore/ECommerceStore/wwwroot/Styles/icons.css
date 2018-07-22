@@ -1,0 +1,50 @@
+﻿@font-face {
+    font-family: 'icomoon';
+    src: url('fonts/icomoon.eot?s5wvlq');
+    src: url('fonts/icomoon.eot?s5wvlq#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?s5wvlq') format('truetype'), url('fonts/icomoon.woff?s5wvlq') format('woff'), url('fonts/icomoon.svg?s5wvlq#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Enable Ligatures ================ */
+    letter-spacing: 0;
+    -webkit-font-feature-settings: "liga";
+    -moz-font-feature-settings: "liga=1";
+    -moz-font-feature-settings: "liga";
+    -ms-font-feature-settings: "liga" 1;
+    font-feature-settings: "liga";
+    -webkit-font-variant-ligatures: discretionary-ligatures;
+    font-variant-ligatures: discretionary-ligatures;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-key:before {
+    content: "\e98d";
+}
+
+.icon-menu:before {
+    content: "\e9bd";
+}
+
+.icon-google-plus:before {
+    content: "\ea8b";
+}
+
+.icon-windows8:before {
+    content: "\eac2";
+}
+
+.icon-linkedin:before {
+    content: "\eac9";
+}

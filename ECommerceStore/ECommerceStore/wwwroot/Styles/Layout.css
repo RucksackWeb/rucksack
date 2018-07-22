@@ -1,97 +1,58 @@
-﻿
-html {
-    margin: 0;
-    border: 0;
-    padding: 0;
+﻿header {
+    width: 100%;
+    position: relative;
+}
+
+header img {
     width: 100%;
 }
 
-body{
-    margin:0;
-    padding: 0;
+nav {
+    position: absolute;
+    bottom: 1.5vw;
+    left: 5vw;
+}
+
+nav li {
+    display: inline-block;
 }
 
 main {
-    outline: red 2px solid;
-    margin: 3% 6%;
-    min-height: 25em;    
+    width: 90vw;
+    margin: auto;
+    outline: 2px solid #3e3e3e;
+    min-height: 60vh;
+    margin-top: 1.2vw;
+    margin-bottom: 1.2vw;
 }
 
-/*nav bar*/
-div.nav{
-    background: black;
-    color: white;
+footer {
+    width: 100%;
+    position: relative;
+    min-height: 25vw;
 }
 
-/*nav title*/
-div.nav-title{
-    font-size: 4.5rem;
-    line-height: .9em;
-    border-bottom: 5px solid gold;
+#creators {
+    position: absolute;
+    bottom: 14.5vw;
+    right: 35vw;
+    padding-left: .25vw;
 }
 
-div.nav-title > p {
+#creators div {
+    display: inline-block;
+}
+
+#creators span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3vw;
+    color: #fff;
+    padding: .25vw;
+}
+
+#creators li {
+    color: #fff;
+    font-size: 1vw;
     text-align: center;
-    margin: 0;
-    padding: 1em 1em 0 1em;
-    font-family: 'Special Elite', cursive;
-}
-
-/*nav menu*/
-div.nav-menu{
-    text-align: center;
-    display: block;
-    padding-top: 2em;
-    margin: 0, 10%;
-    background-color: white;
-    padding-bottom: 0em;
-    border-bottom: 2px black solid;;
-}
-
-/*each menu buttons*/
-div.menu {
-    display: inline;
-    font-size: 1.7em;
-    margin: 0% 4%;
-    color: black;
-    font-family: 'Special Elite', cursive;
-}
-
-
-/*Login/register buttons*/
-div.nav-account{
-
-}
-div.nav-accoutn a {
-
-}
-
-
-
-footer{
-    margin-left: 30%;   
-}
-
-
-/*Responsive Styling*/
-@media only screen and (min-width: 780px){
-    
-    /*Menu buttons*/
-    div.menu {
-
-    }
-
-
-    /* Login/Register buttons */
-    div.nav-account {
-        float: right;
-        margin-right: 5em;
-        margin-top: .8em;
-        display: inline-block;
-    }
-    div.account a {
-        padding-right: 1em;
-        font-size: 1.2em;
-        font-family: 'Special Elite', cursive;
-    }
+    font-family: 'Song Myung', serif;
 }

@@ -1,10 +1,72 @@
-﻿ /*Admin Index*/
-div.admin-index{
-    text-align: center;
-    outline: 2px red solid;
+﻿.logo {
+    font-family: 'IM Fell DW Pica', serif;
+    background-color: #fff;
+    color: #000;
 }
 
-div.admin-index > h1{
-     text-align: center;
- }
+.tagline {
+    font-family: 'IM Fell DW Pica', serif;
+    position: absolute;
+    color: #fff;
+    background-color: #3e3e3e;
+    text-align: center;
+}
 
+header .logo {
+    position: absolute;
+    font-size: 5vw;
+    left: 5vw;
+    top: 1.5vw;
+}
+
+header .tagline {
+    position: absolute;
+    font-size: 1.5vw;
+    width: 17.4vw;
+    left: 5vw;
+    top: 6.9vw;
+}
+
+
+nav li {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.75vw;
+    padding: .5vw;
+}
+
+#userInfo {
+    position: absolute;
+    background-color: #fff;
+    right: 5vw;
+    bottom: 1.5vw;
+    text-align: center;
+    padding: .5vw;
+    min-width: 14.5vw;
+}
+
+nav {
+    position: absolute;
+    background-color: #fff;
+    outline: #3e3e3e;
+}
+
+footer {
+    margin-top: 5vw;
+    background-color: #3e3e3e;
+}
+
+footer .logo {
+    font-size: 3vw;
+    position: absolute;
+    left: 38vw;
+    bottom: 15.7vw;
+}
+
+footer .tagline {
+    position: absolute;
+    font-size: 1.2vw;
+    left: 38vw;
+    bottom: 14vw;
+    width: 10.4vw;
+    outline: 2px solid #fff;
+}

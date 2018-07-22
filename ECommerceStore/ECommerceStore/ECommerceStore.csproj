@@ -29,7 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\icons\" />
+    <Folder Include="wwwroot\images\" />
+    <Folder Include="wwwroot\Styles\Modules\" />
+    <Folder Include="wwwroot\Styles\Fonts\" />
   </ItemGroup>
 
 </Project>
