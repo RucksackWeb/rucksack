@@ -3,14 +3,15 @@
 @{
     Layout = "_Layout";
 }
-<div style="float:right">
+
+<aside id="cart">
     @if (SignInManager.IsSignedIn(User))
     {
         @await Component.InvokeAsync("BasketComponent", UserManager.GetUserId(User));
     }
-</div>
+</aside>
 
-<div>
+<section id="allproducts">
     @foreach (Product product in Model.Products)
     {
     <div class="card">
@@ -37,4 +38,4 @@
     </div>
     <!-- Card Dark -->
     }
-</div>
+</section>

@@ -27,11 +27,18 @@ header .tagline {
     top: 6.9vw;
 }
 
+nav ul {
+    padding: 0;
+}
 
 nav li {
     font-family: 'Oswald', sans-serif;
     font-size: 1.75vw;
     padding: .5vw;
+}
+
+nav a:hover {
+    color: #000;
 }
 
 #userInfo {
@@ -41,7 +48,8 @@ nav li {
     bottom: 1.5vw;
     text-align: center;
     padding: .5vw;
-    min-width: 14.5vw;
+    min-width: 10vw;
+    font-size: 1.2vw;
 }
 
 nav {
@@ -55,18 +63,50 @@ footer {
     background-color: #3e3e3e;
 }
 
-footer .logo {
-    font-size: 3vw;
-    position: absolute;
-    left: 38vw;
-    bottom: 15.7vw;
+    footer .logo {
+        font-size: 3vw;
+        position: absolute;
+        left: 38vw;
+        bottom: 15.7vw;
+    }
+
+    footer .tagline {
+        position: absolute;
+        font-size: 1.2vw;
+        left: 38vw;
+        bottom: 14vw;
+        width: 10.4vw;
+        outline: 2px solid #fff;
+    }
+
+#creators a:hover {
+    color: #888;
 }
 
-footer .tagline {
+#providers {
     position: absolute;
-    font-size: 1.2vw;
-    left: 38vw;
-    bottom: 14vw;
-    width: 10.4vw;
-    outline: 2px solid #fff;
+    top: 14vw;
+    left: 47vw;
 }
+
+#providers div {
+    display: inline-block;
+    font-size: 2vw;
+    padding: .5vw;
+}
+
+#smallprint {
+    font-size: .8vw;
+    position: absolute;
+    bottom: 5vw;
+    left: 41vw;
+}
+
+    #smallprint li {
+        display: inline-block;
+        padding: .25vw;
+    }
+
+    #smallprint a:hover {
+        color: #888;
+    }

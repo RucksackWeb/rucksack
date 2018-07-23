@@ -3,8 +3,11 @@
     "",
     "\\ECommerceStore",
     "\\ECommerceStore\\ECommerceStore",
-    "\\ECommerceStore\\ECommerceStore\\Data"
+    "\\ECommerceStore\\ECommerceStore\\Views",
+    "\\ECommerceStore\\ECommerceStore\\Views\\Shared",
+    "\\ECommerceStore\\ECommerceStore\\wwwroot",
+    "\\ECommerceStore\\ECommerceStore\\wwwroot\\Styles"
   ],
-  "SelectedNode": "\\ECommerceStore\\.gitignore",
+  "SelectedNode": "\\ECommerceStore\\ECommerceStore\\ECommerceStore.csproj",
   "PreviewInSolutionExplorer": false
 }
