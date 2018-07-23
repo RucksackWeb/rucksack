@@ -3,133 +3,151 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          rel="stylesheet" integrity="sha384-wskhasgfghywdcbwn70/dfybj47jz9qbsmid/irn3ewghxqfzcsftd1lzcfmhktb"
-          crossorigin="anonymous">
-
-    <link rel="stylesheet" href="~/Styles/Base.css" type="text/css" />
-    <link rel="stylesheet" href="~/Styles/Layout.css" type="text/css" />
-    <link rel="stylesheet" href="~/Styles/Modules.css" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=IM+Fell+DW+Pica|Oswald|Song+Myung" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/reset.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/base.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/layout.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/modules.css" type="text/css" />
+    <link rel="stylesheet" href="~/css/icons.css" type="text/css" />
 </head>
 
 
 <body>
     <header>
-        <div class="nav">
+        <img src="~/images/treeline.png" alt="Treeline Header" />
 
-            <div class="nav-account">
-                        <div class="account">
-                    @if (SignInManager.IsSignedIn(User))
-                    {
-                            <div>
-                                    Welcome  <strong> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </strong>
-                            </div>
-                            <div>
-                                <a asp-controller="Account" asp-action="Logout">Logout</a>
-                            </div>
-                            <div>
-                                <a asp-controller="Shop" asp-action="CartPage">View Cart</a>
-                            </div>
-                    }
-                    else
-                    {
-                            <div>
-                                <a asp-controller="Account" asp-action="Register"> Register </a>
-                            </div>
-                            <div>
-                                <a asp-controller="Account" asp-action="Login">Login</a>
-                            </div>
-                    }
-                        </div>
-                </div>
+        <a asp-controller="Home" asp-action="Index">
+            <span class="logo">rucksack</span>
+            <span class="tagline">-buy our stuff-</span>
+        </a>
 
-            <div class="nav-title">
-                <p>E Commerce Store</p>
-            </div>
 
-            <div class="nav-menu">
+        <div id="userInfo">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div> <strong> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </strong> </div>
 
+                if (User.IsInRole(ApplicationRoles.Admin))
+                {
+                    <a id="icon-key" asp-controller="Admin" asp-action="Index"></a>
+                }
+                <div><a asp-controller="Account" asp-action="Logout">logout</a></div>
+
+                <div><a asp-controller="Shop" asp-action="CartPage">view cart</a></div>
+
+            }
+            else
+            {
+                <div><a asp-controller="Account" asp-action="Login">login</a></div>
+
+                <div><a asp-controller="Account" asp-action="Register">register</a></div>
+            }
+        </div>
+
+        <nav>
+            <ul>
                 @if (User.IsInRole(ApplicationRoles.Admin))
                 {
-
-
-                    <div class="menu">
-                        <a asp-controller="Admin" asp-action="Index"> Dashboard </a>
-                    </div>
-
-                    <div class="menu">
-                        <a asp-controller="Shop" asp-action="Index">Products</a>
-                    </div>
-
-                    <div class="menu">
-                        <a asp-controller="" asp-action="">Menu three</a>
-                    </div>
+                    <li>
+                        <a asp-controller="Admin" asp-action="Index">inventory</a>
+                    </li>
                 }
-                else if (SignInManager.IsSignedIn(User))
+
+                <li>
+                    <a asp-controller="Shop" asp-action="Index">products</a>
+                </li>
+
+                @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="menu">
-                        <a asp-controller="Home" asp-action="Index">Home</a>
-                    </div>
 
-                    <div class="menu">
-                        <a asp-controller="Shop" asp-action="Index"> Products </a>
-                    </div>
+                    <li>
+                        <a asp-controller="Account" asp-action="Logout">logout</a>
+                    </li>
 
-                    <div class="menu">
-                        <a asp-controller="" asp-action="">Menu three</a>
-                    </div>
-
+                    <li>
+                        <a asp-controller="Shop" asp-action="CartPage">view cart</a>
+                    </li>
                 }
                 else
-                {
+                { 
+                    <li>
+                        <a asp-controller="Account" asp-action="Login">login</a>
+                    </li>
 
-                    <div class="menu">
-                        <a asp-controller="#" asp-action="#"> Menu One </a>
-                    </div>
-
-                    <div class="menu">
-                        <a asp-controller="" asp-action="">Menu two</a>
-                    </div>
-
-                    <div class="menu">
-                        <a asp-controller="" asp-action="">Menu three</a>
-                    </div>
+                    <li>
+                        <a asp-controller="Account" asp-action="Register">register</a>
+                    </li>
                 }
-            </div>
 
-        </div>
+                <li>
+                    about
+                </li>
+
+                <li>
+                    subcribe
+                </li>
+            </ul>
+        </nav>
     </header>
 
 
-    <main>
 
-            @RenderBody()
+
+    <main>
+        @RenderBody()
     </main>
 
+
+
+
+
+
     <footer>
-        <ul>
-            <li>ECommerce 2018</li>
-            <li>
-                <a href="https://linkedin.com" target="_blank">Andrew Baik</a>
-            </li>
-            <li>
-                <a href="https://linkedin.com" target="_blank">Nathan Aurich</a>
-            </li>
-        </ul>
+        <a asp-controller="Home" asp-action="Index">
+            <div>
+                <span class="logo">rucksack</span>
+                <span class="tagline">-2018-</span>
+            </div>
+        </a>
+        <section id="creators">
+            <div>
+                <span>Andrew Baik</span>
+                <ul class="links">
+                    <li>
+                        <a href="https://www.linkedin.com/in/andrewbaik0/" target="_blank">Linkedin</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/AndrewBaik" target="_blank">Github</a>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <span>Nathan Aurich</span>
+                <ul class="links">
+                    <li>
+                        <a href="https://www.linkedin.com/in/nathan-aurich/" target="_blank">Linkedin</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/NateA275" target="_blank">Github</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <section id="providers">
+            <div class="icon-windows"></div>
+            <div class="icon-google"></div>
+        </section>
+        <section id="smallprint">
+            <ul>
+                <li><a asp-controller="Home" asp-action="Index">home</a></li>
+                <li>subcribe</li>
+                <li>about</li>
+                <li>&copy; 2018</li>
+                <li>All Rights Reserved</li>
+            </ul>
+        </section>
     </footer>
+
 </body>
-
 </html>
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>

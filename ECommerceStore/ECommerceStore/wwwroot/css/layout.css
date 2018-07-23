@@ -1,0 +1,112 @@
+﻿header {
+    width: 100%;
+    position: relative;
+}
+
+    header img {
+        width: 100%;
+    }
+
+nav {
+    position: absolute;
+    bottom: 1.5vw;
+    left: 5vw;
+}
+
+    nav li {
+        display: inline-block;
+    }
+
+main {
+    position: relative;
+    width: 90vw;
+    margin: auto;
+    min-height: 60vh;
+    margin-top: 1.2vw;
+    margin-bottom: 1.2vw;
+}
+
+footer {
+    width: 100%;
+    position: relative;
+    min-height: 25vw;
+}
+
+#creators {
+    position: absolute;
+    bottom: 14.5vw;
+    right: 35vw;
+    padding-left: .25vw;
+}
+
+    #creators div {
+        display: inline-block;
+    }
+
+    #creators span {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.3vw;
+        color: #fff;
+        padding: .25vw;
+    }
+
+    #creators li {
+        color: #fff;
+        font-size: 1vw;
+        text-align: center;
+        font-family: 'Song Myung', serif;
+    }
+
+#allproducts {
+    display: inline-block;
+    width: 62vw;
+}
+
+    #allproducts hr {
+        width: 55vw;
+    }
+
+.card {
+    position: relative; 
+}
+
+    .card img {
+        max-width: 35vw;
+        padding: 1.1vw;
+        display: inline-block;
+    }
+
+    .card .description {
+        display: inline-block;
+        position: absolute;
+        top: 5vw;
+    }
+
+#cart {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    margin-left: 1.1vw;
+    width: 27.5vw;
+}
+
+#content {
+}
+
+#homecolumn {
+    width: 55vw;
+    outline: 2px solid red;
+    display: inline-block;
+    height: 40vw;
+}
+
+#bannerAd {
+    outline: 2px solid blue;
+}
+
+#seasonalAd {
+    width: 34.4vw;
+    display: inline-block;
+}
+
+
