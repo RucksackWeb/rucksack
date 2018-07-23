@@ -53,9 +53,9 @@ namespace ECommerceStore.Models
         }
 
 
-        public BasketItem GetItemById(int basketid)
+        public BasketItem GetItemById(int itemId)
         {
-            var cartItem = _context.CartItems.FirstOrDefault(i => i.BasketId == basketid);
+            var cartItem = _context.CartItems.FirstOrDefault(i => i.Id == itemId);
             return cartItem;
         }
 
