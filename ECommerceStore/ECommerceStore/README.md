@@ -3,4 +3,4 @@
 Photo by Sean Stratton on Unsplash
 
 
-Photo by Katie Moum on Unsplash
+Photo by MILKOVÍ on Unsplash

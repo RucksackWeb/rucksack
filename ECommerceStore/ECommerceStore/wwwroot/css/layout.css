@@ -58,12 +58,56 @@ footer {
     }
 
 #allproducts {
-    width: 75vw;
-    outline: 1px solid red;
-    background-color: red;
+    display: inline-block;
+    width: 62vw;
 }
 
+    #allproducts hr {
+        width: 55vw;
+    }
+
+.card {
+    position: relative; 
+}
+
+    .card img {
+        max-width: 35vw;
+        padding: 1.1vw;
+        display: inline-block;
+    }
+
+    .card .description {
+        display: inline-block;
+        position: absolute;
+        top: 5vw;
+    }
+
 #cart {
-    width: 14.5vw;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    margin-left: 1.1vw;
+    width: 27.5vw;
     outline: 1px solid red;
 }
+
+#content {
+}
+
+#homecolumn {
+    width: 55vw;
+    outline: 2px solid red;
+    display: inline-block;
+    height: 40vw;
+}
+
+#bannerAd {
+    outline: 2px solid blue;
+}
+
+#seasonalAd {
+    width: 34.4vw;
+    display: inline-block;
+}
+
+

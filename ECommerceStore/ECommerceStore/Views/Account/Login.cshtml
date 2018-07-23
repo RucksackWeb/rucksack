@@ -24,6 +24,11 @@
     <a asp-action="Register" asp-controller="Account"> Create an Account </a>
 </form>
 
+<section id="providers">
+    <div class="icon-windows"></div>
+    <div class="icon-google"></div>
+</section>
+
 @{
     var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
