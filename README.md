@@ -5,7 +5,7 @@
 
 ### Our Products
 - We sell high quality products that are divided into three different categories:
-    1. Sound system
+    1. Sound systems
     2. Gadgets
     3. Bags
 
@@ -29,7 +29,21 @@ signed-up for the subscription list.
 - We implemented connecting with Microsoft and Google OAuth. Which allows any Google or Microsoft account
 holders will be able to signin through those accounts and still enjoy the experience with our application.
 
+### Database Schema
+- Order
+    - Order object is created when user is ready for payment of a basket.
+    - Order object holds a basket ID and User ID, which is connected to a specific basket object of a user.
+    - Also holds non-personal user information such as shipping address, datetime of payment, and subtotal of order. 
 
+- Basket
+    - Basket acts as a middle data that connects user table, order table, and basket item table.
+    - Order and basket item holds basket ID. Each order and list of basket items are created per each basket object.
+    - Basket holds list of basket items. Which represents the different products and its quantity.
+
+- Basket item
+    - Basket items hold a single product with property of quantity.
+    - It holds a single product item, but as many quantity as possible in a basket.
+    - Each basket items are connected to a single basket object.
 
 
 
@@ -65,4 +79,4 @@ with Azure [Click here](http://lotofstuffcommerce.azurewebsites.net/).
 ## Acknowledgments
 
 * We utilized product images and information from [Uncrate.com](https://uncrate.com/).
-* 
+
