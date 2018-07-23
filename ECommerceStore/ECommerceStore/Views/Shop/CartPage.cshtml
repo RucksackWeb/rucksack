@@ -1,4 +1,4 @@
-﻿@model Basket
+﻿@model BasketViewModels
 
 
 @{ 
@@ -9,33 +9,39 @@
 
     <tr>
         <th></th>
-        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Name)</th>
-        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Quantity)</th>
+        <th>@Html.DisplayNameFor(i => i.Package.CartItem[0].Product.Name)</th>
+        <th>@Html.DisplayNameFor(i => i.Package.CartItem[0].Product.Quantity)</th>
         <th></th>
-        <th>@Html.DisplayNameFor(i => i.CartItem[0].Product.Price)</th>
-        <th>@Html.DisplayNameFor(i => i.CartItem[0].Cost)</th>
-   </tr>
+        <th>@Html.DisplayNameFor(i => i.Package.CartItem[0].Product.Price)</th>
+        <th>@Html.DisplayNameFor(i => i.Package.CartItem[0].Cost)</th>
+    </tr>
 
-   @foreach(BasketItem item in Model.CartItem)
-   {
+    @foreach (BasketItem item in Model.Package.CartItem)
+    {
 
         <tr>
-
             <td><img src="@item.Product.Image" width="150px" /></td>
             <td>@item.Product.Name</td>
-            <td> @item.Quantity</td>
+            <td>
+                <form method="post" asp-action="CartPage">
+                    <input type="hidden" asp-for="basketItemId" value="@item.Id" />
+                    <input type="number" asp-for="basketItemQuantity" value="@item.Quantity"/>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
             <td>x</td>
             <td>@item.Product.Price</td>
             <td>$@item.Cost</td>
             <td><a asp-action="RemoveProduct" asp-controller="Basket" asp-route-id="@item.Id"> Delete </a></td>
         </tr>
 
+
     }
 
 
 
 </table>
-<h3> Total Cost: $@Model.TotalCost</h3>
+<h3> Total Cost: $@Model.Package.TotalCost</h3>
 
 
-<a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Id"> Place Order </a>
+<a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Package.Id"> Place Order </a>

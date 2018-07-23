@@ -6,6 +6,7 @@ using ECommerceStore.Models;
 using ECommerceStore.Models.Interfaces;
 using ECommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
@@ -17,14 +18,16 @@ namespace ECommerceStore.Controllers
         private IOrder _order;
         private SignInManager<ApplicationUser> _signInManager { get; set; }
         private UserManager<ApplicationUser> _userManager { get; set; }
+        private IEmailSender _emailSender { get; set; }
 
-        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order)
+        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order, IEmailSender emailSender)
         {
             _context = context;
             _basket = basket;
             _order = order;
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
 
 
@@ -43,7 +46,7 @@ namespace ECommerceStore.Controllers
             return View(product);
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> CartPage()
         {
             string userId = _userManager.GetUserId(User);
@@ -72,8 +75,50 @@ namespace ECommerceStore.Controllers
             }
 
             basket.CartItem = items;
+            BasketViewModels bvm = new BasketViewModels();
+            bvm.Package = basket;
 
-            return View(basket);
+            return View(bvm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CartPage(BasketViewModels bvm)
+        {
+
+            var singleitem = _basket.GetItemById(bvm.basketItemId);
+            singleitem.Quantity = bvm.basketItemQuantity;
+            await _basket.SaveItem(singleitem);
+
+            string userId = _userManager.GetUserId(User);
+            if (_basket.GetBasketById(userId) == null)
+            {
+                Basket newBasket = new Basket();
+                newBasket.UserId = userId;
+                await _basket.CreateBasket(newBasket);
+            }
+
+            Basket basket = _basket.GetBasketById(userId);
+            List<BasketItem> items = _basket.GetItems(basket.Id);
+
+            if (items != null)
+            {
+                basket.TotalCost = 0;
+                foreach (BasketItem item in items)
+                {
+                    Product product = await _context.GetById(item.ItemId);
+                    item.Product = product;
+
+                    item.Cost = decimal.Multiply(Convert.ToDecimal(item.Quantity), product.Price);
+                    basket.TotalCost += item.Cost;
+                }
+                await _basket.SaveBasket(basket);
+            }
+
+            basket.CartItem = items;
+            BasketViewModels bvm2 = new BasketViewModels();
+            bvm2.Package = basket;
+
+            return View(bvm2);
         }
 
 
@@ -132,11 +177,11 @@ namespace ECommerceStore.Controllers
 
 
         public async Task<IActionResult> CheckoutConfirmation(int id)
-            {
+        {
             string userId = _userManager.GetUserId(User);
             Order order = _order.Get(userId);
 
-            if(order.ID != id)
+            if (order.ID != id)
             {
                 return RedirectToAction("CartPage");
             }
@@ -149,11 +194,37 @@ namespace ECommerceStore.Controllers
             await _order.Update(order);
 
             order.Items = _basket.GetItems(basket.Id);
-            
-            foreach(BasketItem item in order.Items)
+
+            foreach (BasketItem item in order.Items)
             {
                 item.Product = await _context.GetById(item.ItemId);
             }
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            // Sends Receipt email to a user
+            string msgTitle = "Your order is on its way!";
+
+            string msgContent = "<div>" +
+                                $"<h3> Your order #{order.ID} placed on {order.Date}, is getting ready for a shipment! </h3>" +
+                                 $"<p> {user.FirstName} {user.LastName}, Thank you for your order at RuckSack. Your order will be shipped out as soon as possible. </div>" +
+                                
+                                 "<div>" +
+                                 "<h4> Shipping Address: </h5>" +
+                                 $"<p>{user.FirstName} {user.LastName}</p>" +
+                                 $"<p>{order.Address}</p>" +
+                                 $"<p>{order.City} {order.State}, {order.Zipcode}</p>" +
+
+                                 "<h4> Items : </h4>";
+                
+            foreach(BasketItem item in order.Items) 
+            {
+                msgContent += $"<p><strong>{item.Product.Name}</strong> X {item.Quantity}, ${item.Cost}</p>";
+            };
+            msgContent += $"<h4>Damage on your Wallet: ${order.Subtotal}</h5>";        
+
+
+            await _emailSender.SendEmailAsync(user.Email, msgTitle, msgContent);
 
             return View(order);
         }

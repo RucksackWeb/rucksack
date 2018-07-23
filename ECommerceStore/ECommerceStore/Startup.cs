@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -69,11 +70,16 @@ namespace ECommerceStore
                 microsoftOptions.ClientSecret = Configuration["OAuth:Authentication:Microsoft:Password"];
             });
 
-
+            // Policy
             services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();   
+
+            // Connecting with database through interfaces
             services.AddScoped<IInventory, DevInventory>();
             services.AddTransient<IBasket, DevBasket>();
             services.AddTransient<IOrder, DevOrder>();
+
+            // Connection with Email Sender
+            services.AddScoped<IEmailSender, EmailSender>();
         }
 
 

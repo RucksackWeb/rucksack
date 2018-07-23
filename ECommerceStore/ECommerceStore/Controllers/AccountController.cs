@@ -7,6 +7,7 @@ using ECommerceStore.Models;
 using ECommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerceStore.Controllers
@@ -15,11 +16,13 @@ namespace ECommerceStore.Controllers
     {
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
+        private IEmailSender _emailSender;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailSender = emailSender;
         }
          //View
         public IActionResult Index()
@@ -125,10 +128,20 @@ namespace ECommerceStore.Controllers
                         return RedirectToAction("Index", "Admin");
                     }
 
+                    string msgTitle = "Thank you for Registering at RuckSack";
+                    string msgContent = $"<div>" +
+                                        $"<h2> Thank you {user.FirstName} {user.LastName} for registering at RuckSack! </h2>" +
+                                         $"<p> Thanks man </p>" +
+                                         $"</div>";
+
+                    // Sends welcome email to newly registered user
+                    await _emailSender.SendEmailAsync(user.Email, msgTitle, msgContent);
+
                     return RedirectToAction("Index", "Home");
+
                 }
             }
-
+                
             else
             {
                 ModelState.AddModelError(string.Empty, "Your Credential Is Incorrect"); 
@@ -145,12 +158,7 @@ namespace ECommerceStore.Controllers
         }
 
 
-
-
-
-
-
-
+        // OAuth
         public IActionResult ExternalLogin(string provider)
         {
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account");
@@ -268,10 +276,18 @@ namespace ECommerceStore.Controllers
                         return RedirectToAction("Index", "Admin");
                     }
 
-
                     result = await _userManager.AddLoginAsync(user, info);
 
-                        return RedirectToAction("Index", "Home");
+                    string msgTitle = "Thank you for Registering at RuckSack";
+                    string msgContent = $"<div>" +
+                                        $"<h2> Thank you {user.FirstName} {user.LastName} for registering at RuckSack! </h2>" +
+                                         $"<p> Subscribe to our site for exclusive deals. </p>" +
+                                         $"</div>";
+
+                    // Sends welcome email to newly registered user
+                    await _emailSender.SendEmailAsync(user.Email, msgTitle, msgContent);
+
+                    return RedirectToAction("Index", "Home");
                     
                 }
             }
