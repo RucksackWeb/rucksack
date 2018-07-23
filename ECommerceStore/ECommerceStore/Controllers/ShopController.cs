@@ -14,13 +14,15 @@ namespace ECommerceStore.Controllers
     {
         private IInventory _context;
         private IBasket _basket;
+        private IOrder _order;
         private SignInManager<ApplicationUser> _signInManager { get; set; }
         private UserManager<ApplicationUser> _userManager { get; set; }
 
-        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket)
+        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order)
         {
             _context = context;
             _basket = basket;
+            _order = order;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -41,7 +43,7 @@ namespace ECommerceStore.Controllers
             return View(product);
         }
 
-        [HttpGet]
+
         public async Task<IActionResult> CartPage()
         {
             string userId = _userManager.GetUserId(User);
@@ -74,5 +76,86 @@ namespace ECommerceStore.Controllers
             return View(basket);
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            string userId = _userManager.GetUserId(User);
+            var basket = _basket.GetBasketById(userId);
+            List<BasketItem> items = _basket.GetItems(basket.Id);
+
+            if (items.Count == 0)
+            {
+                TempData["ErrorMessage"] = "Shopping Cart is empty";
+                return RedirectToAction("CartPage");
+            }
+
+
+            if(_order.Get(basket.Id) == null)
+            {
+                Order newOrder = new Order
+                {
+                    UserId = userId,
+                    BasketId = basket.Id,
+                    Subtotal = basket.TotalCost,
+                };
+                
+                await _order.Add(newOrder);
+            }
+
+            Order order = _order.Get(basket.Id);
+
+            foreach (BasketItem item in items)
+            {
+                var product = await _context.GetById(item.ItemId);
+                item.Product = product;
+            }
+            order.Items = items;
+
+            return View(order);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(Order order)
+        {
+            string userId = _userManager.GetUserId(User);
+            Order dbOrder = _order.Get(userId);
+            dbOrder.Address = order.Address;
+            dbOrder.City = order.City;
+            dbOrder.State = order.State;
+            dbOrder.Zipcode = order.Zipcode;
+
+            await _order.Update(dbOrder);
+            return RedirectToAction("Checkout");
+        }
+
+
+        public async Task<IActionResult> CheckoutConfirmation(int id)
+            {
+            string userId = _userManager.GetUserId(User);
+            Order order = _order.Get(userId);
+
+            if(order.ID != id)
+            {
+                return RedirectToAction("CartPage");
+            }
+
+            Basket basket = _basket.GetBasketById(userId);
+            basket.IsComplete = true;
+            order.IsComplete = true;
+            order.Date = DateTime.Now;
+            await _basket.SaveBasket(basket);
+            await _order.Update(order);
+
+            order.Items = _basket.GetItems(basket.Id);
+            
+            foreach(BasketItem item in order.Items)
+            {
+                item.Product = await _context.GetById(item.ItemId);
+            }
+
+            return View(order);
+        }
     }
 }

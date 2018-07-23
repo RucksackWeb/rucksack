@@ -72,7 +72,8 @@ namespace ECommerceStore
 
             services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();   
             services.AddScoped<IInventory, DevInventory>();
-            services.AddTransient<IBasket, BasketInventory>();
+            services.AddTransient<IBasket, DevBasket>();
+            services.AddTransient<IOrder, DevOrder>();
         }
 
 

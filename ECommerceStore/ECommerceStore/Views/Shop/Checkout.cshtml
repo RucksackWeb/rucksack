@@ -1,0 +1,71 @@
+﻿@model Order
+
+@{ 
+    Layout = "_Layout";
+}
+
+
+@if (Model.Address == null)
+{
+    <h3> Shipping Address </h3>
+    <form method="post">
+
+        <div>
+            <label asp-for="@Model.Address"></label>
+            <input type="text" asp-for="@Model.Address" required/>
+        </div>
+
+        <div>
+            <label asp-for="@Model.City"></label>
+            <input type="text" asp-for="@Model.City" required/>
+        </div>
+
+        <div>
+            <label asp-for="@Model.State"></label>
+            <input type="text" asp-for="@Model.State" required/>
+        </div>
+
+        <div>
+            <label asp-for="@Model.Zipcode"></label>
+            <input type="number" asp-for="@Model.Zipcode" required/>
+        </div>
+
+        <button type="submit" asp-route-id="@Model.ID"> Submit </button>
+
+    </form>
+
+}
+else
+{
+    <section>
+        @foreach(var item in Model.Items)
+        {
+
+            <div>
+                <img src="@item.Product.Image" width="150px"/>
+
+                <p>@item.Product.Name</p>
+                <p>@item.Quantity</p>
+                <p> X </p>
+                <p>$@item.Product.Price</p>
+                <p> $ @item.Cost</p>
+            </div>
+        }
+    </section>
+
+    <div>
+        <h3>Shipping To: @Model.Address @Model.City @Model.State, @Model.Zipcode </h3>
+        <a asp-action="" asp-controller="" > Change Shipping Address</a>
+    </div>
+
+    <div>
+        <h3> Your Total: @Model.Subtotal</h3>
+        <div>
+            <a asp-action="CartPage" asp-controller="Shop"> Back </a>
+            <a asp-action="CheckoutConfirmation" asp-route-id="@Model.ID"> Place Order Now</a>
+        </div>
+    </div>
+
+
+
+}

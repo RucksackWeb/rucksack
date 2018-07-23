@@ -16,14 +16,14 @@ namespace ECommerceStore.Data
 
         }
 
-        
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
             base.OnModelCreating(builder);
         }
-            
-        
+
+        public DbSet<Order> Orders {get; set;}
     }
 }

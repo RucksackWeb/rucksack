@@ -29,7 +29,7 @@
                     @if (SignInManager.IsSignedIn(User))
                     {
                             <div>
-                                    Welcome!  <strong> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </strong>
+                                    Welcome  <strong> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </strong>
                             </div>
                             <div>
                                 <a asp-controller="Account" asp-action="Logout">Logout</a>
