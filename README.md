@@ -1,4 +1,6 @@
-# ![rucksack](./EcommerceStore/rucksack_logo.PNG)
+# ![rucksack](https://i.imgur.com/Pr8S7Ep.png)
+
+
 - This is a 3 week 2-person team project building an entire ecommerce web application using ASP.NET.
 
 ## About our ECommerce Store
@@ -64,13 +66,13 @@ Follow these steps to run this application on your local mahine
 5. Run the program.
 
 Follow this step to run this application from Azure.
-1. Click this link to open the application. http://lotofstuffcommerce.azurewebsites.net/
+1. Click this link to open the application. http://therucksack.azurewebsites.net/
 
 
 ## Deployment
 
 Current Application is deployed with Microsoft Azure application service. To open this application
-with Azure [Click here](http://lotofstuffcommerce.azurewebsites.net/).
+with Azure [Click here](http://therucksack.azurewebsites.net/).
 
 
 ## Contributing
@@ -79,4 +81,9 @@ with Azure [Click here](http://lotofstuffcommerce.azurewebsites.net/).
 ## Acknowledgments
 
 * We utilized product images and information from [Uncrate.com](https://uncrate.com/).
+Header photo by Sean Stratton on Unsplash.
+Seasonal Advertisement photo by MILKOVÍ on Unsplash.
+Newsletter banner photo by Mathyas Kurmann on Unsplash.
+
+
 
