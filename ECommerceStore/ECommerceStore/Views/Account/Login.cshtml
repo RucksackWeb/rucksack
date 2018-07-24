@@ -24,11 +24,6 @@
     <a asp-action="Register" asp-controller="Account"> Create an Account </a>
 </form>
 
-<section id="providers">
-    <div class="icon-windows"></div>
-    <div class="icon-google"></div>
-</section>
-
 @{
     var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -40,7 +35,7 @@
 
                     @foreach (var provider in loginProviders)
                     {
-                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                        <button type="submit" class="icon-@provider.DisplayName" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"> @provider.Name</button>
 
                     }
                 </form>

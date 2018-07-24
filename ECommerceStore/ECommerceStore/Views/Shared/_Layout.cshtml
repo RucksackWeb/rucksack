@@ -15,42 +15,36 @@
 
 <body>
     <header>
-        <img src="~/images/treeline.png" alt="Treeline Header" />
-
+        <img src="~/images/sean-stratton-744803-unsplash.jpg" alt="Treeline Header" />
         <a asp-controller="Home" asp-action="Index">
             <span class="logo">rucksack</span>
             <span class="tagline">-buy our stuff-</span>
         </a>
-
-
+       @if(SignInManager.IsSignedIn(User))
+       {
         <div id="userInfo">
-            @if (SignInManager.IsSignedIn(User))
+            @if (User.IsInRole(ApplicationRoles.Admin))
             {
-                <div> <strong> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </strong> </div>
-
-                if (User.IsInRole(ApplicationRoles.Admin))
-                {
-                    <a id="icon-key" asp-controller="Admin" asp-action="Index"></a>
-                }
-                <div><a asp-controller="Account" asp-action="Logout">logout</a></div>
-
-                <div><a asp-controller="Shop" asp-action="CartPage">view cart</a></div>
-
+                <span class="icon-unlocked"></span>
+                <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
             }
             else
             {
-                <div><a asp-controller="Account" asp-action="Login">login</a></div>
-
-                <div><a asp-controller="Account" asp-action="Register">register</a></div>
+                <span class="icon-user"></span>
+                <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
             }
+                <ul>
+                    <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
+                </ul>
         </div>
+       }
 
         <nav>
             <ul>
                 @if (User.IsInRole(ApplicationRoles.Admin))
                 {
                     <li>
-                        <a asp-controller="Admin" asp-action="Index">inventory</a>
+                        <a asp-controller="Admin" asp-action="Index">manage</a>
                     </li>
                 }
 
@@ -85,23 +79,15 @@
                 </li>
 
                 <li>
-                    subcribe
+                    subscribe
                 </li>
             </ul>
         </nav>
     </header>
 
-
-
-
     <main>
         @RenderBody()
     </main>
-
-
-
-
-
 
     <footer>
         <a asp-controller="Home" asp-action="Index">
@@ -135,16 +121,16 @@
             </div>
         </section>
         <section id="providers">
-            <div class="icon-windows"></div>
-            <div class="icon-google"></div>
+            <div class="icon-Microsoft"></div>
+            <div class="icon-Google"></div>
         </section>
         <section id="smallprint">
             <ul>
                 <li><a asp-controller="Home" asp-action="Index">home</a></li>
-                <li>subcribe</li>
+                <li>subscribe</li>
                 <li>about</li>
                 <li>&copy; 2018</li>
-                <li>All Rights Reserved</li>
+                <li>All Rights Reserved.</li>
             </ul>
         </section>
     </footer>

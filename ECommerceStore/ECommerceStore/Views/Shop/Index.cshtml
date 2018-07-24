@@ -14,8 +14,8 @@
         <div class="description">
             <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID"><h4>@product.Name</h4></a>
             <p>@product.Price.ToString("C")</p>
-            <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@product.ID">add to cart</a>
-            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID"><h5>detail</h5></a>
+            <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@product.ID"><p>add to cart</p></a>
+            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID"><p>detail</p></a>
         </div>
     </div>
     <hr />

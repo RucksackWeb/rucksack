@@ -29,12 +29,12 @@ main {
 footer {
     width: 100%;
     position: relative;
-    min-height: 25vw;
+    min-height: 16vw;
 }
 
 #creators {
     position: absolute;
-    bottom: 14.5vw;
+    bottom: 6.5vw;
     right: 35vw;
     padding-left: .25vw;
 }
@@ -67,19 +67,23 @@ footer {
     }
 
 .card {
-    position: relative; 
+    position: relative;
+    box-sizing: border-box;
 }
 
     .card img {
         max-width: 35vw;
-        padding: 1.1vw;
+        padding: 1.1vw 0 1.1vw 1.1vw;
         display: inline-block;
     }
 
     .card .description {
+        max-height: 12vw;
         display: inline-block;
         position: absolute;
+        padding: 1.1vw;
         top: 5vw;
+        overflow-y: hidden;
     }
 
 #cart {
@@ -91,22 +95,80 @@ footer {
 }
 
 #content {
+    width: 90vw;
+    padding: 1.1vw;
 }
 
 #homecolumn {
     width: 55vw;
-    outline: 2px solid red;
     display: inline-block;
-    height: 40vw;
+    vertical-align: top;
 }
 
-#bannerAd {
-    outline: 2px solid blue;
-}
+    #homecolumn hr {
+        margin: 2.05vw;
+    }
 
-#seasonalAd {
+#content aside {
     width: 34.4vw;
     display: inline-block;
 }
 
+#featured h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 2vw;
+    padding-top: .8vw;
+}
 
+#itemDetail {
+    position: relative;
+    display: inline-block;
+    width: 62vw;
+    height: 41.3vw;
+}
+
+#itemImage {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#itemDesc {
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    background-color: rgba(255, 255, 255, .65);
+    padding: .4vw;
+}
+
+    #itemDesc span {  
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+        color: #000;
+    }
+
+    #itemDesc p {
+        padding: .2vw 0 .2vw 0;
+        width: 25vw;
+        color: #000;
+    }
+
+#buttons {
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+}
+
+    #buttons a {
+        font-family: 'Oswald', sans-serif;
+        color: #3e3e3e;
+        font-size: 1.3vw;
+        margin: .5vw;
+        padding: .25vw;
+    }
+
+        #buttons a:hover {
+            color: #000;
+            background-color: #ddd;
+        }

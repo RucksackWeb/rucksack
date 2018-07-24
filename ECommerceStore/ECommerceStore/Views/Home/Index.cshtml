@@ -1,22 +1,38 @@
-﻿@{
+﻿@model Product
+
+@{
     Layout = "_Layout";
 }
 
 <section id="content">
     <section id="homecolumn">
-
-        <div id="bannerAd">
-            <p>Subscribe to our monthly newsletter.</p>
+        <div id="banner">
+            <img src="~/images/mathyas-kurmann-102977-unsplash.jpg" alt="Subscribe." />
+            <span>Subscribe to our monthly newsletter.</span>
         </div>
-
+        <hr />
         <div id="featured">
-            <p>This is where the featured product is going to go.</p>
+            <h2 id="title">Featured Product</h2>
+            <div class="card">
+                <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID"><img src="@Model.Image" alt="@Model.Name image"></a>
+                <div class="description">
+                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID"><h4>@Model.Name</h4></a>
+                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID">@Model.Description</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <aside id="seasonalAd">
-        <img src="~/images/openroad.png" alt="Explore." />
-        <span>Explore</span>
-        <span>Summer 2018</span>
-    </aside>
+
+    <a asp-controller="Shop" asp-action="Index">
+        <aside id="seasonalAd">
+            <img src="~/images/ivana-cajina-367006-unsplash.jpg" alt="Explore." />
+            <div>
+                <p>Explore</p>
+                <p>the</p>
+                <p>Summer 2018</p>
+                <p>collection</p>
+            </div>
+        </aside>
+    </a>
 </section>

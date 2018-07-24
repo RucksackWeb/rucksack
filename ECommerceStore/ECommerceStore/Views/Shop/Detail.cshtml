@@ -1,26 +1,46 @@
 ﻿@model Product
 
-@{ 
+@{
     Layout = "_Layout";
 }
 
-<div style="float:right">
+
+
+<section id="itemDetail">
+    <img id="itemImage" src="@Model.Image" alt="@Model.Name  image" />
+
+    <div id="itemDesc">
+        <span>@Model.Name</span>
+        <p>@Model.Description</p>
+        <p>@Model.Price.ToString("C")</p>
+    </div>
+
+    <div id="buttons">
+        <a asp-action="Index" asp-controller="Shop">back</a>
+        <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@Model.ID">add to cart</a>
+    </div>
+</section>
+
+
+
+@*<section id="productDetail">
+        <div>
+            <p>Category @Model.ProductCategory</p>
+            <img src="@Model.Image" alt="@Model.Name image" />
+
+            <h2>@Model.Name</h2>
+
+            <p>$@Model.Price</p>
+            <p>Product Description: @Model.Description</p>
+        </div>
+
+        <a asp-action="Index" asp-controller="Shop">back</a>
+    </section>*@
+
+
+<aside id="cart">
     @if (SignInManager.IsSignedIn(User))
     {
         @await Component.InvokeAsync("BasketComponent", UserManager.GetUserId(User));
     }
-</div>
-<div>
-    <p>Category @Model.ProductCategory</p>
-    <img src="@Model.Image" alt="@Model.Name image" />
-
-    <h2>@Model.Name</h2>
-
-    <p>$@Model.Price</p>
-    <p>Product Description: @Model.Description</p>
-</div>
-
-
-
-
-<a asp-action="Index" asp-controller="Shop">Go back to all Products</a>
+</aside>

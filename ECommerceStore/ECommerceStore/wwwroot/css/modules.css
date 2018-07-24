@@ -48,9 +48,20 @@ nav a:hover {
     bottom: 1.5vw;
     text-align: center;
     padding: .5vw;
-    min-width: 10vw;
-    font-size: 1.2vw;
+    font-size: 1.5vw;
 }
+
+    #userInfo div {
+        display: inline-block;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+    }
+
+    #userInfo li {
+        display: inline-block;
+        font-size: 1vw;
+        font-weight: bold;
+    }
 
 nav {
     position: absolute;
@@ -67,14 +78,14 @@ footer {
         font-size: 3vw;
         position: absolute;
         left: 38vw;
-        bottom: 15.7vw;
+        bottom: 7.5vw;
     }
 
     footer .tagline {
         position: absolute;
         font-size: 1.2vw;
         left: 38vw;
-        bottom: 14vw;
+        bottom: 5.7vw;
         width: 10.4vw;
         outline: 2px solid #fff;
     }
@@ -85,7 +96,7 @@ footer {
 
 #providers {
     position: absolute;
-    top: 14vw;
+    bottom: 1.8vw;
     left: 47vw;
 }
 
@@ -98,7 +109,7 @@ footer {
 #smallprint {
     font-size: .8vw;
     position: absolute;
-    bottom: 5vw;
+    bottom: .2vw;
     left: 41vw;
 }
 
@@ -116,4 +127,99 @@ footer {
     color: #000;
     font-size: 1.4vw;
     font-weight: bold;
+    padding-bottom: .8vw;
 }
+
+    .description h4:hover {
+        color: #3e3e3e; 
+    }
+
+    .description p {
+        padding-bottom: .3vw;
+    }
+
+        .description p:hover {
+            color: #000;
+        }
+
+#seasonalAd {
+    position: relative;
+}
+    #seasonalAd img{
+        width: 32vw;
+        display: block;
+        margin: auto;
+    }
+    #seasonalAd div {
+        position: absolute;
+        left: 5vw;
+        top: 2vw;        
+    }
+
+    #seasonalAd p {
+        text-align: center;
+        font-size: 4vw;
+        color: #fff;
+    }
+
+#banner {
+    position: relative;
+    height: 15vw;
+}
+
+    #banner img {
+        width: 100%;
+    }
+
+    #banner span {
+        position: absolute;
+        top: 1vw;
+        left: 8vw;
+        color: #fff;
+        font-size: 2.5vw;
+    }
+
+#featured {
+    outline: .2vw solid #3e3e3e;
+    margin-top: 1.1vw;
+}
+
+#cartComponent {
+    position: relative;
+    padding: .8vw 0 .8vw 0;
+}
+
+#cartComponent h2 {
+    font-family: 'Oswald', sans-serif;
+    padding-bottom: .2vw;
+    border-bottom: .2vw solid #3e3e3e;
+    font-size: 1.5vw;
+    text-align: center;
+    margin-bottom: .8vw;
+    color: #000;
+}
+
+    #cartComponent li {
+        font-size: .8vw;
+    }
+    #cartComponent hr {
+        width: 18vw;
+    }
+
+    #cartComponent h2:hover {
+        color: #3e3e3e;
+    }
+
+#cartComponent .cost {
+    text-align: right;
+}
+
+    #cartComponent a:hover {
+        color: #000;
+    }
+
+    #cartComponent .checkout {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+        text-align: center;
+    }
