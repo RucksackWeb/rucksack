@@ -1,4 +1,4 @@
-﻿
+﻿@model AdminDashboardViewModel
 
 @{
     Layout = "_Layout";
@@ -10,6 +10,25 @@
     <div class="dashboard">
     <h1> Admin Dashboard</h1>
         
+
+        <div>
+            <div>
+                <h4>Products on sale</h4>
+                <a asp-action="GetAll" asp-controller="Product" >@Model.Products.Count</a>
+            </div>
+
+            <div>
+                <h4>Total registered users</h4>
+                <a asp-action="UserList" >@Model.Users.Count</a>
+            </div>
+
+            <div>
+                <h4>Total Orders Received</h4>
+                <a asp-action="OrderList" >@Model.Orders.Count</a>
+            </div>
+        </div>
+
+
 
         <div class="product-mgnt">
                 <h6 class="dropdown-header"> Manage Products </h6>

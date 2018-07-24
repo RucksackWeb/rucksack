@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerceStore.Migrations
 {
-    public partial class initialtwo : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,7 +61,7 @@ namespace ECommerceStore.Migrations
                     Address = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     State = table.Column<string>(nullable: true),
-                    Zipcode = table.Column<int>(nullable: false),
+                    Zipcode = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Subtotal = table.Column<decimal>(nullable: false),
                     IsComplete = table.Column<bool>(nullable: false)

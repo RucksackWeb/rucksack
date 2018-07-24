@@ -44,6 +44,12 @@ namespace ECommerceStore.Models
             return order;
         }
 
+        public List<Order> GetAllClosed()
+        {
+            var orders = _context.Orders.Where(o => o.IsComplete == true).ToList();
+            return orders;
+        }
+
         public async Task<string> Remove(int id)
         {
             var order = _context.Orders.Find(id);

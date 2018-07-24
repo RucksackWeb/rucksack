@@ -1,0 +1,35 @@
+﻿@model AdminDashboardViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(p => p.Users[0].Id)</th>
+        <th>@Html.DisplayNameFor(p => p.Users[0].Email)</th>
+        <th>@Html.DisplayNameFor(p => p.Users[0].FirstName)</th>
+        <th>@Html.DisplayNameFor(p => p.Users[0].LastName)</th>
+        <th>@Html.DisplayNameFor(p => p.Users[0].Subscribe)</th>
+    </tr>
+
+    @foreach (ApplicationUser user in Model.Users)
+    {
+        <tr>
+            <td>@user.Id</td>
+            <td>@user.Email</td>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            @if (user.Subscribe == true)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+        </tr>
+    }
+</table>
+
+<a asp-action="Index"> Back to Dashboard </a>

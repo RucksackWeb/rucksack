@@ -1,0 +1,33 @@
+﻿@model AdminDashboardViewModel
+
+@{
+    Layout = "_Layout";
+}
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(p => p.Orders[0].ID)</th>
+        <th>@Html.DisplayNameFor(p => p.Orders[0].Date)</th>
+        <th>@Html.DisplayNameFor(p => p.Orders[0].Subtotal)</th>
+        <th>@Html.DisplayNameFor(p => p.Orders[0].IsComplete)</th>
+    </tr>
+
+    @foreach(Order order in Model.Orders)
+    {
+        <tr>
+            <td>@order.ID</td>
+            <td>@order.Date</td>
+            <td>$@order.Subtotal</td>
+            @if(order.IsComplete == true)
+            {
+                <td>yes</td>
+            }
+            else
+            {
+                <td>no</td>
+            }
+        </tr>
+    }
+</table>
+
+<a asp-action="Index"> Back to Dashboard </a>

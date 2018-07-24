@@ -17,7 +17,7 @@ namespace ECommerceStore.Models
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
-        public int Zipcode { get; set; }
+        public string Zipcode { get; set; }
 
 
         [Display(Name = "Time of Transaction")]

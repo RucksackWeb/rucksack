@@ -27,6 +27,7 @@ namespace ECommerceStore.Controllers
          //View
         public IActionResult Index()
         {
+            
             return View();
         }
 

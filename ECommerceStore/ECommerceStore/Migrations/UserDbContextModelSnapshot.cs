@@ -125,7 +125,7 @@ namespace ECommerceStore.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int>("Zipcode");
+                    b.Property<string>("Zipcode");
 
                     b.HasKey("ID");
 

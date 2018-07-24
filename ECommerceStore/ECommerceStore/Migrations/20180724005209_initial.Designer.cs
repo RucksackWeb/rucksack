@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180720040702_initialtwo")]
-    partial class initialtwo
+    [Migration("20180724005209_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,7 +127,7 @@ namespace ECommerceStore.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int>("Zipcode");
+                    b.Property<string>("Zipcode");
 
                     b.HasKey("ID");
 

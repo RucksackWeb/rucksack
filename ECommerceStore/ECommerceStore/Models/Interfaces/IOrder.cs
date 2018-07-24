@@ -11,6 +11,7 @@ namespace ECommerceStore.Models.Interfaces
         Task<string> Update(Order order);
         Order Get(int basketId);
         Order Get(string userId);
+        List<Order> GetAllClosed();
         Task<string> Remove(int id);
 
 
