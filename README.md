@@ -81,9 +81,16 @@ with Azure [Click here](http://therucksack.azurewebsites.net/).
 ## Acknowledgments
 
 * We utilized product images and information from [Uncrate.com](https://uncrate.com/).
-Header photo by Sean Stratton on Unsplash.
-Seasonal Advertisement photo by MILKOVÍ on Unsplash.
-Newsletter banner photo by Mathyas Kurmann on Unsplash.
+
+* Credit for Header photo to Sean Stratton on Unsplash.
+
+* Creidt to Seasonal Advertisement photo to Ivana Cajina on Unsplash.
+
+* Credit to Newsletter banner photo to Mathyas Kurmann on Unsplash.
+
+* CSS reset hosted at http://meyerweb.com/eric/tools/css/reset/ 
+
+* Icons provided by Icomoon.io
 
 
 
