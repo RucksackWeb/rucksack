@@ -19,9 +19,11 @@ namespace ECommerceStore.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var featured = await _context.GetById(5);
+
+            return View(featured);
         }
 
     }

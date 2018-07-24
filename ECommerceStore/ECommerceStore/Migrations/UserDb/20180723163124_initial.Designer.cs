@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ECommerceStore.Migrations.UserDb
 {
     [DbContext(typeof(UserDbContext))]
-    [Migration("20180719181136_initial")]
+    [Migration("20180723163124_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,6 +76,87 @@ namespace ECommerceStore.Migrations.UserDb
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("ECommerceStore.Models.BasketItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BasketId");
+
+                    b.Property<decimal>("Cost");
+
+                    b.Property<int>("ItemId");
+
+                    b.Property<int?>("OrderID");
+
+                    b.Property<int?>("ProductID");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("BasketItem");
+                });
+
+            modelBuilder.Entity("ECommerceStore.Models.Order", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address");
+
+                    b.Property<int>("BasketId");
+
+                    b.Property<string>("City");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<bool>("IsComplete");
+
+                    b.Property<string>("State");
+
+                    b.Property<decimal>("Subtotal");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<int>("Zipcode");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("ECommerceStore.Models.Product", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.Property<int>("ProductCategory");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<string>("SKU");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -186,6 +267,17 @@ namespace ECommerceStore.Migrations.UserDb
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("ECommerceStore.Models.BasketItem", b =>
+                {
+                    b.HasOne("ECommerceStore.Models.Order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderID");
+
+                    b.HasOne("ECommerceStore.Models.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

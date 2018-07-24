@@ -29,12 +29,12 @@ main {
 footer {
     width: 100%;
     position: relative;
-    min-height: 25vw;
+    min-height: 16vw;
 }
 
 #creators {
     position: absolute;
-    bottom: 14.5vw;
+    bottom: 6.5vw;
     right: 35vw;
     padding-left: .25vw;
 }
@@ -67,19 +67,23 @@ footer {
     }
 
 .card {
-    position: relative; 
+    position: relative;
+    box-sizing: border-box;
 }
 
     .card img {
         max-width: 35vw;
-        padding: 1.1vw;
+        padding: 1.1vw 0 1.1vw 1.1vw;
         display: inline-block;
     }
 
     .card .description {
+        max-height: 12vw;
         display: inline-block;
         position: absolute;
+        padding: 1.1vw;
         top: 5vw;
+        overflow-y: hidden;
     }
 
 #cart {
@@ -91,22 +95,37 @@ footer {
 }
 
 #content {
+    width: 90vw;
+    padding: 1.1vw;
 }
 
 #homecolumn {
     width: 55vw;
-    outline: 2px solid red;
     display: inline-block;
-    height: 40vw;
+    vertical-align: top;
 }
 
-#bannerAd {
-    outline: 2px solid blue;
-}
+    #homecolumn hr {
+        margin: 2.05vw;
+    }
 
-#seasonalAd {
+#content aside {
     width: 34.4vw;
     display: inline-block;
 }
 
+#featured h2 {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+    font-size: 2vw;
+    padding-top: .8vw;
+}
 
+#productDetail {
+    display: inline-block;
+    width: 62vw;
+}
+
+    #productDetail img {
+        width: 100%;
+    }

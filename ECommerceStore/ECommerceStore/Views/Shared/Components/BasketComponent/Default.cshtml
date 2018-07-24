@@ -1,15 +1,24 @@
 ﻿@model Basket
 
-    <h2>Shopping Cart</h2>
-<ul>
-    @foreach (var BasketItem in Model.CartItem)
-    {
-        <li>
-            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
-            <a asp-action="CartPage" asp-controller="Shop">@BasketItem.Quantity</a>
-            <span>@BasketItem.Cost</span>
-            <hr />
-        </li>
-    }
-</ul>
-    <div>Total: @Model.TotalCost</div>
+
+<section id="cartComponent">
+    <div id="title">
+        <a asp-controller="Shop" asp-action="CartPage"><h2>cart</h2></a>
+    </div>
+
+    <ul>
+        @foreach (var BasketItem in Model.CartItem)
+        {
+            <li>
+                <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
+                <div class="cost">@BasketItem.Cost.ToString("C")</div>
+                <hr />
+            </li>
+        }
+    </ul>
+    <div class="cost">Total: @Model.TotalCost.ToString("C")</div>
+
+    <div class="checkout"><a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Id">checkout</a></div>
+
+</section>
+

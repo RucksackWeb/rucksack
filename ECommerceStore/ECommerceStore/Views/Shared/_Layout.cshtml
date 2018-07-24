@@ -16,13 +16,10 @@
 <body>
     <header>
         <img src="~/images/treeline.png" alt="Treeline Header" />
-
         <a asp-controller="Home" asp-action="Index">
             <span class="logo">rucksack</span>
             <span class="tagline">-buy our stuff-</span>
         </a>
-
-
         <div id="userInfo">
             @if (SignInManager.IsSignedIn(User))
             {
@@ -85,23 +82,15 @@
                 </li>
 
                 <li>
-                    subcribe
+                    subscribe
                 </li>
             </ul>
         </nav>
     </header>
 
-
-
-
     <main>
         @RenderBody()
     </main>
-
-
-
-
-
 
     <footer>
         <a asp-controller="Home" asp-action="Index">
@@ -135,16 +124,16 @@
             </div>
         </section>
         <section id="providers">
-            <div class="icon-windows"></div>
-            <div class="icon-google"></div>
+            <div class="icon-Microsoft"></div>
+            <div class="icon-Google"></div>
         </section>
         <section id="smallprint">
             <ul>
                 <li><a asp-controller="Home" asp-action="Index">home</a></li>
-                <li>subcribe</li>
+                <li>subscribe</li>
                 <li>about</li>
                 <li>&copy; 2018</li>
-                <li>All Rights Reserved</li>
+                <li>All Rights Reserved.</li>
             </ul>
         </section>
     </footer>
