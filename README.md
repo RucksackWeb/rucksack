@@ -1,4 +1,4 @@
-# ![rucksack]($project/EcommerceStore/wwwroot/images/rucksack_logo.PNG)
+# ![rucksack](./EcommerceStore/wwwroot/images/rucksack_logo.PNG)
 - This is a 3 week 2-person team project building an entire ecommerce web application using ASP.NET.
 
 ## About our ECommerce Store
