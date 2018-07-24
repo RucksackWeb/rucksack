@@ -1,23 +1,41 @@
 ﻿@model Product
 
-@{ 
+@{
     Layout = "_Layout";
 }
 
 
-<section id="productDetail">
-    <div>
-        <p>Category @Model.ProductCategory</p>
-        <img src="@Model.Image" alt="@Model.Name image" />
 
-        <h2>@Model.Name</h2>
+<section id="itemDetail">
+    <img id="itemImage" src="@Model.Image" alt="@Model.Name  image" />
 
-        <p>$@Model.Price</p>
-        <p>Product Description: @Model.Description</p>
+    <div id="itemDesc">
+        <span>@Model.Name</span>
+        <p>@Model.Description</p>
+        <p>@Model.Price.ToString("C")</p>
     </div>
 
-    <a asp-action="Index" asp-controller="Shop">Go back to all Products</a>
+    <div id="buttons">
+        <a asp-action="Index" asp-controller="Shop">back</a>
+        <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@Model.ID">add to cart</a>
+    </div>
 </section>
+
+
+
+@*<section id="productDetail">
+        <div>
+            <p>Category @Model.ProductCategory</p>
+            <img src="@Model.Image" alt="@Model.Name image" />
+
+            <h2>@Model.Name</h2>
+
+            <p>$@Model.Price</p>
+            <p>Product Description: @Model.Description</p>
+        </div>
+
+        <a asp-action="Index" asp-controller="Shop">back</a>
+    </section>*@
 
 
 <aside id="cart">

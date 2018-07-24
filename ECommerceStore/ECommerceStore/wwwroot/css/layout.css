@@ -121,11 +121,54 @@ footer {
     padding-top: .8vw;
 }
 
-#productDetail {
+#itemDetail {
+    position: relative;
     display: inline-block;
     width: 62vw;
+    height: 41.3vw;
 }
 
-    #productDetail img {
-        width: 100%;
+#itemImage {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+#itemDesc {
+    position: absolute;
+    top: 1vw;
+    left: 1vw;
+    background-color: rgba(255, 255, 255, .65);
+    padding: .4vw;
+}
+
+    #itemDesc span {  
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+        color: #000;
     }
+
+    #itemDesc p {
+        padding: .2vw 0 .2vw 0;
+        width: 25vw;
+        color: #000;
+    }
+
+#buttons {
+    position: absolute;
+    bottom: 1vw;
+    right: 1vw;
+}
+
+    #buttons a {
+        font-family: 'Oswald', sans-serif;
+        color: #3e3e3e;
+        font-size: 1.3vw;
+        margin: .5vw;
+        padding: .25vw;
+    }
+
+        #buttons a:hover {
+            color: #000;
+            background-color: #ddd;
+        }
