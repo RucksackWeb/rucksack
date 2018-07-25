@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ECommerceStore.Migrations.UserDb
+namespace ECommerceStore.Migrations
 {
     [DbContext(typeof(UserDbContext))]
     partial class UserDbContextModelSnapshot : ModelSnapshot
@@ -125,7 +125,7 @@ namespace ECommerceStore.Migrations.UserDb
 
                     b.Property<string>("UserId");
 
-                    b.Property<int>("Zipcode");
+                    b.Property<string>("Zipcode");
 
                     b.HasKey("ID");
 
