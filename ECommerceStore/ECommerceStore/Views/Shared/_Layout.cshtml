@@ -26,15 +26,15 @@
             @if (User.IsInRole(ApplicationRoles.Admin))
             {
                 <span class="icon-unlocked"></span>
-                <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
             }
             else
             {
                 <span class="icon-user"></span>
-                <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
             }
+                <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
                 <ul>
                     <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
+                    <li><a asp-controller="" asp-action="">profile</a></li>
                 </ul>
         </div>
        }

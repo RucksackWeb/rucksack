@@ -47,20 +47,40 @@ nav a:hover {
     right: 5vw;
     bottom: 1.5vw;
     text-align: center;
-    padding: .5vw;
+    padding: .5vw .5vw .5vw .8vw;
     font-size: 1.5vw;
 }
+    #userInfo span {
+        position: absolute;
+        left: .3vw;
+        top: .15vw;
+        color: #fff;
+        background-color: #3e3e3e;
+        padding: .4vw;
+        border-radius: 50%;
+        border: .2vw solid #fff;
+    }
 
     #userInfo div {
+        background-color: #3e3e3e;
+        color: #fff;
+        padding: .2vw;
         display: inline-block;
         font-family: 'Oswald', sans-serif;
         font-size: 1.5vw;
+        padding-left: 2.5vw;
     }
 
     #userInfo li {
         display: inline-block;
         font-size: 1vw;
         font-weight: bold;
+        padding: 0 .2vw 0 .2vw;
+    }
+
+    #userInfo a:hover {
+        color: #000;
+        /*border-bottom: 1px solid #000;*/
     }
 
 nav {
