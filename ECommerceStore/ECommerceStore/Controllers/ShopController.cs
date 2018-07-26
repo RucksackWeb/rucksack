@@ -8,11 +8,13 @@ using ECommerceStore.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace ECommerceStore.Controllers
 {
     public class ShopController : Controller
     {
+        private IConfiguration Configuration;
         private IInventory _context;
         private IBasket _basket;
         private IOrder _order;
@@ -20,8 +22,9 @@ namespace ECommerceStore.Controllers
         private UserManager<ApplicationUser> _userManager { get; set; }
         private IEmailSender _emailSender { get; set; }
 
-        public ShopController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order, IEmailSender emailSender)
+        public ShopController(IConfiguration configuration, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order, IEmailSender emailSender)
         {
+            Configuration = configuration;
             _context = context;
             _basket = basket;
             _order = order;
@@ -125,8 +128,8 @@ namespace ECommerceStore.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            string userId = _userManager.GetUserId(User);
-            var basket = _basket.GetBasketById(userId);
+            var user = await _userManager.GetUserAsync(User);
+            var basket = _basket.GetBasketById(user.Id);
             List<BasketItem> items = _basket.GetItems(basket.Id);
 
             if (items.Count == 0)
@@ -134,13 +137,20 @@ namespace ECommerceStore.Controllers
                 TempData["ErrorMessage"] = "Shopping Cart is empty";
                 return RedirectToAction("CartPage");
             }
+            basket.TotalCost = 0;
 
+            foreach (BasketItem item in items)
+            {
+                var product = await _context.GetById(item.ItemId);
+                item.Product = product;
+                basket.TotalCost += Convert.ToDecimal(item.Quantity) * product.Price;
+            }
 
             if(_order.Get(basket.Id) == null)
             {
                 Order newOrder = new Order
                 {
-                    UserId = userId,
+                    UserId = user.Id,
                     BasketId = basket.Id,
                     Subtotal = basket.TotalCost,
                 };
@@ -149,43 +159,62 @@ namespace ECommerceStore.Controllers
             }
 
             Order order = _order.Get(basket.Id);
+            order.Subtotal = basket.TotalCost;
 
-            foreach (BasketItem item in items)
-            {
-                var product = await _context.GetById(item.ItemId);
-                item.Product = product;
-            }
+            await _basket.SaveBasket(basket);
+            await _order.Update(order);
+
+            CheckoutViewModel cvm = new CheckoutViewModel();
             order.Items = items;
+            cvm.Order = order;
 
-            return View(order);
+            return View(cvm);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> Checkout(Order order)
+        public async Task<IActionResult> Checkout(CheckoutViewModel cvm)
         {
-            string userId = _userManager.GetUserId(User);
-            Order dbOrder = _order.Get(userId);
-            dbOrder.Address = order.Address;
-            dbOrder.City = order.City;
-            dbOrder.State = order.State;
-            dbOrder.Zipcode = order.Zipcode;
+            ApplicationUser user = await _userManager.GetUserAsync(User);
 
-            await _order.Update(dbOrder);
-            return RedirectToAction("Checkout");
+            Order dbOrder = _order.Get(user.Id);
+            dbOrder.Address = cvm.Order.Address;
+            dbOrder.City = cvm.Order.City;
+            dbOrder.State = cvm.Order.State;
+            dbOrder.Zipcode = cvm.Order.Zipcode;
+
+            cvm.User = user;
+            cvm.Order = dbOrder;
+
+            // Runs payment
+            Payment payment = new Payment(Configuration);
+            var result = payment.RunPayment(cvm);
+
+            if (result.Contains("failed"))
+            {
+                TempData["PaymentError"] = $"{result}";
+                return RedirectToAction("CartPage", "Shop");
+            }
+            else
+            {
+                await _order.Update(dbOrder);
+                return RedirectToAction("CheckoutConfirmation", new { id = user.Id });
+            }
         }
 
-
-        public async Task<IActionResult> CheckoutConfirmation(int id)
+        public async Task<IActionResult> CheckoutConfirmation(string id)
         {
-            string userId = _userManager.GetUserId(User);
-            Order order = _order.Get(userId);
+            var user = await _userManager.GetUserAsync(User);
+            
+            Order order = _order.Get(id);
 
-            if (order.ID != id)
+            if (order.UserId != id)
             {
                 return RedirectToAction("CartPage");
             }
 
+
+            var userId = _userManager.GetUserId(User);
             Basket basket = _basket.GetBasketById(userId);
             basket.IsComplete = true;
             order.IsComplete = true;
@@ -200,9 +229,8 @@ namespace ECommerceStore.Controllers
                 item.Product = await _context.GetById(item.ItemId);
             }
 
-            var user = await _userManager.FindByIdAsync(userId);
 
-            // Sends Receipt email to a user
+            // Sends Receipt email to user
             string msgTitle = "Your order is on its way!";
 
             string msgContent = "<div>" +

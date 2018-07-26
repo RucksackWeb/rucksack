@@ -37,12 +37,12 @@ namespace ECommerceStore
             services.AddMvc();
 
             services.AddDbContext<WarehouseDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
-            //options.UseSqlServer(Configuration["ConnectionStrings:WarehouseDeployedDB"]));
+            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
+            options.UseSqlServer(Configuration["ConnectionStrings:WarehouseDeployedDB"]));
 
             services.AddDbContext<UserDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
-            //options.UseSqlServer(Configuration["ConnectionStrings:UserDeployedDB"]));
+            //options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
+            options.UseSqlServer(Configuration["ConnectionStrings:UserDeployedDB"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
@@ -62,9 +62,7 @@ namespace ECommerceStore
             {
                 google.ClientId = Configuration["OAuth:Authentication:Google:ClientId"];
                 google.ClientSecret = Configuration["OAuth:Authentication:Google:ClientSecret"];
-            });
-
-            services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+            }).AddMicrosoftAccount(microsoftOptions =>
             {
                 microsoftOptions.ClientId = Configuration["OAuth:Authentication:Microsoft:ApplicationId"];
                 microsoftOptions.ClientSecret = Configuration["OAuth:Authentication:Microsoft:Password"];

@@ -225,7 +225,7 @@ namespace ECommerceStore.Controllers
 
                 var info = await _signInManager.GetExternalLoginInfoAsync();
 
-                if(info == null)
+                if(info == null)    
                 {
                     TempData["ErrorMessage"] = "Error Loading Information";
                 }
