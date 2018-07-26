@@ -172,3 +172,11 @@ footer {
             color: #000;
             background-color: #ddd;
         }
+
+#userProfile .hidden {
+    display: none;
+}
+
+    #userProfile .hidden:target {
+        display: block; 
+    }

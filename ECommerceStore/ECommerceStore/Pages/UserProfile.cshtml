@@ -8,31 +8,55 @@
 
 <section id="userProfile">
 
-    <h1>@Model.profileInfo.FirstName</h1>
+    <div id="userDetails">
+        <h2>Account Information <a href="#editInfo">edit</a></h2>
+        <div>Name: @Model.profileInfo.LastName, @Model.profileInfo.FirstName</div>
+        <div>Email: @Model.profileInfo.Email</div>
+        <div><a href="#orderHistory">View Recent Orders</a></div>
+    </div>
 
 
+    <div id="editInfo" class="hidden">
+        <h2>Edit Profile</h2>
+        <form method="post">
+            <div>
+                <label asp-for="FirstName">First Name</label> :
+                <input asp-for="FirstName" />
+            </div>
+            <div>
+                <label asp-for="LastName">Last Name</label> :
+                <input asp-for="LastName" />
+            </div>
+        </form>
+        <button type="submit">Update</button>
+    </div>
 
-    <table style="width: 100%">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Date</th>
-                <th>Address</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var o in Model.userOrders)
-            { 
+    <div id="orderHistory" class="hidden">
+        <h2>Recent Orders</h2>
+        <table style="width: 100%">
+            <thead>
                 <tr>
-                    <th>@o.ID</th>
-                    <td>@o.Date.ToString("MM/dd/yyyy")<td>
-                    <td>@o.Address @o.City, @o.State</td>
-                    <td>@o.Subtotal.ToString("C")</td>
+                    <td>ID</td>
+                    <td>Date</td>
+                    <td>Shipping Address</td>
+                    <td>Subtotal</td>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var o in Model.userOrders)
+                {
+                    <tr>
+                        <td>@o.ID</td>
+                        <td>@o.Date.ToString("MM/dd/yyyy")
+                        <td>
+                        <td>@o.Address @o.City @o.State</td>
+                        <td>@o.Subtotal.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
 
 
 </section>

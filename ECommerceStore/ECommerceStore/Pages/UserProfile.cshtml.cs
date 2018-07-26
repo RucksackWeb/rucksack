@@ -35,7 +35,7 @@ namespace ECommerceStore.Pages
             var user = await _userManager.GetUserAsync(User);
             profileInfo = user;
 
-            userOrders = _orders.GetUserClosedOrders(user.Id, 10);
+            userOrders = _orders.GetUserClosedOrders(user.Id, 3);
         }
     }
 }
