@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.Interfaces;
@@ -21,6 +22,13 @@ namespace ECommerceStore.Pages
         public ApplicationUser profileInfo { get; set; }
         public List<Order> userOrders { get; set; }
 
+        [BindProperty]
+        public string FirstName { get; set; }
+
+        [BindProperty]
+        public string LastName { get; set; }
+            
+
 
         public UserProfileModel(IOrder orders, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -34,8 +42,31 @@ namespace ECommerceStore.Pages
         {
             var user = await _userManager.GetUserAsync(User);
             profileInfo = user;
-
             userOrders = _orders.GetUserClosedOrders(user.Id, 3);
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            var user = await _userManager.GetUserAsync(User);
+
+            user.FirstName = FirstName;
+            user.LastName = LastName;
+
+            await _userManager.UpdateAsync(user);
+
+            Claim claim = User.Claims.First(c => c.Type == "FullName");
+            Claim newClaim = new Claim("FullName", $"{user.FirstName} {user.LastName}");
+
+            await _userManager.RemoveClaimAsync(user, claim);
+            await _userManager.AddClaimAsync(user, newClaim);
+
+            await _signInManager.SignOutAsync();
+            await _signInManager.SignInAsync(user, false);
+
+            profileInfo = user;
+            userOrders = _orders.GetUserClosedOrders(user.Id, 3);
+
+            return new RedirectToPageResult("UserProfile");
         }
     }
 }
