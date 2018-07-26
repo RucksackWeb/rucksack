@@ -6,19 +6,27 @@
         <a asp-controller="Shop" asp-action="CartPage"><h2>cart</h2></a>
     </div>
 
-    <ul>
-        @foreach (var BasketItem in Model.CartItem)
-        {
-            <li>
-                <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
-                <div class="cost">@BasketItem.Cost.ToString("C")</div>
-                <hr />
-            </li>
-        }
-    </ul>
-    <div class="cost">Total: @Model.TotalCost.ToString("C")</div>
 
-    <div class="checkout"><a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Id">checkout</a></div>
+    @if (Model.CartItem.Count == 0)
+    {
+        <div style="text-align: center">Your cart is Empty</div>
+    }
+    else
+    {
+        <ul>
+            @foreach (var BasketItem in Model.CartItem)
+            {
+                <li>
+                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@BasketItem.Product.ID">@BasketItem.Product.Name</a>
+                    <div class="cost">@BasketItem.Cost.ToString("C")</div>
+                    <hr />
+                </li>
+            }
+        </ul>
+        <div class="cost">Total: @Model.TotalCost.ToString("C")</div>
+        <div class="checkout"><a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Id">checkout</a></div>
+    }
+
 
 </section>
 

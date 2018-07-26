@@ -18,7 +18,7 @@
         <img src="~/images/sean-stratton-744803-unsplash.jpg" alt="Treeline Header" />
         <a asp-controller="Home" asp-action="Index">
             <span class="logo">rucksack</span>
-            <span class="tagline">-buy our stuff-</span>
+            <span class="tagline">-everyday outfitter-</span>
         </a>
        @if(SignInManager.IsSignedIn(User))
        {
@@ -33,14 +33,20 @@
             }
                 <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
                 <ul>
-                    <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
                     <li><a asp-controller="UserProfile">profile</a></li>
+                    <li><a asp-controller="Shop" asp-action="CartPage">cart</a></li>
+                    <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
                 </ul>
         </div>
        }
 
         <nav>
             <ul>
+
+                <li>
+                    <a asp-controller="Home" asp-action="Index">home</a>
+                </li>
+
                 @if (User.IsInRole(ApplicationRoles.Admin))
                 {
                     <li>
@@ -52,35 +58,21 @@
                     <a asp-controller="Shop" asp-action="Index">products</a>
                 </li>
 
-                @if (SignInManager.IsSignedIn(User))
-                {
-
-                    <li>
-                        <a asp-controller="Account" asp-action="Logout">logout</a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="Shop" asp-action="CartPage">view cart</a>
-                    </li>
-                }
-                else
-                { 
-                    <li>
-                        <a asp-controller="Account" asp-action="Login">login</a>
-                    </li>
-
-                    <li>
-                        <a asp-controller="Account" asp-action="Register">register</a>
-                    </li>
-                }
-
                 <li>
                     about
                 </li>
 
-                <li>
-                    subscribe
-                </li>
+                @if (!SignInManager.IsSignedIn(User))
+                {
+                    <li>
+                        <a asp-controller="Account" asp-action="Register">register</a>
+                    </li>
+
+                    <li>
+                        <a asp-controller="Account" asp-action="Login">login</a>
+                        </li>
+                }
+
             </ul>
         </nav>
     </header>

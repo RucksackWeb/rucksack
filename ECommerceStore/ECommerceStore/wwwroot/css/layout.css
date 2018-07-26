@@ -178,6 +178,9 @@ footer {
 }
 
     #userProfile .hidden:target {
-        display: block; 
+        display: block;
     }
-    
+
+#orderHistory a:target {
+    display: none;
+}
