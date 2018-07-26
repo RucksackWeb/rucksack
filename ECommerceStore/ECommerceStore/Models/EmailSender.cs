@@ -25,7 +25,7 @@ namespace ECommerceStore.Models
 
             var msg = new SendGridMessage();
 
-            msg.SetFrom("admin@Rucksack.com", "RuckSack Customer Service");
+            msg.SetFrom("customerservice@rucksack.com", "RuckSack Customer Service");
 
             msg.AddTo(email);
             msg.SetSubject(subject);
