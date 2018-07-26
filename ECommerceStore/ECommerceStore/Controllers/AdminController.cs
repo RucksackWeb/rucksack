@@ -55,10 +55,11 @@ namespace ECommerceStore.Controllers
         public IActionResult OrderList()
         {
             var orders = _order.GetAllClosed();
+            var filteredOrders = orders.OrderByDescending(o => o.Date).Take(20).ToList();
 
             AdminDashboardViewModel advm = new AdminDashboardViewModel
             {
-                Orders = orders
+                Orders = filteredOrders
             };
 
             return View(advm);
