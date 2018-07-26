@@ -50,6 +50,15 @@ namespace ECommerceStore.Models
             return orders;
         }
 
+        public List<Order> GetUserClosedOrders(string userId, int num)
+        {
+            var orders = _context.Orders.Where(o => o.IsComplete && o.UserId == userId)
+                                        .OrderByDescending(o => o.Date)
+                                        .Take(num)
+                                        .ToList();
+            return orders;
+        }
+
         public async Task<string> Remove(int id)
         {
             var order = _context.Orders.Find(id);

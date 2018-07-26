@@ -1,0 +1,38 @@
+﻿@page
+@model ECommerceStore.Pages.UserProfileModel
+@{
+    Layout = "_Layout";
+}
+
+
+
+<section id="userProfile">
+
+    <h1>@Model.profileInfo.FirstName</h1>
+
+
+
+    <table style="width: 100%">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Address</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var o in Model.userOrders)
+            { 
+                <tr>
+                    <th>@o.ID</th>
+                    <td>@o.Date.ToString("MM/dd/yyyy")<td>
+                    <td>@o.Address @o.City, @o.State</td>
+                    <td>@o.Subtotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+</section>

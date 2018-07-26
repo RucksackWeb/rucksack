@@ -34,7 +34,7 @@
                 <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
                 <ul>
                     <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
-                    <li><a asp-controller="" asp-action="">profile</a></li>
+                    <li><a asp-controller="UserProfile" asp-action="">profile</a></li>
                 </ul>
         </div>
        }

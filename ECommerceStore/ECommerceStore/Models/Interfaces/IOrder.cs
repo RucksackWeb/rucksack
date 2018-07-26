@@ -12,8 +12,7 @@ namespace ECommerceStore.Models.Interfaces
         Order Get(int basketId);
         Order Get(string userId);
         List<Order> GetAllClosed();
+        List<Order> GetUserClosedOrders(string userId, int num);
         Task<string> Remove(int id);
-
-
     }
 }
