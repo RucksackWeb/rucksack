@@ -1,13 +1,10 @@
-﻿/*font-family: 'IM Fell DW Pica', serif;
-font-family: 'Oswald', sans-serif;
-font-family: 'Song Myung', serif;*/
-
-* {
+﻿* {
     color: #626262;
     font-family: 'Song Myung', serif;
 }
 
 *::-webkit-scrollbar {
+    width: .5vw;
 }
 
 *::-webkit-scrollbar-thumb {
