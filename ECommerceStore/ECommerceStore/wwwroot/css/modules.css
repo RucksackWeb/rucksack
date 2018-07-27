@@ -1,245 +1,200 @@
-﻿.logo {
+﻿/* Header Logo */
+.logo {
     font-family: 'IM Fell DW Pica', serif;
     background-color: #fff;
     color: #000;
 }
+    .tagline {
+        font-family: 'IM Fell DW Pica', serif;
+        position: absolute;
+        color: #fff;
+        background-color: #3e3e3e;
+        text-align: center;
+    }
+    header .logo {
+        position: absolute;
+        font-size: 5vw;
+        left: 5vw;
+        top: 1.5vw;
+    }
+    header .tagline {
+        position: absolute;
+        font-size: 1.5vw;
+        width: 17.4vw;
+        left: 5vw;
+        top: 6.9vw;
+    }
 
-.tagline {
-    font-family: 'IM Fell DW Pica', serif;
-    position: absolute;
-    color: #fff;
-    background-color: #3e3e3e;
-    text-align: center;
+
+/* Nav Bar*/
+nav {
+    background-color: #fff;
+    outline: #3e3e3e;
 }
+    nav li {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.75vw;
+    }
+    nav a:hover {
+        color: #000;
+    }
 
-header .logo {
-    position: absolute;
-    font-size: 5vw;
-    left: 5vw;
-    top: 1.5vw;
-}
 
-header .tagline {
-    position: absolute;
-    font-size: 1.5vw;
-    width: 17.4vw;
-    left: 5vw;
-    top: 6.9vw;
-}
-
-nav ul {
-    padding: 0;
-}
-
-nav li {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.75vw;
-    padding: .5vw;
-}
-
-nav a:hover {
-    color: #000;
-}
-
+/* User Info Block */
 #userInfo {
-    position: absolute;
     background-color: #fff;
-    right: 5vw;
-    bottom: 1.5vw;
     text-align: center;
-    padding: .5vw .5vw .5vw .8vw;
     font-size: 1.5vw;
 }
     #userInfo span {
-        position: absolute;
-        left: .3vw;
-        top: .15vw;
         color: #fff;
         background-color: #3e3e3e;
-        padding: .4vw;
         border-radius: 50%;
         border: .2vw solid #fff;
     }
-
     #userInfo div {
         background-color: #3e3e3e;
         color: #fff;
-        padding: .2vw;
-        display: inline-block;
         font-family: 'Oswald', sans-serif;
         font-size: 1.5vw;
-        padding-left: 2.5vw;
     }
-
     #userInfo li {
         display: inline-block;
         font-size: 1vw;
         font-weight: bold;
-        padding: 0 .2vw 0 .2vw;
     }
-
     #userInfo a:hover {
         color: #000;
-        /*border-bottom: 1px solid #000;*/
     }
 
-nav {
-    position: absolute;
-    background-color: #fff;
-    outline: #3e3e3e;
-}
 
+/* Footer */
 footer {
-    margin-top: 5vw;
     background-color: #3e3e3e;
 }
-
     footer .logo {
         font-size: 3vw;
-        position: absolute;
-        left: 38vw;
-        bottom: 7.5vw;
     }
-
     footer .tagline {
-        position: absolute;
         font-size: 1.2vw;
-        left: 38vw;
-        bottom: 5.7vw;
-        width: 10.4vw;
         outline: 2px solid #fff;
     }
 
-#creators a:hover {
-    color: #888;
-}
 
-#providers {
-    position: absolute;
-    bottom: 1.8vw;
-    left: 47vw;
+/* Author Credits */
+#creators span {
+    font-size: 1.3vw;
+    color: #fff;
 }
-
-#providers div {
-    display: inline-block;
-    font-size: 2vw;
-    padding: .5vw;
-}
-
-#smallprint {
-    font-size: .8vw;
-    position: absolute;
-    bottom: .2vw;
-    left: 41vw;
-}
-
-    #smallprint li {
-        display: inline-block;
-        padding: .25vw;
+    #creators li {
+        color: #fff;
+        font-size: 1vw;
+    }
+    #creators a:hover {
+        color: #888;
     }
 
+
+/* 3rd Party Providers */
+#providers div {
+    font-size: 2vw;
+}
+
+
+/* Footer Fine Print */
+#smallprint {
+    font-size: .8vw;
+}
     #smallprint a:hover {
         color: #888;
     }
 
+
+ /* Product Index Page */
 .description h4 {
     font-family: 'Oswald', sans-serif;
     color: #000;
     font-size: 1.4vw;
     font-weight: bold;
-    padding-bottom: .8vw;
 }
-
     .description h4:hover {
         color: #3e3e3e; 
     }
-
-    .description p {
-        padding-bottom: .3vw;
-    }
-
-        .description p:hover {
+    .description a:hover {
             color: #000;
         }
 
-#seasonalAd {
-    position: relative;
+/* Product Detail Page */
+#itemDesc span {
+    font-size: 1.5vw;
+    color: #000;
 }
-    #seasonalAd img{
-        width: 32vw;
-        display: block;
-        margin: auto;
+    #itemDesc p {
+        color: #000;
     }
-    #seasonalAd div {
-        position: absolute;
-        left: 5vw;
-        top: 2vw;        
+    #buttons a {
+        color: #3e3e3e;
+        font-size: 1.3vw;
+    }
+    #buttons a:hover {
+        color: #000;
+        background-color: #ddd;
     }
 
+/* Seasonal Ad */
+#seasonalAd {
+    outline: .2vw solid white;
+    outline-offset: -1.5vw;
+    background-image: url("../images/ivana-cajina-367006-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
     #seasonalAd p {
         text-align: center;
         font-size: 4vw;
         color: #fff;
     }
 
+
+/* Newsletter Ad */
 #banner {
-    position: relative;
-    height: 15vw;
+    background-image: linear-gradient(
+        rgba(0, 0, 0, 0),
+        rgba(0, 0, 0, .5)),
+        url("../images/mathyas-kurmann-102977-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
-
-    #banner img {
-        width: 100%;
-    }
-
     #banner span {
-        position: absolute;
-        top: 1vw;
-        left: 8vw;
         color: #fff;
         font-size: 2.5vw;
     }
 
+
+/* Featured Product Block */
 #featured {
     outline: .2vw solid #3e3e3e;
-    margin-top: 1.1vw;
 }
 
-#cartComponent {
-    position: relative;
-    padding: .8vw 0 .8vw 0;
-}
 
+/* Cart Component Contents */
 #cartComponent h2 {
     font-family: 'Oswald', sans-serif;
-    padding-bottom: .2vw;
     border-bottom: .2vw solid #3e3e3e;
     font-size: 1.5vw;
-    text-align: center;
     margin-bottom: .8vw;
     color: #000;
 }
-
     #cartComponent li {
-        font-size: .8vw;
+        font-size: .9vw;
     }
-    #cartComponent hr {
-        width: 18vw;
-    }
-
     #cartComponent h2:hover {
         color: #3e3e3e;
     }
-
-#cartComponent .cost {
-    text-align: right;
-}
-
     #cartComponent a:hover {
         color: #000;
     }
-
     #cartComponent .checkout {
         font-family: 'Oswald', sans-serif;
         font-size: 1.5vw;
-        text-align: center;
     }

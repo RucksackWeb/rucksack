@@ -1,186 +1,300 @@
-﻿header {
+﻿/* Top of Page Image */
+header {
     width: 100%;
+    height: 23.9vw;
     position: relative;
+    background-image: url(../images/sean-stratton-744803-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: contain
 }
 
-    header img {
-        width: 100%;
-    }
 
+/* Navigation Bar */
 nav {
     position: absolute;
     bottom: 1.5vw;
     left: 5vw;
 }
-
+    nav ul {
+        padding: 0;
+    }
     nav li {
+        display: inline-block;
+        padding: .5vw;
+    }
+
+
+/* User Info Block */
+#userInfo {
+    position: absolute;
+    right: 5vw;
+    bottom: 1.5vw;
+    padding: .5vw .5vw .5vw .8vw;
+}
+    #userInfo span {
+        position: absolute;
+        left: .3vw;
+        top: .15vw;
+        padding: .4vw;
+    }
+    #userInfo div {
+        padding: .2vw;
+        display: inline-block;
+        padding-left: 2.5vw;
+    }
+    #userInfo li {
         display: inline-block;
     }
 
+
+/* Main Content Container Block */
 main {
     position: relative;
     width: 90vw;
     margin: auto;
-    min-height: 60vh;
     margin-top: 1.2vw;
     margin-bottom: 1.2vw;
+    min-height: 52vw;
 }
 
-footer {
-    width: 100%;
+
+/* Left Column of Home Index */
+#homecolumn {
+    width: 54.4vw;
+    display: inline-block;
+    vertical-align: top;
+}
+    #homecolumn hr {
+        margin: 2.5vw;
+    }
+
+
+ /* Newsletter Ad */
+#banner {
     position: relative;
-    min-height: 16vw;
+    width: 54.4vw;
+    height: 11.7vw;
 }
-
-#creators {
-    position: absolute;
-    bottom: 6.5vw;
-    right: 35vw;
-    padding-left: .25vw;
-}
-
-    #creators div {
-        display: inline-block;
+    #banner span {
+        position: absolute;
+        bottom: .8vw;
+        left: 8vw;
     }
 
-    #creators span {
+
+/* Right Column of Home Index */
+#content aside {
+    width: 34.4vw;
+    float: right;
+}
+
+
+/* Seasonal Ad Block */
+#seasonalAd {
+    position: relative;
+    height: 51.45vw;
+}
+    #seasonalAd div {
+        position: absolute;
+        left: 5vw;
+        top: 2vw;
+    }
+
+
+/* Featured Product */
+#featured {
+    margin-top: 1.1vw;
+}
+    #featured h2 {
         font-family: 'Oswald', sans-serif;
-        font-size: 1.3vw;
-        color: #fff;
-        padding: .25vw;
-    }
-
-    #creators li {
-        color: #fff;
-        font-size: 1vw;
         text-align: center;
-        font-family: 'Song Myung', serif;
+        font-size: 2vw;
+        padding-top: .8vw;
     }
 
+
+/* Products Index Page Container (Left Column)*/
 #allproducts {
     display: inline-block;
-    width: 62vw;
+    width: 67vw;
 }
-
     #allproducts hr {
         width: 55vw;
     }
 
+
+/* Product Card on Product Index Page */
 .card {
     position: relative;
     box-sizing: border-box;
+    overflow: hidden;
 }
-
     .card img {
         max-width: 35vw;
         padding: 1.1vw 0 1.1vw 1.1vw;
         display: inline-block;
     }
-
     .card .description {
         max-height: 12vw;
         display: inline-block;
         position: absolute;
         padding: 1.1vw;
         top: 5vw;
-        overflow-y: hidden;
+        overflow-y: scroll;
+    }
+    .card .description h4 {
+        padding-bottom: .8vw;
+    }
+    .card .description span {
+        padding-bottom: 1.1vw;
+    }
+    .card .description a {
+        display: block;
+        padding-bottom: .3vw;
     }
 
-#cart {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    margin-left: 1.1vw;
-    width: 27.5vw;
-}
 
-#content {
-    width: 90vw;
-    padding: 1.1vw;
-}
-
-#homecolumn {
-    width: 55vw;
-    display: inline-block;
-    vertical-align: top;
-}
-
-    #homecolumn hr {
-        margin: 2.05vw;
-    }
-
-#content aside {
-    width: 34.4vw;
-    display: inline-block;
-}
-
-#featured h2 {
-    font-family: 'Oswald', sans-serif;
-    text-align: center;
-    font-size: 2vw;
-    padding-top: .8vw;
-}
-
+/* Product Information - Product Detail Page*/
 #itemDetail {
     position: relative;
     display: inline-block;
-    width: 62vw;
-    height: 41.3vw;
+    width: 67vw;
+    height: 44.5vw;
 }
-
-#itemImage {
-    width: 100%;
-    position: absolute;
-    top: 0;
-}
-
-#itemDesc {
-    position: absolute;
-    top: 1vw;
-    left: 1vw;
-    background-color: rgba(255, 255, 255, .65);
-    padding: .4vw;
-}
-
-    #itemDesc span {  
-        font-family: 'Oswald', sans-serif;
-        font-size: 1.5vw;
-        color: #000;
+    #itemImage {
+        width: 100%;
+        position: absolute;
+        top: 0;
     }
-
-    #itemDesc p {
-        padding: .2vw 0 .2vw 0;
-        width: 25vw;
-        color: #000;
+    #itemDesc {
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        background-color: rgba(255, 255, 255, .65);
+        padding: .4vw;
     }
-
-#buttons {
-    position: absolute;
-    bottom: 1vw;
-    right: 1vw;
-}
-
+        #itemDesc span {
+            font-family: 'Oswald', sans-serif;
+        }
+        #itemDesc p {
+            padding: .2vw 0 .2vw 0;
+            width: 25vw;
+        }
+    #buttons {
+        position: absolute;
+        bottom: 1vw;
+        right: 1vw;
+    }
     #buttons a {
         font-family: 'Oswald', sans-serif;
-        color: #3e3e3e;
-        font-size: 1.3vw;
         margin: .5vw;
         padding: .25vw;
     }
 
-        #buttons a:hover {
-            color: #000;
-            background-color: #ddd;
-        }
 
+/* Cart Container Element */
+#cart {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 22vw;
+    max-height: 30vw;
+    overflow-y: scroll;
+}
+
+
+/* Cart Component Contents */
+#cartComponent {
+    position: relative;
+    padding: .8vw .3vw .8vw .3vw;
+}
+    #cartComponent h2 {
+        font-family: 'Oswald', sans-serif;
+        padding-bottom: .2vw;
+        text-align: center;
+        margin-bottom: .8vw;
+    }
+    #cartComponent hr {
+        width: 10vw;
+    }
+    #cartComponent .cost {
+        text-align: right;
+    }
+    #cartComponent .checkout {
+        text-align: center;
+    }
+
+
+/* User Profile Page*/
 #userProfile .hidden {
     display: none;
 }
-
     #userProfile .hidden:target {
         display: block;
     }
 
-#orderHistory a:target {
-    display: none;
+
+/* Footer */
+footer {
+    width: 100%;
+    position: relative;
+    height: 16vw;
 }
+    footer .logo {
+        position: absolute;
+        left: 38vw;
+        bottom: 7.5vw;
+    }
+    footer .tagline {
+        position: absolute;
+        left: 38vw;
+        bottom: 5.7vw;
+        width: 10.4vw;
+    }
+
+
+/* Author Credits on Footer */
+#creators {
+    position: absolute;
+    bottom: 6.5vw;
+    right: 35vw;
+    padding-left: .25vw;
+}
+    #creators div {
+        display: inline-block;
+    }
+    #creators span {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.3vw;
+        padding: .25vw;
+    }
+    #creators li {
+        font-size: 1vw;
+        text-align: center;
+        font-family: 'Song Myung', serif;
+    }
+
+
+/* 3rd Party Provider Logos */
+#providers {
+    position: absolute;
+    bottom: 1.8vw;
+    left: 47vw;
+}
+    #providers div {
+        display: inline-block;
+        padding: .5vw;
+    }
+
+
+/* Footer Fine Print */
+#smallprint {
+    position: absolute;
+    bottom: .2vw;
+    left: 41vw;
+}
+    #smallprint li {
+        display: inline-block;
+        padding: .25vw;
+    }
