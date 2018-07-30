@@ -16,6 +16,8 @@ namespace ECommerceStore.Pages
     public class UserProfileModel : PageModel
     {
         private IOrder _orders;
+        private IBasket _basket;
+        private IInventory _inventory;
         private UserManager<ApplicationUser> _userManager;
         private SignInManager<ApplicationUser> _signInManager;
 
@@ -30,9 +32,11 @@ namespace ECommerceStore.Pages
             
 
 
-        public UserProfileModel(IOrder orders, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        public UserProfileModel(IOrder orders, IBasket basket, IInventory inventory, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _orders = orders;
+            _basket = basket;
+            _inventory = inventory;
             _userManager = userManager;
             _signInManager = signInManager;
         }
@@ -43,6 +47,17 @@ namespace ECommerceStore.Pages
             var user = await _userManager.GetUserAsync(User);
             profileInfo = user;
             userOrders = _orders.GetUserClosedOrders(user.Id, 3);
+
+            foreach (var order in userOrders)
+            {
+                order.Items = _basket.GetItems(order.BasketId);
+
+                foreach (var item in order.Items)
+                {
+                    item.Product = await _inventory.GetById(item.ItemId);
+                }
+
+            };
         }
 
         public async Task<IActionResult> OnPost()

@@ -82,7 +82,7 @@
                 <div>  
                     
                     <label asp-for="ExpireDate"></label>
-                    <input type="text" asp-for="@Model.ExpireDate" required />
+                    <input type="text" asp-for="@Model.ExpireDate" placeholder="MMYY" required />
                 </div>
                 <button type="submit" asp-route-id="@Model.Order.ID"> Place Order Now </button>
             </form>
