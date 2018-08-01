@@ -211,3 +211,35 @@ footer {
         color: #888;
     }
 
+
+/*Admin Dashboard*/
+.admin-index div {
+    font-size: 2vw;
+    color: #000;
+}
+    .admin-index > h1 {
+        font-size: 5vw;
+        color: #000;
+    }
+
+    /*Admin table layout*/
+    .admin-table th {
+        font-size: 1.5vw;
+        color: #000;
+    }
+    .admin-table td {
+        font-size: 1.2vw;
+        color: #000;
+    }
+    /*Admin form layout*/
+    .admin-form h3{
+        font-size: 2vw;
+    }
+    .admin-form label{
+        font-size: 1.5vw;
+    }
+    h3#subtotal{
+        font-size: 2vw;
+        font-weight:bold;
+        color: #000;
+    }

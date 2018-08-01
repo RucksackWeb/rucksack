@@ -33,7 +33,7 @@
             }
                 <div>@User.Claims.FirstOrDefault(c => c.Type == "FullName").Value</div>
                 <ul>
-                    <li><a asp-controller="UserProfile">profile</a></li>
+                    <li><a asp-page="/UserProfile">profile</a></li>
                     <li><a asp-controller="Shop" asp-action="CartPage">cart</a></li>
                     <li><a asp-controller="Account" asp-action="Logout">logout</a></li>
                 </ul>

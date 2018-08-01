@@ -18,7 +18,7 @@
 }
 else
 {
-    <table>
+    <table class="admin-table">
         <tr>
             <th></th>
             <th>@Html.DisplayNameFor(i => i.Package.CartItem[0].Product.Name)</th>
@@ -32,7 +32,7 @@ else
         {
 
             <tr>
-                <td><img src="@item.Product.Image" style="width: 5vw;" /></td>
+                <td><img src="@item.Product.Image" /></td>
                 <td>@item.Product.Name</td>
                 <td>
                     <form method="post" asp-action="CartPage">
@@ -44,15 +44,14 @@ else
                 <td>x</td>
                 <td>@item.Product.Price</td>
                 <td>$@item.Cost</td>
-                <td><a asp-action="RemoveProduct" asp-controller="Basket" asp-route-id="@item.Id"> Delete </a></td>
+                <td><a class="red-button" asp-action="RemoveProduct" asp-controller="Basket" asp-route-id="@item.Id"> Remove </a></td>
             </tr>
-
-
         }
+
     </table>
-    <h3> Total Cost: $@Model.Package.TotalCost</h3>
+        <h3 id="subtotal"> Total Cost: $@Model.Package.TotalCost</h3>
 
 
-    <a asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Package.Id"> Place Order </a>
+    <a class="blk-button" asp-action="Checkout" asp-controller="Shop" asp-route-id="@Model.Package.Id"> Place Order </a>
 }
 

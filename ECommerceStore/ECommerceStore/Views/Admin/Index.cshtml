@@ -3,42 +3,40 @@
 @{
     Layout = "_Layout";
 }
-<link rel="stylesheet" href="~/Styles/Admin/Admin.css" type="text/css" />
+
+
 
 <div class="admin-index">
 
-    <div class="dashboard">
     <h1> Admin Dashboard</h1>
-        
+    <div>
 
-        <div>
+
+        <div class="dashboard">
+
             <div>
-                <h4>Products on sale</h4>
-                <a asp-action="GetAll" asp-controller="Product" >@Model.Products.Count</a>
+                <a class="dropdown-item" asp-action="GetAll" asp-controller="Product">
+                    <h4>Products on sale</h4>
+                    <p>@Model.Products.Count</p>
+                </a>
             </div>
 
             <div>
-                <h4>Total registered users</h4>
-                <a asp-action="UserList" >@Model.Users.Count</a>
+                <a asp-action="UserList">
+                    <h4>Total registered users</h4>
+                    <p>@Model.Users.Count</p></a>
             </div>
 
             <div>
-                <h4>Total Orders Received</h4>
-                <a asp-action="OrderList" >@Model.Orders.Count</a>
+                <a asp-action="OrderList">
+                    <h4>Total Orders Received</h4>
+                    <p>@Model.Orders.Count</p>
+                        </a>
             </div>
+
         </div>
 
 
-
-        <div class="product-mgnt">
-                <h6 class="dropdown-header"> Manage Products </h6>
-            <div class="dropdown">
-                <a class="dropdown-item" asp-action="Create" asp-controller="Product"> Add new Product </a>
-                <a class="dropdown-item" asp-action="GetAll" asp-controller="Product"> Manage Existing Products </a>
-            </div>
-
-
-        </div>
     </div>
 
-</div>
+</div>  

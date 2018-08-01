@@ -3,8 +3,11 @@
 @{
     Layout = "_Layout";
 }
+<div class="buttondiv">
+    <a asp-action="Index"> Back to Dashboard </a>
+</div>
 
-<table>
+<table class="admin-table">
     <tr>
         <th>@Html.DisplayNameFor(p => p.Orders[0].ID)</th>
         <th>@Html.DisplayNameFor(p => p.Orders[0].Date)</th>
@@ -29,5 +32,3 @@
         </tr>
     }
 </table>
-
-<a asp-action="Index"> Back to Dashboard </a>

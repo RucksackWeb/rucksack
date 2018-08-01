@@ -4,11 +4,13 @@
 @{
     Layout = "_Layout";
 }
+<div class="buttondiv">
+    <a asp-action="Index" asp-controller="Admin"> Back to Dashboard</a>
+    <a asp-action="Create" asp-controller="Product"> Create new </a>
+</div>
 
-
-<table class="table">
+<table class="admin-table">
     <tr>
-        <th scope="col"></th>
         <th scope="col">@Html.DisplayNameFor(p => p.Products[0].ID) </th>
         <th scope="col">@Html.DisplayNameFor(p => p.Products[0].SKU) </th>
         <th scope="col">@Html.DisplayNameFor(p => p.Products[0].Name) </th>
@@ -18,22 +20,23 @@
         <th scope="col">@Html.DisplayNameFor(p => p.Products[0].ProductCategory) </th>
         <th scope="col">@Html.DisplayNameFor(p => p.Products[0].Image) </th>
         <th scope="col"></th>
+        <th scope="col"></th>
 
     </tr>
 
     @foreach (Product product in Model.Products)
     {
         <tr scope="row">
-            <td><a asp-action="Update" asp-controller="Product" asp-route-Id="@product.ID"> Update </a></td>
             <td>@product.ID</td>
             <td>@product.SKU</td>
             <td>@product.Name</td>
-            <td>@product.Price</td>
+            <td>$@product.Price</td>
             <td>@product.Description</td>
             <td>@product.Quantity</td>
             <td>@product.ProductCategory</td>
-            <td><img src="@product.Image" height="80" /></td>
-            <td> <a asp-action="Delete" asp-controller="Product" asp-route-Id="@product.ID"> Delete Product </a> </td>
+            <td><img src="@product.Image"/></td>
+            <td><a class="grn-button" asp-action="Update" asp-controller="Product" asp-route-Id="@product.ID"> Update </a></td>
+            <td> <a class= "red-button" asp-action="Delete" asp-controller="Product" asp-route-Id="@product.ID"> Delete </a> </td>
         </tr>
 
     }

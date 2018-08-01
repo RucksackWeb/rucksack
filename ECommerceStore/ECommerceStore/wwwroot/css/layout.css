@@ -305,3 +305,118 @@ footer {
         display: inline-block;
         padding: .25vw;
     }
+
+
+/* Admin Dashboard*/
+.admin-index {
+    width: 90%;
+    text-align: center;
+    margin-top: 5%;
+}
+    .dashboard{
+        margin-top: 5%;
+    }
+    .dashboard div{
+        margin: 1vh .5vw;
+        display: inline-block;
+        width: 30%;
+        height: 8vh;
+        outline: 2px black solid;
+        padding-top: 5vh;
+    }
+    .dashboard div:hover {
+        -webkit-box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+        box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+    }
+    .dashboard div:active {
+        transform: translateY(4px);
+        -webkit-box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+        box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+    }
+
+    /*Admin table layout linked from dashboard*/
+    .admin-table{
+        width: 100%;
+        text-align: center;
+    }
+    .admin-table th, td{
+        padding: 2% 0;
+    }
+    .admin-table th{
+        border-top: 1px thick black;
+        padding: .5vw;
+    }
+    .admin-table td {
+    border-bottom: 2px solid black;
+    }
+    .admin-table img {
+        height: 7.5vh;
+        width: auto
+    }
+    .admin-table a {
+        padding: .3vw;
+    }
+
+    /*Admin dashboard linked page button layout*/
+    .buttondiv{
+        margin: 2% 0;
+    }
+    .buttondiv a{
+        text-align: center;
+        display: inline;
+        padding: .5vw;
+        width: 8vw;
+        outline: 1px solid black;
+        margin: 0 2%;
+    }
+    .buttondiv a:hover {
+        -webkit-box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+        -moz-box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+        box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+    }
+    .buttondiv a:active {
+        transform: translateY(4px);
+        -webkit-box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+        -moz-box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+        box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+    }
+
+    .grn-button {
+        outline: 1px solid #51d830;
+        background-color: #51d830;
+        margin-right: 25%;
+        margin-left: 10%;
+        color: white;
+    }
+    .red-button {
+        outline: 1px solid #e82f2f;
+        background-color: #e82f2f;
+        margin-left: 25%;
+        color: white;
+    }
+    .blk-button{
+        background-color: #000;
+        color: white;
+        padding: .3vw;
+
+    }
+
+    /*Admin forms layout*/
+    .admin-form{
+        margin-top: 5%;
+        /*text-align: center;*/
+        outline: 1px solid red;
+    }
+    .admin-form div{
+        margin-bottom: 2%;
+        
+        /*width: 30%;*/ 
+    }
+    .admin-form h3{
+        margin: 2% 0;
+
+    }
+
+
