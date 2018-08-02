@@ -11,8 +11,10 @@
     <tr>
         <th>@Html.DisplayNameFor(p => p.Orders[0].ID)</th>
         <th>@Html.DisplayNameFor(p => p.Orders[0].Date)</th>
+        <th>Products purchased</th>
         <th>@Html.DisplayNameFor(p => p.Orders[0].Subtotal)</th>
-        <th>@Html.DisplayNameFor(p => p.Orders[0].IsComplete)</th>
+        <th>UserName</th>
+        <th></th>
     </tr>
 
     @foreach(Order order in Model.Orders)
@@ -20,15 +22,11 @@
         <tr>
             <td>@order.ID</td>
             <td>@order.Date</td>
+            <td>@order.Items.Count</td>
             <td>$@order.Subtotal</td>
-            @if(order.IsComplete == true)
-            {
-                <td>yes</td>
-            }
-            else
-            {
-                <td>no</td>
-            }
+            <td>@Model.Users.FirstOrDefault(u => u.Id == order.UserId).FirstName 
+            @Model.Users.FirstOrDefault(u => u.Id == order.UserId).LastName</td>
+            <td><a class="blk-button" asp-action="OrderDetail" asp-route-id="@order.ID">Detail</a></td>
         </tr>
     }
 </table>

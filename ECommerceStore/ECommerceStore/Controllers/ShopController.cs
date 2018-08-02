@@ -223,13 +223,13 @@ namespace ECommerceStore.Controllers
             await _order.Update(order);
 
             order.Items = _basket.GetItems(basket.Id);
+            List<Product> products = new List<Product>();
 
             foreach (BasketItem item in order.Items)
             {
                 item.Product = await _context.GetById(item.ItemId);
             }
-
-
+            
             // Sends Receipt email to user
             string msgTitle = "Your order is on its way!";
 
@@ -251,8 +251,8 @@ namespace ECommerceStore.Controllers
             };
             msgContent += $"<h4>Damage on your Wallet: ${order.Subtotal}</h5>";        
 
-
             await _emailSender.SendEmailAsync(user.Email, msgTitle, msgContent);
+    
 
             return View(order);
         }

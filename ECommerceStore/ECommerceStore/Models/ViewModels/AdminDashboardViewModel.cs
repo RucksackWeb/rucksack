@@ -10,5 +10,6 @@ namespace ECommerceStore.Models.ViewModels
         public List<ApplicationUser> Users { get; set; }
         public List<Product> Products { get; set; }
         public List<Order> Orders { get; set; }
+        public Order Order { get; set; }
     }
 }

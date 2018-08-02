@@ -353,15 +353,16 @@ footer {
     }
     .admin-table img {
         height: 7.5vh;
-        width: auto
+        width: auto;
     }
     .admin-table a {
         padding: .3vw;
     }
 
     /*Admin dashboard linked page button layout*/
-    .buttondiv{
+    .buttondiv {
         margin: 2% 0;
+
     }
     .buttondiv a{
         text-align: center;
@@ -370,6 +371,7 @@ footer {
         width: 8vw;
         outline: 1px solid black;
         margin: 0 2%;
+        font-size: 1.1vw;
     }
     .buttondiv a:hover {
         -webkit-box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
@@ -389,30 +391,28 @@ footer {
         margin-right: 25%;
         margin-left: 10%;
         color: white;
+        font-size: 1.1vw;
     }
     .red-button {
         outline: 1px solid #e82f2f;
         background-color: #e82f2f;
         margin-left: 25%;
         color: white;
+                font-size: 1.1vw;
     }
     .blk-button{
         background-color: #000;
         color: white;
         padding: .3vw;
-
+        font-size: 1.1vw;
     }
 
     /*Admin forms layout*/
     .admin-form{
         margin-top: 5%;
-        /*text-align: center;*/
-        outline: 1px solid red;
     }
     .admin-form div{
         margin-bottom: 2%;
-        
-        /*width: 30%;*/ 
     }
     .admin-form h3{
         margin: 2% 0;
@@ -420,3 +420,25 @@ footer {
     }
 
 
+/*Order Confirmation*/
+.confirmation{
+
+}
+    .confirmation h2{
+        text-align: center;
+    }
+
+    .confirmation div{
+        display: inline-block;
+        width: 45%;
+        margin: 5% 0;
+
+    }
+    .confirmation p{
+       margin: 1vw 2vw 3vw 5vw;
+
+    }
+    .confirmation div:nth-last-match(div){
+        display: block;
+        border: 3px solid red;
+    }
