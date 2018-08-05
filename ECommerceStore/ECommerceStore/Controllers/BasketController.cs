@@ -16,8 +16,8 @@ namespace ECommerceStore.Controllers
         private IBasket _basket;
         private IInventory _context;
 
-        private SignInManager<ApplicationUser> _signInManager { get; set; }
-        private UserManager<ApplicationUser> _userManager { get; set; }
+        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
 
         public BasketController(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IBasket basket, IInventory context)
         {
@@ -31,7 +31,6 @@ namespace ECommerceStore.Controllers
         // AddProduct, add a new product to a basket
         public async Task<IActionResult> AddToCart(int productId)
         {
-
             string userId = _userManager.GetUserId(User);
             Product product = await _context.GetById(productId);
             if(_basket.GetBasketById(userId) == null)
@@ -42,7 +41,6 @@ namespace ECommerceStore.Controllers
             }
 
             Basket basket = _basket.GetBasketById(userId);
-            //BasketItem item = _basket.GetItemById(basket.Id);
             List<BasketItem> items = _basket.GetItems(basket.Id);
 
             if (items == null || items.FirstOrDefault(i => i.ItemId == product.ID) == null)
@@ -112,35 +110,36 @@ namespace ECommerceStore.Controllers
 
 
 
-            // Update quantity of a product
-            // Update quantity of a product in the cart view
-            [HttpPost]
-            public void Update(int itemId, int quantity)
+        // Update quantity of a product
+        // Update quantity of a product in the cart view
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void Update(int itemId, int quantity)
+        {
+            BasketItem item = _basket.GetItemById(itemId);
+
+            if (quantity == 0)
             {
-                BasketItem item = _basket.GetItemById(itemId);
-
-                if (quantity == 0)
-                {
-                    _basket.RemoveItem(itemId);
-                }
-                else
-                {
-                    item.Quantity = quantity;
-                    item.Cost = decimal.Multiply(Convert.ToDecimal(quantity), item.Product.Price);
-
-                    _basket.SaveItem(item);
-                }
+                _basket.RemoveItem(itemId);
             }
-
-
-
-
-            // Delete, a product from basket
-            public IActionResult RemoveProduct(int id)
+            else
             {
-                _basket.RemoveItem(id);
-                return RedirectToAction("CartPage", "Shop");
+                item.Quantity = quantity;
+                item.Cost = decimal.Multiply(Convert.ToDecimal(quantity), item.Product.Price);
+
+                _basket.SaveItem(item);
             }
+        }
+
+
+
+
+        // Delete, a product from basket
+        public IActionResult RemoveProduct(int id)
+        {
+            _basket.RemoveItem(id);
+            return RedirectToAction("CartPage", "Shop");
+        }
         
         
     }

@@ -1,5 +1,9 @@
 ﻿@page
 @model ECommerceStore.Pages.UserProfileModel
+@using (Html.BeginForm("OnPost", "UserProfile"))
+{
+    @Html.AntiForgeryToken()
+}
 @{
     Layout = "_Layout";
 }

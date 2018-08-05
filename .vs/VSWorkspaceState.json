@@ -3,10 +3,8 @@
     "",
     "\\ECommerceStore",
     "\\ECommerceStore\\ECommerceStore",
-    "\\ECommerceStore\\ECommerceStore\\Views\\Shared",
-    "\\ECommerceStore\\ECommerceStore\\wwwroot",
     "\\ECommerceStore\\ECommerceStore\\wwwroot\\images"
   ],
-  "SelectedNode": "\\ECommerceStore\\ECommerceStore\\wwwroot\\images\\rucksack_logo.PNG",
+  "SelectedNode": "\\ECommerceStore\\ECommerceStore\\ECommerceStore.csproj",
   "PreviewInSolutionExplorer": false
 }

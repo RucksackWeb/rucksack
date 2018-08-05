@@ -26,7 +26,6 @@ namespace ECommerceStore.Controllers
             _basket = basket;
         }
 
-        //[ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> Index()
         {
@@ -43,7 +42,6 @@ namespace ECommerceStore.Controllers
             return View(advm);
         }
 
-        //[ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> UserList()
         {
@@ -55,7 +53,6 @@ namespace ECommerceStore.Controllers
             return View(advm);
         }
 
-       // [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> OrderList()
         {
@@ -81,7 +78,6 @@ namespace ECommerceStore.Controllers
         }
 
 
-       // [ValidateAntiForgeryToken]
         [Authorize(Policy = "AdminOnly")]
         public async Task<IActionResult> OrderDetail(int id)
         {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ECommerceStore.Models;
 using ECommerceStore.Models.Interfaces;
 using ECommerceStore.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -18,9 +19,9 @@ namespace ECommerceStore.Controllers
         private IInventory _context;
         private IBasket _basket;
         private IOrder _order;
-        private SignInManager<ApplicationUser> _signInManager { get; set; }
-        private UserManager<ApplicationUser> _userManager { get; set; }
-        private IEmailSender _emailSender { get; set; }
+        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<ApplicationUser> _userManager;
+        private IEmailSender _emailSender;
 
         public ShopController(IConfiguration configuration, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IInventory context, IBasket basket, IOrder order, IEmailSender emailSender)
         {
@@ -85,6 +86,7 @@ namespace ECommerceStore.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CartPage(BasketViewModels bvm)
         {
 
@@ -126,6 +128,7 @@ namespace ECommerceStore.Controllers
 
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Checkout()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -173,6 +176,8 @@ namespace ECommerceStore.Controllers
 
 
         [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Checkout(CheckoutViewModel cvm)
         {
             ApplicationUser user = await _userManager.GetUserAsync(User);
@@ -202,6 +207,7 @@ namespace ECommerceStore.Controllers
             }
         }
 
+        [Authorize]
         public async Task<IActionResult> CheckoutConfirmation(string id)
         {
             var user = await _userManager.GetUserAsync(User);

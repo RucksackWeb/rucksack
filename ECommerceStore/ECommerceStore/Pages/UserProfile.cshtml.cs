@@ -60,6 +60,7 @@ namespace ECommerceStore.Pages
             };
         }
 
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> OnPost()
         {
             var user = await _userManager.GetUserAsync(User);
