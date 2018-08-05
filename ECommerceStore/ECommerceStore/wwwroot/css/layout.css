@@ -1,0 +1,444 @@
+﻿/**
+    This file contains properties pertaining to position, sizing, and display types.
+*/
+
+/* Top of Page Image */
+header {
+    width: 100%;
+    height: 23.9vw;
+    position: relative;
+}
+    header .tagline {
+        position: absolute;
+        background-color: #3e3e3e;
+        text-align: center;
+    }
+    header .logo {
+        position: absolute;
+        left: 5vw;
+        top: 1.5vw;
+    }
+    header .tagline {
+        position: absolute;
+        width: 17.4vw;
+        left: 5vw;
+        top: 6.9vw;
+    }
+
+
+/* Navigation Bar */
+nav {
+    position: absolute;
+    bottom: 1.5vw;
+    left: 5vw;
+}
+    nav ul {
+        padding: 0;
+    }
+    nav li {
+        display: inline-block;
+        padding: .5vw;
+    }
+
+
+/* User Info Block */
+#userInfo {
+    position: absolute;
+    right: 5vw;
+    bottom: 1.5vw;
+    padding: .5vw .5vw .5vw .8vw;
+}
+    #userInfo span {
+        position: absolute;
+        left: .3vw;
+        top: .15vw;
+        padding: .4vw;
+    }
+    #userInfo div {
+        padding: .2vw;
+        display: inline-block;
+        padding-left: 2.5vw;
+    }
+    #userInfo li {
+        display: inline-block;
+    }
+
+
+/* Main Content Container Block */
+main {
+    position: relative;
+    width: 90vw;
+    margin: auto;
+    margin-top: 1.2vw;
+    margin-bottom: 1.2vw;
+    min-height: 52vw;
+}
+
+
+/* Left Column of Home Index */
+#homecolumn {
+    width: 54.4vw;
+    display: inline-block;
+    vertical-align: top;
+}
+    #homecolumn hr {
+        margin: 2.5vw;
+    }
+
+
+ /* Newsletter Ad */
+#banner {
+    position: relative;
+    width: 54.4vw;
+    height: 11.7vw;
+}
+    #banner span {
+        position: absolute;
+        bottom: .8vw;
+        left: 8vw;
+    }
+
+
+/* Right Column of Home Index */
+#content aside {
+    width: 34.2vw;
+    float: right;
+}
+
+
+/* Seasonal Ad Block */
+#seasonalAd {
+    position: relative;
+    height: 51.45vw;
+}
+    #seasonalAd div {
+        position: absolute;
+        left: 5vw;
+        top: 2vw;
+    }
+
+
+/* Featured Product */
+#featured {
+    margin-top: 1.1vw;
+}
+    #featured h2 {
+        text-align: center;
+        padding-top: .8vw;
+    }
+
+
+/* Products Index Page Container (Left Column)*/
+#allproducts {
+    display: inline-block;
+    width: 67vw;
+}
+    #allproducts hr {
+        width: 55vw;
+    }
+
+
+/* Product Card on Product Index Page */
+.card {
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+    .card img {
+        max-width: 35vw;
+        padding: 1.1vw 0 1.1vw 1.1vw;
+        display: inline-block;
+    }
+    .card .description {
+        max-height: 12vw;
+        display: inline-block;
+        position: absolute;
+        padding: 1.1vw;
+        top: 5vw;
+        overflow-y: scroll;
+    }
+    .card .description h4 {
+        padding-bottom: .8vw;
+    }
+    .card .description span {
+        padding-bottom: 1.1vw;
+    }
+    .card .description a {
+        display: block;
+        padding-bottom: .3vw;
+    }
+
+
+/* Product Information - Product Detail Page*/
+#itemDetail {
+    position: relative;
+    display: inline-block;
+    width: 67vw;
+    height: 44.5vw;
+}
+    #itemImage {
+        width: 100%;
+        position: absolute;
+        top: 0;
+    }
+    #itemDesc {
+        position: absolute;
+        top: 1vw;
+        left: 1vw;
+        background-color: rgba(255, 255, 255, .65);
+        padding: .4vw;
+    }
+    #itemDesc p {
+        padding: .2vw 0 .2vw 0;
+        width: 25vw;
+    }
+    #buttons {
+        position: absolute;
+        bottom: 1vw;
+        right: 1vw;
+    }
+    #buttons a {
+        margin: .5vw;
+        padding: .25vw;
+    }
+
+
+/* Cart Container Element */
+#cart {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 22vw;
+    max-height: 30vw;
+    overflow-y: scroll;
+}
+
+
+/* Cart Component Contents */
+#cartComponent {
+    position: relative;
+    padding: .8vw .3vw .8vw .3vw;
+}
+    #cartComponent h2 {
+        padding-bottom: .2vw;
+        text-align: center;
+        margin-bottom: .8vw;
+    }
+    #cartComponent hr {
+        width: 10vw;
+    }
+    #cartComponent .cost {
+        text-align: right;
+    }
+    #cartComponent .checkout {
+        text-align: center;
+    }
+
+
+/* User Profile Page*/
+#userProfile .hidden {
+    display: none;
+}
+    #userProfile .hidden:target {
+        display: block;
+    }
+
+
+/* Footer */
+footer {
+    width: 100%;
+    position: relative;
+    height: 16vw;
+}
+    footer .logo {
+        position: absolute;
+        left: 38vw;
+        bottom: 7.5vw;
+    }
+    footer .tagline {
+        position: absolute;
+        text-align: center;
+        left: 38vw;
+        bottom: 5.7vw;
+        width: 10.4vw;
+    }
+
+
+/* Author Credits on Footer */
+#creators {
+    position: absolute;
+    bottom: 6.5vw;
+    right: 35vw;
+    padding-left: .25vw;
+}
+    #creators div {
+        display: inline-block;
+    }
+    #creators span {
+        padding: .25vw;
+    }
+    #creators li {
+        text-align: center;
+    }
+
+
+/* 3rd Party Provider Logos */
+#providers {
+    position: absolute;
+    bottom: 1.8vw;
+    left: 47vw;
+}
+    #providers div {
+        display: inline-block;
+        padding: .5vw;
+    }
+
+
+/* Footer Fine Print */
+#smallprint {
+    position: absolute;
+    bottom: .2vw;
+    left: 41vw;
+}
+    #smallprint li {
+        display: inline-block;
+        padding: .25vw;
+    }
+
+
+/* Admin Dashboard*/
+.admin-index {
+    width: 90%;
+    text-align: center;
+    margin-top: 5%;
+}
+    .dashboard{
+        margin-top: 5%;
+    }
+    .dashboard div{
+        margin: 1vh .5vw;
+        display: inline-block;
+        width: 30%;
+        height: 8vh;
+        outline: 2px black solid;
+        padding-top: 5vh;
+    }
+    .dashboard div:hover {
+        -webkit-box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+        box-shadow: 7px 10px 29px 1px rgba(0,0,0,0.75);
+    }
+    .dashboard div:active {
+        transform: translateY(4px);
+        -webkit-box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+        -moz-box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+        box-shadow: 7px 6px 29px 1px rgba(0,0,0,0.75);
+    }
+
+    /*Admin table layout linked from dashboard*/
+    .admin-table{
+        width: 100%;
+        text-align: center;
+    }
+    .admin-table th, td{
+        padding: 2% 0;
+    }
+    .admin-table th{
+        border-top: 1px thick black;
+        padding: .5vw;
+    }
+    .admin-table td {
+    border-bottom: 2px solid black;
+    }
+    .admin-table img {
+        height: 7.5vh;
+        width: auto;
+    }
+    .admin-table a {
+        padding: .3vw;
+    }
+
+    /*Admin dashboard linked page button layout*/
+    .buttondiv {
+        margin: 2% 0;
+
+    }
+    .buttondiv a{
+        text-align: center;
+        display: inline;
+        padding: .5vw;
+        width: 8vw;
+        outline: 1px solid black;
+        margin: 0 2%;
+        font-size: 1.1vw;
+    }
+    .buttondiv a:hover {
+        -webkit-box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+        -moz-box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+        box-shadow: 5px 6px 15px -1px rgba(0,0,0,0.52);
+    }
+    .buttondiv a:active {
+        transform: translateY(4px);
+        -webkit-box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+        -moz-box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+        box-shadow: 5px 2px 15px -1px rgba(0,0,0,0.52);
+    }
+
+    .grn-button {
+        outline: 1px solid #51d830;
+        background-color: #51d830;
+        margin-right: 25%;
+        margin-left: 10%;
+        color: white;
+        font-size: 1.1vw;
+    }
+    .red-button {
+        outline: 1px solid #e82f2f;
+        background-color: #e82f2f;
+        margin-left: 25%;
+        color: white;
+                font-size: 1.1vw;
+    }
+    .blk-button{
+        background-color: #000;
+        color: white;
+        padding: .3vw;
+        font-size: 1.1vw;
+    }
+
+    /*Admin forms layout*/
+    .admin-form{
+        margin-top: 5%;
+    }
+    .admin-form div{
+        margin-bottom: 2%;
+    }
+    .admin-form h3{
+        margin: 2% 0;
+
+    }
+
+
+/*Order Confirmation*/
+.confirmation{
+
+}
+    .confirmation h2{
+        text-align: center;
+    }
+
+    .confirmation div{
+        display: inline-block;
+        width: 45%;
+        margin: 5% 0;
+
+    }
+    .confirmation p{
+       margin: 1vw 2vw 3vw 5vw;
+
+    }
+    .confirmation div:nth-last-match(div){
+        display: block;
+        border: 3px solid red;
+    }

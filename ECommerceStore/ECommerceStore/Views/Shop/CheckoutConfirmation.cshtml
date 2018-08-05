@@ -1,0 +1,46 @@
+﻿@model Order
+
+@{ 
+    Layout = "_Layout";
+}
+    <div class="buttondiv">
+        <a asp-action="Index" asp-controller="Shop"> Back to Products</a>
+    </div>
+<div class="confirmation">
+    <h2> Thank you for your Order @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value!</h2>
+
+    <div>
+        <h5>Customer Number: </h5>
+            <p>@Model.UserId</p>
+        <h5>Order Number: </h5>
+            <p>@Model.ID</p>
+        <h5>Order Time: </h5>
+            <p>@Model.Date</p>
+    </div>
+
+    <div>
+        <h5> Shipping Address: </h5>
+        <h5> @User.Claims.FirstOrDefault(c => c.Type == "FullName").Value </h5>
+        <h5>@Model.Address  @Model.City  @Model.State, @Model.Zipcode</h5>
+    </div>
+
+    <h3> Items </h3>
+
+    <table class="admin-table">
+        @foreach(var item in Model.Items)
+        {
+            <tr>
+                <td><img src="@item.Product.Image"></td>
+                <td>@item.Product.Name</td>
+                <td>x</td>
+                <td>@item.Quantity</td>
+                <td>@item.Product.Price</td>
+                <td>@item.Cost</td>
+            </tr>
+
+        }
+
+    </table>
+    <h5>Subtotal: $@Model.Subtotal</h5>
+</div>
+

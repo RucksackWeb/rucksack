@@ -4,36 +4,26 @@
     Layout = "_Layout";
 }
 
-@foreach (Product product in Model.Products)
-{
-
+<section id="allproducts">
+    @foreach (Product product in Model.Products)
+    {
     <div class="card">
-
-        <!-- Card image -->
-        <div class="view overlay">
-            <img class="card-img-top" src="@product.Image" alt="@product.Name image">
-            <a>
-                <div class="mask rgba-white-slight"></div>
-            </a>
+        <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID"><img src="@product.Image" alt="@product.Name image"></a>
+        <div class="description">
+            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID"><h4>@product.Name</h4></a>
+            <span>@product.Price.ToString("C")</span>
+            <a asp-action="AddToCart" asp-controller="Basket" asp-route-productId="@product.ID">add to cart</a>
+            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID">detail</a>
         </div>
-
-        <!-- Card content -->
-        <div class="card-body elegant-color white-text rounded-bottom">
-
-            <!-- Social shares button -->
-            <a class="activator waves-effect mr-4"><i class="fa fa-share-alt white-text"></i></a>
-            <!-- Title -->
-            <h4 class="card-title">@product.Name</h4>
-            <hr class="hr-light">
-            <!-- Text -->
-            <p class="card-text white-text mb-4">$@product.Price</p>
-            <!-- Link -->
-            <a asp-action="Detail" asp-controller="Shop" asp-route-id="@product.ID" class="white-text d-flex justify-content-end"><h5>View Detail <i class="fa fa-angle-double-right"></i></h5></a>
-
-        </div>
-
     </div>
-    <!-- Card Dark -->
+    <hr />
+    }
+</section>
 
-}
 
+<aside id="cart">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        @await Component.InvokeAsync("BasketComponent", UserManager.GetUserId(User));
+    }
+</aside>

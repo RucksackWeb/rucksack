@@ -55,6 +55,7 @@ namespace ECommerceStore.Controllers
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
@@ -73,8 +74,6 @@ namespace ECommerceStore.Controllers
         }
 
 
-
-
         [HttpGet]
         public async Task<IActionResult> Update(int id)
         {
@@ -83,6 +82,7 @@ namespace ECommerceStore.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id, Product product)
         {
             string result = await _context.Update(id, product);

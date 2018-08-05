@@ -1,0 +1,259 @@
+﻿/**
+    This file contains properties pertaining to fonts, colors, and images.
+*/
+
+/* Header */
+header {
+    background-image: url(../images/sean-stratton-744803-unsplash.jpg);
+    background-repeat: no-repeat;
+    background-size: contain
+}
+
+
+/* Header Logo */
+.logo {
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: 5vw;
+    background-color: #fff;
+    color: #000;
+}
+    .tagline {
+        font-family: 'IM Fell DW Pica', serif;
+        font-size: 1.5vw;
+        color: #fff;
+        background-color: #3e3e3e;
+    }
+
+
+/* Nav Bar*/
+nav {
+    background-color: #fff;
+    outline: #3e3e3e;
+}
+    nav li {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.75vw;
+    }
+    nav a:hover {
+        color: #000;
+    }
+
+
+/* User Info Block */
+#userInfo {
+    background-color: #fff;
+    text-align: center;
+    font-size: 1.5vw;
+}
+    #userInfo span {
+        color: #fff;
+        background-color: #3e3e3e;
+        border-radius: 50%;
+        border: .2vw solid #fff;
+    }
+    #userInfo div {
+        background-color: #3e3e3e;
+        color: #fff;
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+    }
+    #userInfo li {
+        display: inline-block;
+        font-size: 1vw;
+        font-weight: bold;
+    }
+    #userInfo a:hover {
+        color: #000;
+    }
+
+
+/* Seasonal Ad */
+#seasonalAd {
+    outline: .2vw solid white;
+    outline-offset: -1.5vw;
+    background-image: url("../images/ivana-cajina-367006-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+    #seasonalAd p {
+        text-align: center;
+        font-size: 4vw;
+        color: #fff;
+    }
+
+
+/* Newsletter Ad */
+#banner {
+    background-image: radial-gradient(
+        rgba(0, 0, 0, .3),
+        rgba(0, 0, 0, .3)),
+        url("../images/mathyas-kurmann-102977-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+    #banner span {
+        color: #fff;
+        font-size: 2.5vw;
+    }
+
+
+/* Featured Product Block */
+#featured {
+    outline: .2vw solid #3e3e3e;
+    font-size: 1.2vw;
+}
+    #featured h2 {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2vw;
+    }
+
+
+ /* Product Index Page */
+.description h4 {
+    font-family: 'Oswald', sans-serif;
+    color: #000;
+    font-size: 1.4vw;
+    font-weight: bold;
+}
+    .description h4:hover {
+        color: #3e3e3e; 
+    }
+    .description a:hover {
+            color: #000;
+    }
+
+
+/* Product Detail Page */
+#itemDesc span {
+    font-size: 1.5vw;
+    color: #000;
+}
+    #itemDesc p {
+        color: #000;
+    }
+    #itemDesc span {
+        font-family: 'Oswald', sans-serif;
+    }
+    #buttons a {
+        font-family: 'Oswald', sans-serif;
+        color: #3e3e3e;
+        font-size: 1.3vw;
+    }
+    #buttons a:hover {
+        color: #000;
+        background-color: #ddd;
+    }
+
+
+/* Cart Component Contents */
+#cartComponent h2 {
+    font-family: 'Oswald', sans-serif;
+    border-bottom: .2vw solid #3e3e3e;
+    font-size: 1.5vw;
+    margin-bottom: .8vw;
+    color: #000;
+}
+    #cartComponent li {
+        font-size: .9vw;
+    }
+    #cartComponent h2:hover {
+        color: #3e3e3e;
+    }
+    #cartComponent a:hover {
+        color: #000;
+    }
+    #cartComponent .checkout {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1.5vw;
+    }
+
+
+/* Footer */
+footer {
+    background-color: #3e3e3e;
+}
+    footer .logo {
+        font-size: 3vw;
+    }
+    footer .tagline {
+        font-size: 1.2vw;
+        outline: 2px solid #fff;
+    }
+
+
+/* Author Credits */
+#creators span {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.3vw;
+    color: #fff;
+}
+    #creators li {
+        font-family: 'Song Myung', serif;
+        color: #fff;
+        font-size: 1vw;
+    }
+    #creators a:hover {
+        color: #888;
+    }
+
+
+/* 3rd Party Providers */
+#providers div {
+    font-size: 2vw;
+}
+
+
+/* Footer Fine Print */
+#smallprint {
+    font-size: .8vw;
+}
+    #smallprint a:hover {
+        color: #888;
+    }
+
+
+/*Admin Dashboard*/
+.admin-index div {
+    font-size: 2vw;
+    color: #000;
+}
+    .admin-index > h1 {
+        font-size: 5vw;
+        color: #000;
+    }
+
+    /*Admin table layout*/
+    .admin-table th {
+        font-size: 1.5vw;
+        color: #000;
+    }
+    .admin-table td {
+        font-size: 1.2vw;
+        color: #000;
+    }
+    /*Admin form layout*/
+    .admin-form h3{
+        font-size: 2vw;
+    }
+    .admin-form label{
+        font-size: 1.5vw;
+    }
+    h3#subtotal{
+        font-size: 2vw;
+        font-weight:bold;
+        color: #000;
+    }
+
+/*Order Confirmation*/
+.confirmation h2 {
+    font-size: 3vw;
+    color: #000;
+}
+    .confirmation h3{
+        font-size: 1.7vw;
+        color: #000;
+    }
+    .confirmation h5{
+        font-size: 1.3vw;
+        color: #000;
+    }
