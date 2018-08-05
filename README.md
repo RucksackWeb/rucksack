@@ -72,7 +72,7 @@ Follow this step to run this application from Azure.
 ## Deployment
 
 Current Application is deployed with Microsoft Azure application service. To open this application
-with Azure [Click here](http://therucksack.azurewebsites.net/).
+with Azure [Click here](http://rucksacks.azurewebsites.net/).
 
 
 ## Contributing
