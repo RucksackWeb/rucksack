@@ -76,7 +76,8 @@ with Azure [Click here](http://rucksacks.azurewebsites.net/).
 
 
 ## Contributing
-
+[Nathan Aurich](https://github.com/NateA275)
+[Andrew Baik](https://github.com/AndrewBaik)
 
 ## Acknowledgments
 
