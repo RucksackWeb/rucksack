@@ -3,10 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ECommerceStore.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Baskets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    UserId = table.Column<string>(nullable: true),
+                    IsComplete = table.Column<bool>(nullable: false),
+                    TotalCost = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Baskets", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
@@ -24,6 +39,35 @@ namespace ECommerceStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CartItems",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    BasketId = table.Column<int>(nullable: false),
+                    ItemId = table.Column<int>(nullable: false),
+                    ProductID = table.Column<int>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    Cost = table.Column<decimal>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CartItems", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Baskets_BasketId",
+                        column: x => x.BasketId,
+                        principalTable: "Baskets",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CartItems_Products_ProductID",
+                        column: x => x.ProductID,
+                        principalTable: "Products",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(
@@ -45,10 +89,26 @@ namespace ECommerceStore.Migrations
                     { 12, "When it comes to small-but-important items like your phone, charger, passport, and pens, you don't just want them stored — you want them sorted, as well. This Is Ground's Venture 2 Backpack was designed with this in mind. ", "https://uncrate.com/assets_c/2018/03/thisisground-venture-backpack-5-thumb-960xauto-82491.jpg", "GROUND VENTURE 2 BACKPACK", 950m, 2, 50, "bag04groundventure" },
                     { 13, "Latest series of limited edition collaborations, the Topo Designs x Uncrate Rover Pack uses signature American bison leather as a base for Topo's nearly indestructible Ballistic Cordura fabric construction. ", "https://uncrate.com/assets_c/2016/03/topo-1-thumb-960xauto-61610.jpg", "TOPO DESIGNS X UNCRATE ROVER PACK", 300m, 2, 50, "bag05topo" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_BasketId",
+                table: "CartItems",
+                column: "BasketId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CartItems_ProductID",
+                table: "CartItems",
+                column: "ProductID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CartItems");
+
+            migrationBuilder.DropTable(
+                name: "Baskets");
+
             migrationBuilder.DropTable(
                 name: "Products");
         }

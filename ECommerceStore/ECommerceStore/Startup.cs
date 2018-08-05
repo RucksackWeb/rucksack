@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -37,25 +38,46 @@ namespace ECommerceStore
 
             services.AddDbContext<WarehouseDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("WarehouseLocalDB")));
-            //options.UseSqlServer(Configuration.GetConnectionString("WarehouseDeployedDB")));
+            //options.UseSqlServer(Configuration["ConnectionStrings:WarehouseDeployedDB"]));
 
             services.AddDbContext<UserDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("UserLocalDB")));
-            //options.UseSqlServer(Configuration.GetConnectionString("UserDeployedDB")));
+            //options.UseSqlServer(Configuration["ConnectionStrings:UserDeployedDB"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<UserDbContext>()
                 .AddDefaultTokenProviders();
 
 
+            // Claims
             services.AddAuthorization(option =>
             {
                 option.AddPolicy("AdminOnly", policy => policy.RequireRole(ApplicationRoles.Admin));
                 option.AddPolicy("SubscribersOnly", policy => policy.RequireClaim("Subscription"));
             });
 
-            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();
+
+            // OAuth
+            services.AddAuthentication().AddGoogle(google =>
+            {
+                google.ClientId = Configuration["OAuth:Authentication:Google:ClientId"];
+                google.ClientSecret = Configuration["OAuth:Authentication:Google:ClientSecret"];
+            }).AddMicrosoftAccount(microsoftOptions =>
+            {
+                microsoftOptions.ClientId = Configuration["OAuth:Authentication:Microsoft:ApplicationId"];
+                microsoftOptions.ClientSecret = Configuration["OAuth:Authentication:Microsoft:Password"];
+            });
+
+            // Policy
+            services.AddTransient<IAuthorizationHandler, SubscriberFeatureHandler>();   
+
+            // Connecting with database through interfaces
             services.AddScoped<IInventory, DevInventory>();
+            services.AddTransient<IBasket, DevBasket>();
+            services.AddTransient<IOrder, DevOrder>();
+
+            // Connection with Email Sender
+            services.AddScoped<IEmailSender, EmailSender>();
         }
 
 

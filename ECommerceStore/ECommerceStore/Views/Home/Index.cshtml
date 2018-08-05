@@ -1,5 +1,38 @@
-﻿@{
+﻿@model Product
+
+@{
     Layout = "_Layout";
 }
 
-<div> index home page</div>
+<section id="content">
+    <section id="homecolumn">
+        <div id="banner">
+            <span>Subscribe to our monthly newsletter.</span>
+        </div>
+
+        <hr />
+        <div id="featured">
+            <h2 id="title">Featured Product</h2>
+            <div class="card">
+                <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID"><img src="@Model.Image" alt="@Model.Name image"></a>
+                <div class="description">
+                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID"><h4>@Model.Name</h4></a>
+                    <a asp-action="Detail" asp-controller="Shop" asp-route-id="@Model.ID">@Model.Description</a>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </section>
+
+    <a asp-controller="Shop" asp-action="Index">
+        <aside id="seasonalAd">
+            <div>
+                <p>Explore</p>
+                <p>the</p>
+                <p>Summer 2018</p>
+                <p>collection</p>
+            </div>
+
+        </aside>
+    </a>
+</section>

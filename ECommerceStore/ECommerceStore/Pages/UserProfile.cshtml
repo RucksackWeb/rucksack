@@ -1,0 +1,94 @@
+﻿@page
+@model ECommerceStore.Pages.UserProfileModel
+@using (Html.BeginForm("OnPost", "UserProfile"))
+{
+    @Html.AntiForgeryToken()
+}
+@{
+    Layout = "_Layout";
+}
+
+<section id="userProfile">
+    <div id="userDetails">
+        <h2>Account Information <a href="#editInfo">edit</a></h2>
+        <div>Name: @Model.profileInfo.LastName, @Model.profileInfo.FirstName</div>
+        <div>Email: @Model.profileInfo.Email</div>
+        <a href="#orderHistory">View Recent Orders</a>
+    </div>
+
+    <div id="editInfo" class="hidden">
+        <h2>Edit Profile</h2>
+        <form method="post">
+            <div>
+                <label asp-for="FirstName">First Name</label> :
+                <input asp-for="FirstName" required />
+            </div>
+            <div>
+                <label asp-for="LastName">Last Name</label> :
+                <input asp-for="LastName" required />
+            </div>
+
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+    <div id="orderHistory" class="hidden">
+        @if (Model.userOrders.Count == 0)
+        {
+            <div>No orders to display.</div>
+            <div>
+                <a asp-controller="Shop" asp-action="Index">Start Here.</a>
+            </div>
+        }
+        else
+        {
+            <h2>Recent Orders</h2>
+            <table style="width: 100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Shipping Address</th>
+                        <th>Items</th>
+                        <th>Qty.</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var o in Model.userOrders)
+                    {
+                        <tr>
+                            <td>@o.ID</td>
+                            <td>@o.Date.ToString("MM/dd/yyyy")
+                            <td>@o.Address @o.City @o.State</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+
+                        @foreach (var item in o.Items)
+                        {
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@item.Product.Name</td>
+                                <td>@item.Quantity</td>
+                                <td>@item.Cost.ToString("C")</td>
+                            </tr>
+                        }
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Order Total:</td>
+                            <td>@o.Subtotal.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</section>

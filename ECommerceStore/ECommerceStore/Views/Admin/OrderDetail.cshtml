@@ -1,0 +1,48 @@
+﻿@model AdminDashboardViewModel
+
+@{
+    ViewData["Title"] = "OrderDetail";
+    Layout = "_Layout";
+}
+<div class="buttondiv">
+    <a asp-action="OrderList"> Back to Orders </a>
+</div>
+
+<table class="admin-table">
+    <tr>
+        <th>@Html.DisplayNameFor(n => n.Order.Date)</th>
+        <th>@Html.DisplayNameFor(n => n.Users[0].Email)</th>
+        <th>@Html.DisplayNameFor(n => n.Users[0].UserName)</th>
+        <th>@Html.DisplayNameFor(n => n.Order.Address)</th>
+        <th>Purchased Products</th>
+        <th>@Html.DisplayNameFor(n => n.Order.Subtotal)</th>    
+    </tr>
+
+
+    <tr>
+        <td>@Model.Order.Date</td>
+        <td>@Model.Users.FirstOrDefault(u=>u.Id == @Model.Order.UserId).Email</td>
+        <td>
+            @Model.Users.FirstOrDefault(u => u.Id == @Model.Order.UserId).FirstName 
+            @Model.Users.FirstOrDefault(u => u.Id == @Model.Order.UserId).LastName
+        </td>
+        <td>@Model.Order.Address @Model.Order.City  @Model.Order.State  @Model.Order.Zipcode</td>
+
+         <td> 
+            @foreach(var item in Model.Order.Items)
+               {
+                    @Model.Products.FirstOrDefault(p => p.ID == item.Product.ID).Name   
+                   <span>      </span>
+                   @item.Quantity   
+                   <span>   x   </span>
+                   @item.Cost
+                   <br/>
+               }</td>
+
+        <td>$@Model.Order.Subtotal</td>
+   </tr>
+</table>
+
+
+
+

@@ -1,8 +1,15 @@
 ﻿@model Product
 
-<h3> Update @Model.Name</h3>
+@{
+    Layout = "_Layout";
+}
 
-<form method="post" form-action="Create">
+<div class="buttondiv">
+    <a asp-action="GetAll" asp-controller="Product"> Back to Products</a>
+</div>
+
+<form class="admin-form" method="post" form-action="Create">
+    <h3> Update @Model.Name</h3>
 
     <div>
         <label asp-for="SKU"></label>
