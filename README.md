@@ -66,7 +66,7 @@ Follow these steps to run this application on your local mahine
 5. Run the program.
 
 Follow this step to run this application from Azure.
-1. Click this link to open the application. http://therucksack.azurewebsites.net/
+1. Click this link to open the application. http://rucksacks.azurewebsites.net/
 
 
 ## Deployment
