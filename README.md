@@ -1,7 +1,7 @@
 # ![rucksack](https://i.imgur.com/Pr8S7Ep.png)
 
 
-- This is a 3 week 2-person team project building an entire ecommerce web application using ASP.NET.
+- It is a basic functional ECommerce store that utilized the ASP.NET Core framework, Microsoft Identity, SendGrid, OAuth, and Auth.Net.
 
 ## About our ECommerce Store
 
@@ -23,6 +23,9 @@ signed-up for the subscription list.
 - Currently we have two policies that are being enforced in our application:
     1. AdminOnly
         - Admin Only policy only allow access for users with admin status to enter certain parts of our application for security reasons.
+        - To Login as an admin:
+            Id: admin@codefellows.com
+            pass: And!23
     2. Subscriber
         - Subscriber policy only allow Subscribers to see sepcial deals we will be holding in the future.
         - Currently, this policy has not been yet implemented yet, but it will be in short future.
@@ -66,13 +69,15 @@ Follow these steps to run this application on your local mahine
 5. Run the program.
 
 Follow this step to run this application from Azure.
-1. Click this link to open the application. http://rucksacks.azurewebsites.net/
+1. Click this link to open the application. http://therucksack.azurewebsites.net/
 
 
 ## Deployment
 
 Current Application is deployed with Microsoft Azure application service. To open this application
-with Azure [Click here](http://rucksacks.azurewebsites.net/).
+with Azure [Click here](http://therucksack.azurewebsites.net/).
+
+This application was planned and organized with [Visual Studio Team Services](https://ecommercestore.visualstudio.com/ECommerceStore).
 
 
 ## Contributing
